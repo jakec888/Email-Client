@@ -1,35 +1,29 @@
 import React, { Component } from "react";
-import "./App.css";
+// import { connect } from "react-redux";
 
-import { connect } from "react-redux";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
-import Mail from "./containers/Mail";
+import MainRoutes from "./router";
+import history from "./store/history";
 
-import { sampleAction } from "./store/actions/sampleAction";
-
-class App extends Component {
-  sampleAction = event => {
-    this.props.sampleAction();
-  };
-
+export class App extends Component {
   render() {
     return (
-      <div className="Main">
-        <Mail />
-      </div>
+      <Provider store={store}>
+        <MainRoutes history={history} />
+      </Provider>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  ...state
-});
+// const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => ({
-  sampleAction: () => dispatch(sampleAction())
-});
+// const mapDispatchToProps = {};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(App);
+
+export default App;
