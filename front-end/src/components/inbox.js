@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -10,69 +10,64 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 
 export class Inbox extends Component {
-  // email = (name, body) => {
-  //   return (
-  //     <Paper>
-  //       <Typography>This is the Inbox</Typography>
-  //     </Paper>
-  //   );
-  // };
+  email = ({ id, subject, name, body }) => {
+    const avatarStyle = {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "#3f51b5",
+      fontSize: "16px",
+      fontWeight: 300,
+      color: "#fff",
+      letterSpacing: "1px"
+    };
+    const signature = {
+      splitLet: name
+        .match(/\b(\w)/g)
+        .join("")
+        .split("", 2)
+    };
+    return (
+      <Fragment key={id}>
+        <ListItem alignItems="flex-start">
+          <ListItemAvatar>
+            <Avatar alt="Remy Sharp">
+              <span style={avatarStyle} className={"Hello"}>
+                {signature.splitLet}
+              </span>
+            </Avatar>
+            {/* <span style={avatarStyle} className={"Hello"}>
+              {signature.splitLet}
+            </span> */}
+          </ListItemAvatar>
+          <ListItemText
+            primary={subject}
+            secondary={
+              <Fragment>
+                <Typography component="span" variant="body2" color="textPrimary">
+                  {name}
+                </Typography>
+                {" — "}
+                {body.substring(0, 150)}
+              </Fragment>
+            }
+          />
+        </ListItem>
+        <Divider variant="inset" component="li" />
+      </Fragment>
+    );
+  };
 
   render() {
     console.log(this.props.inbox);
     return (
       <Paper style={{ width: "85%", margin: "auto" }}>
         <List>
-          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Brunch this weekend?"
-              secondary={
-                <React.Fragment>
-                  <Typography component="span" variant="body2" color="textPrimary">
-                    Ali Connors
-                  </Typography>
-                  {" — I'll be in your neighborhood doing errands this…"}
-                </React.Fragment>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Summer BBQ"
-              secondary={
-                <React.Fragment>
-                  <Typography component="span" variant="body2" color="textPrimary">
-                    to Scott, Alex, Jennifer
-                  </Typography>
-                  {" — Wish I could come, but I'm out of town this…"}
-                </React.Fragment>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/3.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Oui Oui"
-              secondary={
-                <React.Fragment>
-                  <Typography component="span" variant="body2" color="textPrimary">
-                    Sandra Adams
-                  </Typography>
-                  {" — Do you have Paris recommendations? Have you ever…"}
-                </React.Fragment>
-              }
-            />
-          </ListItem>
+          {this.props.inbox
+            ? this.props.inbox.map(email => this.email(email))
+            : "No Email"}
         </List>
       </Paper>
     );
