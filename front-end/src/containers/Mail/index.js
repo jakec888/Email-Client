@@ -24,6 +24,10 @@ import React from "react";
 
 import Home from "../../components/home";
 import Inbox from "../../components/inbox";
+import Sent from "../../components/sent";
+import AllMail from "../../components/all";
+import Trash from "../../components/trash";
+
 import ComposeEmail from "../../components/compose";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -47,12 +51,16 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import MailIcon from "@material-ui/icons/Mail";
 import DeleteIcon from "@material-ui/icons/Delete";
-import HomeIcon from "@material-ui/icons/Home";
+// import HomeIcon from "@material-ui/icons/Home";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    menuPadding: {
+      paddingTop: "15px",
+      paddingBottom: "15px"
+    },
     root: {
       display: "flex"
     },
@@ -142,9 +150,11 @@ export default function PersistentDrawerLeft() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              Jake's Email
-            </Typography>
+            <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
+              <Typography variant="h6" noWrap>
+                Jake's Email
+              </Typography>
+            </Link>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -163,50 +173,62 @@ export default function PersistentDrawerLeft() {
           </div>
           <Divider />
           <List>
-            <ListItem button key={"Home"}>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <Link to="/" style={{ textDecoration: "none" }}>
-                <ListItemText primary={"Home"} />
-              </Link>
-            </ListItem>
-
-            <ListItem button key={"Inbox"}>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
-              <Link to="/inbox" style={{ textDecoration: "none" }}>
+            <Link to="/inbox" style={{ textDecoration: "none" }}>
+              <ListItem button key={"Inbox"}>
+                <ListItemIcon>
+                  <MailIcon />
+                </ListItemIcon>
                 <ListItemText primary={"Inbox"} />
-              </Link>
-            </ListItem>
+              </ListItem>
+            </Link>
 
-            <ListItem button key={"Sent"}>
-              <ListItemIcon>
-                <DeleteIcon />
-              </ListItemIcon>
-              <Link to="/sent" style={{ textDecoration: "none" }}>
+            <Link to="/sent" style={{ textDecoration: "none" }}>
+              <ListItem button key={"Sent"}>
+                <ListItemIcon>
+                  <DeleteIcon />
+                </ListItemIcon>
                 <ListItemText primary={"Sent"} />
-              </Link>
-            </ListItem>
+              </ListItem>
+            </Link>
 
-            <ListItem button key={"AllMail"}>
-              <ListItemIcon>
-                <DeleteIcon />
-              </ListItemIcon>
-              <Link to="/all-mail" style={{ textDecoration: "none" }}>
+            <Link to="/all-mail" style={{ textDecoration: "none" }}>
+              <ListItem button key={"AllMail"}>
+                <ListItemIcon>
+                  <DeleteIcon />
+                </ListItemIcon>
                 <ListItemText primary={"All Mail"} />
-              </Link>
-            </ListItem>
+              </ListItem>
+            </Link>
 
-            <ListItem button key={"Trash"}>
-              <ListItemIcon>
-                <DeleteIcon />
-              </ListItemIcon>
-              <Link to="/trash" style={{ textDecoration: "none" }}>
+            <Divider />
+
+            <Link
+              to="/compose"
+              style={{ textDecoration: "none" }}
+              className={classes.menuPadding}
+            >
+              <ListItem button key={"ComposeEmail"}>
+                <ListItemIcon>
+                  <DeleteIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Compose Email"} />
+              </ListItem>
+            </Link>
+
+            <Divider />
+
+            <Link
+              to="/trash"
+              style={{ textDecoration: "none" }}
+              className={classes.menuPadding}
+            >
+              <ListItem button key={"Trash"}>
+                <ListItemIcon>
+                  <DeleteIcon />
+                </ListItemIcon>
                 <ListItemText primary={"Trash"} />
-              </Link>
-            </ListItem>
+              </ListItem>
+            </Link>
           </List>
         </Drawer>
         <main
@@ -217,8 +239,11 @@ export default function PersistentDrawerLeft() {
           <div className={classes.drawerHeader} />
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/inbox" component={Inbox} />
-            <Route path="/compose" component={ComposeEmail} />
+            <Route path="/inbox" exact component={Inbox} />
+            <Route path="/sent" exact component={Sent} />
+            <Route path="/all-mail" exact component={AllMail} />
+            <Route path="/trash" exact component={Trash} />
+            <Route path="/compose" exact component={ComposeEmail} />
           </Switch>
           {/* <Typography paragraph>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
