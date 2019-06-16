@@ -38,9 +38,6 @@ export class Inbox extends Component {
                 {signature.splitLet}
               </span>
             </Avatar>
-            {/* <span style={avatarStyle} className={"Hello"}>
-              {signature.splitLet}
-            </span> */}
           </ListItemAvatar>
           <ListItemText
             primary={subject}
@@ -49,8 +46,7 @@ export class Inbox extends Component {
                 <Typography component="span" variant="body2" color="textPrimary">
                   {name}
                 </Typography>
-                {" — "}
-                {body.substring(0, 150)}
+                {" — " + body.substring(0, 135) + " ..."}
               </Fragment>
             }
           />
