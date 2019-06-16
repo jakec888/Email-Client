@@ -50,8 +50,10 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 import MailIcon from "@material-ui/icons/Mail";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
 import DeleteIcon from "@material-ui/icons/Delete";
-// import HomeIcon from "@material-ui/icons/Home";
+import SendIcon from "@material-ui/icons/Send";
+import AddIcon from "@material-ui/icons/Add";
 
 const drawerWidth = 240;
 
@@ -176,7 +178,7 @@ export default function PersistentDrawerLeft() {
             <Link to="/inbox" style={{ textDecoration: "none" }}>
               <ListItem button key={"Inbox"}>
                 <ListItemIcon>
-                  <MailIcon />
+                  <InboxIcon />
                 </ListItemIcon>
                 <ListItemText primary={"Inbox"} />
               </ListItem>
@@ -185,7 +187,7 @@ export default function PersistentDrawerLeft() {
             <Link to="/sent" style={{ textDecoration: "none" }}>
               <ListItem button key={"Sent"}>
                 <ListItemIcon>
-                  <DeleteIcon />
+                  <SendIcon />
                 </ListItemIcon>
                 <ListItemText primary={"Sent"} />
               </ListItem>
@@ -194,7 +196,7 @@ export default function PersistentDrawerLeft() {
             <Link to="/all-mail" style={{ textDecoration: "none" }}>
               <ListItem button key={"AllMail"}>
                 <ListItemIcon>
-                  <DeleteIcon />
+                  <MailIcon />
                 </ListItemIcon>
                 <ListItemText primary={"All Mail"} />
               </ListItem>
@@ -209,7 +211,7 @@ export default function PersistentDrawerLeft() {
             >
               <ListItem button key={"ComposeEmail"}>
                 <ListItemIcon>
-                  <DeleteIcon />
+                  <AddIcon />
                 </ListItemIcon>
                 <ListItemText primary={"Compose Email"} />
               </ListItem>
