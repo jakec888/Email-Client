@@ -1,5 +1,5 @@
 import sampleReducer from "./sampleReducer";
 
 export default {
-  sampleReducer
+  exampleData: sampleReducer
 };
