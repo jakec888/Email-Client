@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
@@ -30,8 +32,21 @@ export class Inbox extends Component {
         .split("", 2)
     };
     return (
-      <Fragment key={id}>
-        <ListItem alignItems="flex-start">
+      // <Fragment key={id}>
+      <Link
+        key={id}
+        to={`/stuff/${id}`}
+        style={{ textDecoration: "none", color: "#000" }}
+      >
+        <ListItem
+          style={{
+            display: "flex",
+            fleDirection: "row",
+            height: "100%",
+            justifyContent: "center",
+            aligItems: "center"
+          }}
+        >
           <ListItemAvatar>
             <Avatar alt="Remy Sharp">
               <span style={avatarStyle} className={"Hello"}>
@@ -52,7 +67,8 @@ export class Inbox extends Component {
           />
         </ListItem>
         <Divider variant="inset" component="li" />
-      </Fragment>
+        {/* </Fragment> */}
+      </Link>
     );
   };
 
