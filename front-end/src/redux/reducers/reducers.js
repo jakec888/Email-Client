@@ -1,5 +1,7 @@
 import sampleReducer from "./sampleReducer";
+import emailReducer from "./emailsReducers";
 
 export default {
-  exampleData: sampleReducer
+  exampleData: sampleReducer,
+  selectedEmail: emailReducer
 };

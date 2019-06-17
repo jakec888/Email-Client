@@ -11,6 +11,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 
+import { selectEmail } from "../redux/actions/selectEmail";
+
 export class Inbox extends Component {
   email = ({ id, subject, name, body }) => {
     const avatarStyle = {
@@ -36,6 +38,7 @@ export class Inbox extends Component {
         key={id}
         to={`/inbox/${id}`}
         style={{ textDecoration: "none", color: "#000" }}
+        onClick={() => this.onSelectEmail(id)}
       >
         <ListItem
           style={{
@@ -70,6 +73,10 @@ export class Inbox extends Component {
     );
   };
 
+  onSelectEmail = id => {
+    this.props.selectEmail(id);
+  };
+
   render() {
     return (
       <Paper style={{ width: "85%", margin: "auto" }}>
@@ -87,7 +94,9 @@ const mapStateToProps = state => ({
   inbox: state.exampleData.sampleData
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  selectEmail
+};
 
 export default connect(
   mapStateToProps,
