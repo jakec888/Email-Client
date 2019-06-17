@@ -32,10 +32,9 @@ export class Inbox extends Component {
         .split("", 2)
     };
     return (
-      // <Fragment key={id}>
       <Link
         key={id}
-        to={`/stuff/${id}`}
+        to={`/inbox/${id}`}
         style={{ textDecoration: "none", color: "#000" }}
       >
         <ListItem
@@ -67,13 +66,11 @@ export class Inbox extends Component {
           />
         </ListItem>
         <Divider variant="inset" component="li" />
-        {/* </Fragment> */}
       </Link>
     );
   };
 
   render() {
-    console.log(this.props.inbox);
     return (
       <Paper style={{ width: "85%", margin: "auto" }}>
         <List>

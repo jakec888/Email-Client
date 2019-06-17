@@ -5,6 +5,7 @@ import Inbox from "../../components/inbox";
 import Sent from "../../components/sent";
 import AllMail from "../../components/all";
 import Trash from "../../components/trash";
+import View from "../../components/view";
 
 import ComposeEmail from "../../components/compose";
 
@@ -221,6 +222,7 @@ export default function PersistentDrawerLeft() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/inbox" exact component={Inbox} />
+            <Route path="/inbox/:id" component={View} />
             <Route path="/sent" exact component={Sent} />
             <Route path="/all-mail" exact component={AllMail} />
             <Route path="/trash" exact component={Trash} />
