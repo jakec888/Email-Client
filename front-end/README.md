@@ -66,3 +66,20 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### Dates
+
+```
+const date = new Date(this.props.selectedEmail.date);
+
+// moment().format('ll');   // Jun 17, 2019
+const calendar = moment(date).format("ll");
+
+// moment(z).format('LT');  // 8:38 PM
+const time = moment(date).format("LT");
+
+// moment().startOf('hour').fromNow(); // 36 minutes ago
+const when = moment(date)
+  .startOf("hour")
+  .fromNow();
+```

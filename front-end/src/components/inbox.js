@@ -77,7 +77,7 @@ export class Inbox extends Component {
                 <Typography component="span" variant="body2" color="textPrimary">
                   {name}
                 </Typography>
-                <Typography component="span" variant="body4" color="textPrimary">
+                <Typography component="span" variant="body2" color="textPrimary">
                   {" — " + body.substring(0, 100) + "..."}
                 </Typography>
               </Fragment>
