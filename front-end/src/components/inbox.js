@@ -51,9 +51,7 @@ export class Inbox extends Component {
         >
           <ListItemAvatar>
             <Avatar alt="Remy Sharp">
-              <span style={avatarStyle} className={"Hello"}>
-                {signature.splitLet}
-              </span>
+              <span style={avatarStyle}>{signature.splitLet}</span>
             </Avatar>
           </ListItemAvatar>
           <ListItemText
@@ -68,7 +66,7 @@ export class Inbox extends Component {
             }
           />
         </ListItem>
-        <Divider variant="inset" component="li" />
+        <Divider variant="middle" />
       </Link>
     );
   };
