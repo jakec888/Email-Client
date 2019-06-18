@@ -11,7 +11,9 @@ export class View extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  selectedEmail: state.selectedEmail
+});
 
 const mapDispatchToProps = {};
 

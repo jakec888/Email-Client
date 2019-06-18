@@ -11,7 +11,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 
-import { selectEmail } from "../redux/actions/selectEmail";
+import selectEmailActions from "../redux/actions/selectEmail.action";
 
 export class Inbox extends Component {
   email = ({ id, subject, name, body }) => {
@@ -73,8 +73,8 @@ export class Inbox extends Component {
     );
   };
 
-  onSelectEmail = id => {
-    this.props.selectEmail(id);
+  onSelectEmail = emailId => {
+    this.props.selectEmail(emailId);
   };
 
   render() {
@@ -95,7 +95,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  selectEmail
+  selectEmail: selectEmailActions.selectEmail
 };
 
 export default connect(

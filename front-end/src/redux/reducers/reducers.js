@@ -1,5 +1,5 @@
 import sampleReducer from "./sampleReducer";
-import emailReducer from "./emailsReducers";
+import emailReducer from "./emailsReducer";
 
 export default {
   exampleData: sampleReducer,
