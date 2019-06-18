@@ -13,8 +13,23 @@ import Paper from "@material-ui/core/Paper";
 
 import selectEmailActions from "../redux/actions/selectEmail.action";
 
+import moment from "moment";
+
 export class Inbox extends Component {
-  email = ({ id, subject, name, body }) => {
+  email = ({ id, subject, name, body, date }) => {
+    const emailDate = new Date(date);
+
+    // moment().format('ll');   // Jun 17, 2019
+    const calendar = moment(emailDate).format("ll");
+
+    // moment(z).format('LT');  // 8:38 PM
+    const time = moment(emailDate).format("LT");
+
+    // moment().startOf('hour').fromNow(); // 36 minutes ago
+    const when = moment(emailDate)
+      .startOf("hour")
+      .fromNow();
+
     const avatarStyle = {
       width: "100%",
       height: "100%",
@@ -40,6 +55,7 @@ export class Inbox extends Component {
         style={{ textDecoration: "none", color: "#000" }}
         onClick={() => this.onSelectEmail(id)}
       >
+        <Divider variant="middle" />
         <ListItem
           style={{
             display: "flex",
@@ -61,9 +77,15 @@ export class Inbox extends Component {
                 <Typography component="span" variant="body2" color="textPrimary">
                   {name}
                 </Typography>
-                {" — " + body.substring(0, 135) + " ..."}
+                <Typography component="span" variant="body4" color="textPrimary">
+                  {" — " + body.substring(0, 100) + "..."}
+                </Typography>
               </Fragment>
             }
+          />
+          <ListItemText
+            secondary={`${calendar} at ${time} (${when})`}
+            style={{ textAlign: "right" }}
           />
         </ListItem>
         <Divider variant="middle" />

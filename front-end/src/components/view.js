@@ -10,8 +10,23 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 
+import moment from "moment";
+
 export class View extends Component {
   render() {
+    const date = new Date(this.props.selectedEmail.date);
+
+    // moment().format('ll');   // Jun 17, 2019
+    const calendar = moment(date).format("ll");
+
+    // moment(z).format('LT');  // 8:38 PM
+    const time = moment(date).format("LT");
+
+    // moment().startOf('hour').fromNow(); // 36 minutes ago
+    const when = moment(date)
+      .startOf("hour")
+      .fromNow();
+
     const avatarStyle = {
       width: "100%",
       height: "100%",
@@ -67,6 +82,19 @@ export class View extends Component {
                 </Typography>
               </Fragment>
             }
+          />
+          <ListItemText
+            primary={
+              <Fragment>
+                <Typography component="span" variant="body2" color="textPrimary">
+                  {`${calendar} at ${time} (${when})`}
+                </Typography>
+              </Fragment>
+            }
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse"
+            }}
           />
         </ListItem>
         <ListItemText primary={this.props.selectedEmail.body} />
