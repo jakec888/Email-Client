@@ -1,7 +1,9 @@
 import sampleReducer from "./sampleReducer";
 import emailReducer from "./selectEmail.reducer";
+import menuReducer from "./selectMenu.reducer";
 
 export default {
-  exampleData: sampleReducer,
-  selectedEmail: emailReducer
+  ExampleData: sampleReducer,
+  SelectedEmail: emailReducer,
+  SelectedMenu: menuReducer
 };

@@ -98,9 +98,10 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft(props) {
   const classes = useStyles();
   const theme = useTheme();
+
   const [open, setOpen] = React.useState(false);
 
   function handleDrawerOpen() {
@@ -133,7 +134,7 @@ export default function PersistentDrawerLeft() {
             </IconButton>
             <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
               <Typography variant="h6" noWrap>
-                Jake's Email
+                {props.currentMenu}
               </Typography>
             </Link>
           </Toolbar>
@@ -154,7 +155,12 @@ export default function PersistentDrawerLeft() {
           </div>
           <Divider />
           <List>
-            <Link to="/inbox" style={{ textDecoration: "none" }}>
+            <Link
+              to="/inbox"
+              style={{ textDecoration: "none" }}
+              onClick={() => props.changeMenu("Inbox")}
+              // onClick={props.changeMenu("Inbox")}
+            >
               <ListItem button key={"Inbox"}>
                 <ListItemIcon>
                   <InboxIcon />

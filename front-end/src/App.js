@@ -1,54 +1,31 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import Mail from "./containers/mail";
 
+import selectMenuActions from "./redux/actions/selectEmail.action";
+
 import "./App.css";
 
-function App() {
-  return (
-    <div>
-      <Mail />
-    </div>
-  );
+export class App extends Component {
+  render() {
+    return (
+      <div>
+        <Mail currentMenu={this.props.currentMenu} changeMenu={this.props.changeMenu} />
+      </div>
+    );
+  }
 }
 
-// export default App;
+const mapStateToProps = state => ({
+  currentMenu: state.SelectedMenu.menu
+});
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  changeMenu: selectMenuActions.selectMenu
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
-
-// import React, { Component } from 'react'
-// import { connect } from 'react-redux'
-
-// import Mail from "./containers/mail";
-
-// import "./App.css";
-
-// export default App;
-
-// export class App extends Component {
-//   render() {
-//     return (
-//       <div>
-//         <Mail />
-//       </div>
-//     )
-//   }
-// }
-
-// const mapStateToProps = (state) => ({
-
-// })
-
-// const mapDispatchToProps = {
-
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(App)

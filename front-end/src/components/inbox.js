@@ -111,7 +111,7 @@ export class Inbox extends Component {
 }
 
 const mapStateToProps = state => ({
-  inbox: state.exampleData.sampleData
+  inbox: state.ExampleData.sampleData
 });
 
 const mapDispatchToProps = {
