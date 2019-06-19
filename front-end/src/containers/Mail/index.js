@@ -99,6 +99,8 @@ const useStyles = makeStyles(theme =>
 );
 
 export default function PersistentDrawerLeft(props) {
+  console.log(props);
+
   const classes = useStyles();
   const theme = useTheme();
 
@@ -159,7 +161,6 @@ export default function PersistentDrawerLeft(props) {
               to="/inbox"
               style={{ textDecoration: "none" }}
               onClick={() => props.changeMenu("Inbox")}
-              // onClick={props.changeMenu("Inbox")}
             >
               <ListItem button key={"Inbox"}>
                 <ListItemIcon>
