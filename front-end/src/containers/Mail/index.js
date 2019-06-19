@@ -1,6 +1,6 @@
 import React from "react";
 
-import Home from "../../components/home";
+// import Home from "../../components/home";
 import Inbox from "../../components/inbox";
 import Sent from "../../components/sent";
 import AllMail from "../../components/all";
@@ -33,6 +33,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SendIcon from "@material-ui/icons/Send";
 import AddIcon from "@material-ui/icons/Add";
+// import HomeIcon from "@material-ui/icons/Home";
 
 const drawerWidth = 240;
 
@@ -99,7 +100,7 @@ const useStyles = makeStyles(theme =>
 );
 
 export default function PersistentDrawerLeft(props) {
-  console.log(props);
+  // console.log(props);
 
   const classes = useStyles();
   const theme = useTheme();
@@ -134,11 +135,14 @@ export default function PersistentDrawerLeft(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
+            {/* <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
               <Typography variant="h6" noWrap>
                 {props.currentMenu}
               </Typography>
-            </Link>
+            </Link> */}
+            <Typography variant="h6" noWrap>
+              {props.currentMenu}
+            </Typography>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -157,8 +161,28 @@ export default function PersistentDrawerLeft(props) {
           </div>
           <Divider />
           <List>
-            <Link
+            {/* <Link
+              to="/"
+              style={{ textDecoration: "none" }}
+              onClick={() => props.changeMenu("Home")}
+            >
+              <ListItem button key={"Home"}>
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Home"} />
+              </ListItem>
+            </Link>
+
+            <Divider /> */}
+
+            {/* <Link
               to="/inbox"
+              style={{ textDecoration: "none" }}
+              onClick={() => props.changeMenu("Inbox")}
+            > */}
+            <Link
+              to="/"
               style={{ textDecoration: "none" }}
               onClick={() => props.changeMenu("Inbox")}
             >
@@ -170,7 +194,11 @@ export default function PersistentDrawerLeft(props) {
               </ListItem>
             </Link>
 
-            <Link to="/sent" style={{ textDecoration: "none" }}>
+            <Link
+              to="/sent"
+              style={{ textDecoration: "none" }}
+              onClick={() => props.changeMenu("Sent Emails")}
+            >
               <ListItem button key={"Sent"}>
                 <ListItemIcon>
                   <SendIcon />
@@ -179,7 +207,11 @@ export default function PersistentDrawerLeft(props) {
               </ListItem>
             </Link>
 
-            <Link to="/all-mail" style={{ textDecoration: "none" }}>
+            <Link
+              to="/all-mail"
+              style={{ textDecoration: "none" }}
+              onClick={() => props.changeMenu("All Emails")}
+            >
               <ListItem button key={"AllMail"}>
                 <ListItemIcon>
                   <MailIcon />
@@ -194,6 +226,7 @@ export default function PersistentDrawerLeft(props) {
               to="/compose"
               style={{ textDecoration: "none" }}
               className={classes.menuPadding}
+              onClick={() => props.changeMenu("Compose A New Email")}
             >
               <ListItem button key={"ComposeEmail"}>
                 <ListItemIcon>
@@ -209,6 +242,7 @@ export default function PersistentDrawerLeft(props) {
               to="/trash"
               style={{ textDecoration: "none" }}
               className={classes.menuPadding}
+              onClick={() => props.changeMenu("Trash")}
             >
               <ListItem button key={"Trash"}>
                 <ListItemIcon>
@@ -227,8 +261,9 @@ export default function PersistentDrawerLeft(props) {
         >
           <div className={classes.drawerHeader} />
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/inbox" exact component={Inbox} />
+            {/* <Route path="/" exact component={Home} /> */}
+            <Route path="/" exact component={Inbox} />
+            {/* <Route path="/inbox" exact component={Inbox} /> */}
             <Route path="/inbox/:id" component={View} />
             <Route path="/sent" exact component={Sent} />
             <Route path="/all-mail" exact component={AllMail} />

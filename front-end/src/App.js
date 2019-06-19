@@ -8,12 +8,7 @@ import selectMenuActions from "./redux/actions/selectMenu.action";
 import "./App.css";
 
 export class App extends Component {
-  handleClickExample = () => {
-    console.log("clicked");
-  };
-
   render() {
-    console.log(this.props.changeMenu);
     return (
       <div>
         <Mail currentMenu={this.props.currentMenu} changeMenu={this.props.changeMenu} />
