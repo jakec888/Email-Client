@@ -10,6 +10,8 @@ import Button from "@material-ui/core/Button";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
 
+import composeEmailActions from "../redux/actions/composeEmail.action";
+
 const CssTextField = withStyles({
   root: {
     "& label.Mui-focused": {
@@ -33,6 +35,18 @@ const CssTextField = withStyles({
 })(TextField);
 
 export class ComposeEmail extends Component {
+  onChangeToAddress = event => {
+    this.props.updateToAddress(event.target.value);
+  };
+
+  onChangeSubject = event => {
+    this.props.updateSubject(event.target.value);
+  };
+
+  onChangeMessage = event => {
+    this.props.updateMessage(event.target.value);
+  };
+
   render() {
     return (
       <Paper
@@ -53,6 +67,8 @@ export class ComposeEmail extends Component {
           variant="outlined"
           id="custom-css-outlined-input"
           style={{ margin: "8px 0 8px 0" }}
+          onChange={this.onChangeToAddress}
+          value={this.props.currentTo}
           fullWidth
         />
         <CssTextField
@@ -61,6 +77,8 @@ export class ComposeEmail extends Component {
           variant="outlined"
           id="custom-css-outlined-input"
           style={{ margin: "8px 0 8px 0" }}
+          onChange={this.onChangeSubject}
+          value={this.props.currentSubject}
           fullWidth
         />
         <CssTextField
@@ -70,6 +88,8 @@ export class ComposeEmail extends Component {
           id="custom-css-outlined-input"
           style={{ margin: "8px 0 8px 0" }}
           rows="13"
+          onChange={this.onChangeMessage}
+          value={this.props.currentMessage}
           multiline
         />
         <div
@@ -105,9 +125,17 @@ export class ComposeEmail extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  currentTo: state.ComposeEmail.to,
+  currentSubject: state.ComposeEmail.subject,
+  currentMessage: state.ComposeEmail.message
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  updateToAddress: composeEmailActions.updateTo,
+  updateSubject: composeEmailActions.updateSubject,
+  updateMessage: composeEmailActions.updateMessage
+};
 
 export default connect(
   mapStateToProps,
