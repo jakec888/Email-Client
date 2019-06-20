@@ -1,5 +1,7 @@
 from chalice import Chalice
 import config
+from imbox import Imbox
+import json
 
 app = Chalice(app_name='back-end')
 app.debug = True
@@ -7,25 +9,29 @@ app.debug = True
 
 @app.route('/')
 def index():
-    return {'hello': config.IMAP_PORT}
+    return {'hello': 'jake'}
 
 
-# The view function above will return {"hello": "world"}
-# whenever you make an HTTP GET request to '/'.
-#
-# Here are a few more examples:
-#
-# @app.route('/hello/{name}')
-# def hello_name(name):
-#    # '/hello/james' -> {"hello": "james"}
-#    return {'hello': name}
-#
-# @app.route('/users', methods=['POST'])
-# def create_user():
-#     # This is the JSON body the user sent in their POST request.
-#     user_as_json = app.current_request.json_body
-#     # We'll echo the json body back to the user in a 'user' key.
-#     return {'user': user_as_json}
-#
-# See the README documentation for more examples.
-#
+@app.route('/imap')
+def testimap():
+    with Imbox(hostname=config.IMAP_SERVER, port=config.IMAP_PORT, username=config.EMAIL, password=config.PASSWORD, ssl=True) as imbox:
+        all_inbox_messages = imbox.messages()
+        for uid, message in all_inbox_messages:
+            print(message)
+            print(message.sent_from)
+            print(message.sent_to)
+            print(message.subject)
+            print(message.headers)
+            print(message.message_id)
+            print(message.date)
+            if message.body["plain"]:
+                print(message.body["plain"])
+            if message.body["html"]:
+                print(message.body["html"])
+            print(message.attachments)
+    return {'imap': 'test'}
+
+
+@app.route('/smtp')
+def testsmtp():
+    return {'smtp': 'test'}
