@@ -1,11 +1,13 @@
 from chalice import Chalice
+import config
 
 app = Chalice(app_name='back-end')
+app.debug = True
 
 
 @app.route('/')
 def index():
-    return {'hello': 'world'}
+    return {'hello': config.IMAP_PORT}
 
 
 # The view function above will return {"hello": "world"}
