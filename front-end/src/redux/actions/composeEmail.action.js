@@ -2,6 +2,8 @@ const composeEmailActions = {
   COMPOSE_TO: "COMPOSE_TO",
   COMPOSE_SUBJECT: "COMPOSE_SUBJECT",
   COMPOSE_MESSAGE: "COMPOSE_MESSAGE",
+  TRASH_MESSAGE: "TRASH_MESSAGE",
+  SEND_MESSAGE: "SEND_MESSAGE",
   updateTo: toAddress => {
     return dispatch => {
       dispatch({
@@ -23,6 +25,33 @@ const composeEmailActions = {
       dispatch({
         type: composeEmailActions.COMPOSE_MESSAGE,
         payload: { message }
+      });
+    };
+  },
+  trashMessage: () => {
+    return dispatch => {
+      dispatch({
+        type: composeEmailActions.TRASH_MESSAGE,
+        payload: {
+          to: "",
+          subject: "",
+          message: ""
+        }
+      });
+    };
+  },
+  sendMessage: () => {
+    return (dispatch, getState) => {
+      console.log(`SEND EMAIL`);
+      const email = getState().ComposeEmail;
+      console.log(email);
+      dispatch({
+        type: composeEmailActions.SEND_MESSAGE,
+        payload: {
+          to: "",
+          subject: "",
+          message: ""
+        }
       });
     };
   }

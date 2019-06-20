@@ -14,6 +14,18 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, subject: payload.subject };
     case composeEmailActions.COMPOSE_MESSAGE:
       return { ...state, message: payload.message };
+    case composeEmailActions.TRASH_MESSAGE:
+      return {
+        to: payload.message,
+        subject: payload.subject,
+        message: payload.message
+      };
+    case composeEmailActions.SEND_MESSAGE:
+      return {
+        to: payload.message,
+        subject: payload.subject,
+        message: payload.message
+      };
     default:
       return state;
   }

@@ -47,6 +47,12 @@ export class ComposeEmail extends Component {
     this.props.updateMessage(event.target.value);
   };
 
+  onSendEmail = event => {
+    event.preventDefault();
+    console.log("onSendEmail Clicked");
+    this.props.onSendMessage();
+  };
+
   render() {
     return (
       <Paper
@@ -55,71 +61,86 @@ export class ComposeEmail extends Component {
           minHeight: "300px",
           height: "auto",
           margin: "auto",
-          padding: "15px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between"
+          padding: "15px"
+          // display: "flex",
+          // flexDirection: "column",
+          // justifyContent: "space-between"
         }}
       >
-        <CssTextField
-          label="To"
-          placeholder="example@gmail.com"
-          variant="outlined"
-          id="custom-css-outlined-input"
-          style={{ margin: "8px 0 8px 0" }}
-          onChange={this.onChangeToAddress}
-          value={this.props.currentTo}
-          fullWidth
-        />
-        <CssTextField
-          label="Subject"
-          placeholder="Hi There!"
-          variant="outlined"
-          id="custom-css-outlined-input"
-          style={{ margin: "8px 0 8px 0" }}
-          onChange={this.onChangeSubject}
-          value={this.props.currentSubject}
-          fullWidth
-        />
-        <CssTextField
-          label="Message"
-          placeholder="Hello "
-          variant="outlined"
-          id="custom-css-outlined-input"
-          style={{ margin: "8px 0 8px 0" }}
-          rows="13"
-          onChange={this.onChangeMessage}
-          value={this.props.currentMessage}
-          multiline
-        />
-        <div
+        <form
+          onSubmit={this.onSendEmail}
           style={{
             display: "flex",
-            flexDirection: "row-reverse",
-            justifyContent: "flex-start"
+            flexDirection: "column",
+            justifyContent: "space-between"
           }}
         >
-          <Button
+          <CssTextField
+            label="To"
+            placeholder="example@gmail.com"
             variant="outlined"
-            color="primary"
+            id="custom-css-outlined-input"
+            style={{ margin: "8px 0 8px 0" }}
+            onChange={this.onChangeToAddress}
+            value={this.props.currentTo}
+            name="to"
+            fullWidth
+          />
+          <CssTextField
+            label="Subject"
+            placeholder="Hi There!"
+            variant="outlined"
+            id="custom-css-outlined-input"
+            style={{ margin: "8px 0 8px 0" }}
+            onChange={this.onChangeSubject}
+            value={this.props.currentSubject}
+            name="subject"
+            fullWidth
+          />
+          <CssTextField
+            label="Message"
+            placeholder="Hello "
+            variant="outlined"
+            id="custom-css-outlined-input"
+            style={{ margin: "8px 0 8px 0" }}
+            rows="13"
+            onChange={this.onChangeMessage}
+            value={this.props.currentMessage}
+            name="message"
+            multiline
+          />
+          <div
             style={{
-              margin: "0px 5px",
-              color: "#3f51b5",
-              borderColor: "#3f51b5"
+              display: "flex",
+              flexDirection: "row-reverse",
+              justifyContent: "flex-start"
             }}
           >
-            Send
-            <SendOutlinedIcon style={{ margin: "0px 3px" }} />
-          </Button>
-          <Button
-            variant="outlined"
-            color="secondary"
-            style={{ margin: "0px 5px", color: "red", borderColor: "red" }}
-          >
-            Delete
-            <DeleteOutlinedIcon style={{ margin: "0px 3px" }} />
-          </Button>
-        </div>
+            <Button
+              type="submit"
+              value="Submit"
+              variant="outlined"
+              color="primary"
+              style={{
+                margin: "0px 5px",
+                color: "#3f51b5",
+                borderColor: "#3f51b5"
+              }}
+            >
+              Send
+              <SendOutlinedIcon style={{ margin: "0px 3px" }} />
+            </Button>
+            <Button
+              variant="outlined"
+              color="secondary"
+              style={{ margin: "0px 5px", color: "red", borderColor: "red" }}
+              onClick={this.props.onTrashMessage}
+            >
+              Delete
+              <DeleteOutlinedIcon style={{ margin: "0px 3px" }} />
+            </Button>
+          </div>
+        </form>
       </Paper>
     );
   }
@@ -134,7 +155,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   updateToAddress: composeEmailActions.updateTo,
   updateSubject: composeEmailActions.updateSubject,
-  updateMessage: composeEmailActions.updateMessage
+  updateMessage: composeEmailActions.updateMessage,
+  onTrashMessage: composeEmailActions.trashMessage,
+  onSendMessage: composeEmailActions.sendMessage
 };
 
 export default connect(
