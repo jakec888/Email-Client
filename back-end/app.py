@@ -1,7 +1,10 @@
-from chalice import Chalice
-import config
+from chalice import Chalice, Response
 from imbox import Imbox
+from datetime import datetime
+import config
 import json
+import uuid
+
 
 app = Chalice(app_name='back-end')
 app.debug = True
@@ -14,22 +17,67 @@ def index():
 
 @app.route('/imap')
 def testimap():
-    with Imbox(hostname=config.IMAP_SERVER, port=config.IMAP_PORT, username=config.EMAIL, password=config.PASSWORD, ssl=True) as imbox:
-        all_inbox_messages = imbox.messages()
-        for uid, message in all_inbox_messages:
-            print(message)
-            print(message.sent_from)
-            print(message.sent_to)
-            print(message.subject)
-            print(message.headers)
-            print(message.message_id)
-            print(message.date)
-            if message.body["plain"]:
-                print(message.body["plain"])
-            if message.body["html"]:
-                print(message.body["html"])
-            print(message.attachments)
-    return {'imap': 'test'}
+    try:
+        with Imbox(hostname=config.IMAP_SERVER, port=config.IMAP_PORT, username=config.EMAIL, password=config.PASSWORD, ssl=True) as imbox:
+            all_inbox_messages = imbox.messages()
+            if all_inbox_messages:
+                emails = []
+                for uid, message in all_inbox_messages:
+                    email = {}
+
+                    email["id"] = str(uuid.uuid4())
+
+                    # name
+                    if message.sent_from[0]["name"]:
+                        email["name"] = str(message.sent_from[0]["name"])
+
+                    # email
+                    if message.sent_from[0]["email"]:
+                        email["email"] = str(message.sent_from[0]["email"])
+
+                    # body (html)
+                    if message.body["html"]:
+                        email["body_html"] = str(message.body["html"][0])
+
+                    # body (plain)
+                    if message.body["plain"]:
+                        email["body_plain"] = str(message.body["plain"][0])
+
+                    # subject
+                    if message.subject:
+                        email["subject"] = str(message.subject)
+
+                    # date
+                    if message.date:
+                        try:
+                            email["date"] = parser.parse(str(message.date)).strftime(
+                                '%Y-%m-%dT%H:%M:%S.%f')[:-3] + "Z"
+                        except:
+                            datetime.now().strftime(
+                                '%Y-%m-%dT%H:%M:%S.%f')[:-3] + "Z"
+
+                    # # bucket
+                    # email["bucket"] = "Inbox"
+
+                    # read
+                    # email["read"] = False
+
+                    # if message.attachments:
+                    #     email["attachments"] = message.attachments
+
+                    emails.append(email)
+
+                return Response(body={'emails': emails, "number_of_emails": len(emails)},
+                                status_code=200,
+                                headers={'Content-Type': 'text/json'})
+            else:
+                return Response(body='No Emails!',
+                                status_code=204,
+                                headers={'Content-Type': 'text/plain'})
+    except Exception as error:
+        return Response(body=str(error),
+                        status_code=500,
+                        headers={'Content-Type': 'text/plain'})
 
 
 @app.route('/smtp')
