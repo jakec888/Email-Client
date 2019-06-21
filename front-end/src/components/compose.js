@@ -12,6 +12,12 @@ import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
 
 import composeEmailActions from "../redux/actions/composeEmail.action";
 
+// import { convertToRaw } from "draft-js";
+// import draftToHtml from "draftjs-to-html";
+
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
 const CssTextField = withStyles({
   root: {
     "& label.Mui-focused": {
@@ -35,6 +41,13 @@ const CssTextField = withStyles({
 })(TextField);
 
 export class ComposeEmail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      editorState: ""
+    };
+  }
+
   onChangeToAddress = event => {
     this.props.updateToAddress(event.target.value);
   };
@@ -44,8 +57,12 @@ export class ComposeEmail extends Component {
   };
 
   onChangeMessage = event => {
-    this.props.updateMessage(event.target.value);
+    this.props.updateMessage(event);
   };
+
+  // onChangeMessage = event => {
+  //   console.log(draftToHtml(convertToRaw(event.getCurrentContent())));
+  // };
 
   onSendEmail = event => {
     event.preventDefault();
@@ -97,7 +114,7 @@ export class ComposeEmail extends Component {
             name="subject"
             fullWidth
           />
-          <CssTextField
+          {/* <CssTextField
             label="Message"
             placeholder="Hello "
             variant="outlined"
@@ -108,6 +125,13 @@ export class ComposeEmail extends Component {
             value={this.props.currentMessage}
             name="message"
             multiline
+          /> */}
+          <Editor
+            editorState={this.props.currentMessage}
+            // editorState={this.state.editorState}
+            wrapperClassName="demo-wrapper"
+            editorClassName="demo-editor"
+            onEditorStateChange={this.onChangeMessage}
           />
           <div
             style={{
