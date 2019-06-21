@@ -6,7 +6,11 @@ const retrieveEmailActions = {
     console.log(folder);
     return dispatch => {
       return axios
-        .get("http://127.0.0.1:8000/imap")
+        .get("http://127.0.0.1:8000/imap", {
+          params: {
+            RequestedFolder: "Inbox"
+          }
+        })
         .then(result => {
           console.log(result.data);
           dispatch({

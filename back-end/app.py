@@ -20,8 +20,14 @@ def index():
 @app.route('/imap', cors=True)
 def testimap():
     try:
+        params = app.current_request.query_params
+
+        folder = params["RequestedFolder"]
+
+        print(folder)
+
         with Imbox(hostname=config.IMAP_SERVER, port=config.IMAP_PORT, username=config.EMAIL, password=config.PASSWORD, ssl=True) as imbox:
-            all_inbox_messages = imbox.messages()
+            all_inbox_messages = imbox.messages(folder=folder)
             if all_inbox_messages:
                 emails = []
                 for uid, message in all_inbox_messages:
