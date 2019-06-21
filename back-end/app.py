@@ -17,7 +17,7 @@ def index():
     return {'hello': 'jake'}
 
 
-@app.route('/imap', cors=True)
+@app.route('/get-emails', cors=True)
 def testimap():
     try:
         params = app.current_request.query_params
