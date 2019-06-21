@@ -12,12 +12,15 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 
 import selectEmailActions from "../redux/actions/selectEmail.action";
+import retrieveEmailActions from "../redux/actions/retrieveEmail.actions";
 
 import moment from "moment";
-import axios from "axios";
+// import axios from "axios";
 
 export class Inbox extends Component {
-  sample = async () => {
+  // sample = async () => {
+  sample = () => {
+    this.props.retrieveEmails("Inbox");
     // await axios
     //   .get("http://127.0.0.1:8000/zzz", {
     //     params: {
@@ -30,16 +33,16 @@ export class Inbox extends Component {
     //   .catch(err => {
     //     console.log(`Error\n${err}`);
     //   });
-    await axios
-      .post("http://127.0.0.1:8000/smtp", {
-        toAddress: "jaconjcondes@gmail.com"
-      })
-      .then(result => {
-        console.log(result);
-      })
-      .catch(err => {
-        console.log(`Error\n${err}`);
-      });
+    // await axios
+    //   .post("http://127.0.0.1:8000/smtp", {
+    //     toAddress: "jaconjcondes@gmail.com"
+    //   })
+    //   .then(result => {
+    //     console.log(result);
+    //   })
+    //   .catch(err => {
+    //     console.log(`Error\n${err}`);
+    //   });
   };
 
   email = ({ id, subject, name, body, date }) => {
@@ -138,11 +141,13 @@ export class Inbox extends Component {
 }
 
 const mapStateToProps = state => ({
-  inbox: state.ExampleData.sampleData
+  inbox: state.ExampleData.sampleData,
+  inboxEmails: state.RetrieveEmails.inboxEmails
 });
 
 const mapDispatchToProps = {
-  selectEmail: selectEmailActions.selectEmail
+  selectEmail: selectEmailActions.selectEmail,
+  retrieveEmails: retrieveEmailActions.retrieveEmails
 };
 
 export default connect(

@@ -17,7 +17,7 @@ def index():
     return {'hello': 'jake'}
 
 
-@app.route('/imap')
+@app.route('/imap', cors=True)
 def testimap():
     try:
         with Imbox(hostname=config.IMAP_SERVER, port=config.IMAP_PORT, username=config.EMAIL, password=config.PASSWORD, ssl=True) as imbox:

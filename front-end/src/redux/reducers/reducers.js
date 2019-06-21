@@ -2,10 +2,12 @@ import sampleReducer from "./sampleReducer";
 import emailReducer from "./selectEmail.reducer";
 import menuReducer from "./selectMenu.reducer";
 import composeEmailReducer from "./composeEmail.reducer";
+import retrieveEmailReducer from "./retrieveEmails.reducer";
 
 export default {
   ExampleData: sampleReducer,
   SelectedEmail: emailReducer,
   SelectedMenu: menuReducer,
-  ComposeEmail: composeEmailReducer
+  ComposeEmail: composeEmailReducer,
+  RetrieveEmails: retrieveEmailReducer
 };
