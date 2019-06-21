@@ -7,7 +7,9 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case retrieveEmailActions.GET_EMAILS:
-      return { inboxEmails: payload };
+      return { ...state, inboxEmails: payload };
+    case retrieveEmailActions.SEND_EMAIL:
+      return { ...state, sent: payload };
     default:
       return state;
   }

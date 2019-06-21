@@ -94,6 +94,11 @@ def testsmtp():
         data = app.current_request.json_body
 
         toAddress = data["toAddress"]
+        fromAddress = data["fromAddress"]
+        name = data["name"]
+        subject = data["subject"]
+        bodyPLAIN = data["bodyPLAIN"]
+        bodyHTML = data["bodyHTML"]
 
         print(toAddress)
 
@@ -107,11 +112,11 @@ def testsmtp():
 
         msg = Message()
 
-        msg.subject = f"Testing Your SMTP Credentials"
-        msg.fromaddr = (config.NAME, config.EMAIL)
+        msg.subject = subject
+        msg.fromaddr = (name, fromAddress)
         msg.to = toAddress
-        msg.body = f"Hello {config.NAME}!\nYour SMTP Credentials Have Been Validated!"
-        msg.html = f"<h1>Hello {config.NAME}!</h1>Your SMTP Credentials Have Been Validated!"
+        msg.body = bodyPLAIN
+        msg.html = bodyHTML
         # msg.cc = "cc@example.com"
         # msg.bcc = ["bcc01@example.com", "bcc02@example.com"]
         # msg.reply_to = "cc@example.com"
