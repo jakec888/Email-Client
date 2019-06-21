@@ -18,15 +18,24 @@ def index():
 
 
 @app.route('/get-emails', cors=True)
-def testimap():
+def get_emails():
     try:
         params = app.current_request.query_params
 
         folder = params["RequestedFolder"]
 
-        print(folder)
+        email = params["email"]
+        password = params["password"]
+        imap_server = params["imap_server"]
+        imap_port = params["imap_port"]
 
-        with Imbox(hostname=config.IMAP_SERVER, port=config.IMAP_PORT, username=config.EMAIL, password=config.PASSWORD, ssl=True) as imbox:
+        print(folder)
+        print(email)
+        print(password)
+        print(imap_server)
+        print(imap_port)
+
+        with Imbox(hostname=imap_server, port=imap_port, username=email, password=password, ssl=True) as imbox:
             all_inbox_messages = imbox.messages(folder=folder)
             if all_inbox_messages:
                 emails = []
@@ -83,9 +92,64 @@ def testimap():
                                 status_code=204,
                                 headers={'Content-Type': 'text/plain'})
     except Exception as error:
+        print("Error")
+        print(error)
         return Response(body=str(error),
                         status_code=500,
                         headers={'Content-Type': 'text/plain'})
+
+
+@app.route('/send-email', methods=['POST'], cors=True)
+def send_email():
+    try:
+        data = app.current_request.json_body
+
+        toAddress = data["toAddress"]
+        fromAddress = data["fromAddress"]
+        name = data["name"]
+        subject = data["subject"]
+        bodyPLAIN = data["bodyPLAIN"]
+        bodyHTML = data["bodyHTML"]
+
+        print(toAddress)
+
+        mail = Mail(
+            host=config.SMTP_SERVER,
+            port=config.SMTP_PORT,
+            username=config.EMAIL,
+            password=config.PASSWORD,
+            use_ssl=True
+        )
+
+        msg = Message()
+
+        msg.subject = subject
+        msg.fromaddr = (name, fromAddress)
+        msg.to = toAddress
+        msg.body = bodyPLAIN
+        msg.html = bodyHTML
+        # msg.cc = "cc@example.com"
+        # msg.bcc = ["bcc01@example.com", "bcc02@example.com"]
+        # msg.reply_to = "cc@example.com"
+        msg.date = int(round(time.time()))
+        msg.charset = "utf-8"
+        msg.extra_headers = {}
+        msg.mail_options = []
+        msg.rcpt_options = []
+
+        print(msg)
+        print(type(msg))
+
+        mail.send(msg)
+
+        return Response(body={'sent': True},
+                        status_code=200,
+                        headers={'Content-Type': 'text/json'})
+
+    except Exception as error:
+        return Response(body={'sent': False},
+                        status_code=500,
+                        headers={'Content-Type': 'text/json'})
 
 
 @app.route('/smtp', methods=['POST'], cors=True)

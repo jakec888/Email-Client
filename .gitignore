@@ -25,6 +25,10 @@ yarn-error.log*
 # VScode
 .vscode
 
+
+# React
+EmailConfig.js
+
 # Python
 venv
 config.py

@@ -5,11 +5,17 @@ const retrieveEmailActions = {
   SEND_EMAIL: "SEND_EMAIL",
   retrieveEmails: folder => {
     console.log(folder);
-    return dispatch => {
+    return (dispatch, getState) => {
+      const ProfileConfig = getState().ProfileConfig;
+      console.log(ProfileConfig);
       return axios
         .get("http://127.0.0.1:8000/get-emails", {
           params: {
-            RequestedFolder: "Inbox"
+            RequestedFolder: folder,
+            email: ProfileConfig.EMAIL,
+            password: ProfileConfig.PASSWORD,
+            imap_server: ProfileConfig.IMAP_SERVER,
+            imap_port: ProfileConfig.IMAP_PORT
           }
         })
         .then(result => {
@@ -31,7 +37,7 @@ const retrieveEmailActions = {
   },
   sendEmailTest: email => {
     console.log(email);
-    return dispatch => {
+    return (dispatch, getState) => {
       axios
         .post("http://127.0.0.1:8000/smtp", {
           toAddress: email.toAddress,

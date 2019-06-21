@@ -1,9 +1,12 @@
+import axios from "axios";
+
 const composeEmailActions = {
   COMPOSE_TO: "COMPOSE_TO",
   COMPOSE_SUBJECT: "COMPOSE_SUBJECT",
   COMPOSE_MESSAGE: "COMPOSE_MESSAGE",
   TRASH_MESSAGE: "TRASH_MESSAGE",
   SEND_MESSAGE: "SEND_MESSAGE",
+  ERROR_SEND_MESSAGE: "ERROR_SEND_MESSAGE",
   updateTo: toAddress => {
     return dispatch => {
       dispatch({
@@ -13,7 +16,7 @@ const composeEmailActions = {
     };
   },
   updateSubject: subject => {
-    return (dispatch, getState) => {
+    return dispatch => {
       dispatch({
         type: composeEmailActions.COMPOSE_SUBJECT,
         payload: { subject }
@@ -45,14 +48,34 @@ const composeEmailActions = {
       console.log(`SEND EMAIL`);
       const email = getState().ComposeEmail;
       console.log(email);
-      dispatch({
-        type: composeEmailActions.SEND_MESSAGE,
-        payload: {
-          to: "",
-          subject: "",
-          message: ""
-        }
-      });
+
+      axios
+        .post("http://127.0.0.1:8000/send-email", {
+          toAddress: email.to
+          // fromAddress: email.,
+          // name: email.,
+          // subject: email.subject,
+          // bodyPLAIN: email.,
+          // bodyHTML: email.,
+        })
+        .then(result => {
+          dispatch({
+            type: composeEmailActions.SEND_MESSAGE,
+            payload: {
+              to: "",
+              subject: "",
+              message: ""
+            }
+          });
+        })
+        .catch(err => {
+          console.log("Error");
+          console.log(err);
+          alert(err);
+          dispatch({
+            type: composeEmailActions.SEND_MESSAGE
+          });
+        });
     };
   }
 };

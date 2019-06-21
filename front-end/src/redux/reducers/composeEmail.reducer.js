@@ -26,6 +26,8 @@ export default (state = initialState, { type, payload }) => {
         subject: payload.subject,
         message: payload.message
       };
+    case composeEmailActions.ERROR_SEND_MESSAGE:
+      return { ...state };
     default:
       return state;
   }

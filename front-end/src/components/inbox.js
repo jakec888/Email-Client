@@ -20,18 +20,16 @@ import moment from "moment";
 export class Inbox extends Component {
   // sample = async () => {
   sample = () => {
-    // this.props.retrieveEmails("Inbox");
-
-    const emailToSend = {
-      toAddress: "jaconjcondes@gmail.com",
-      fromAddress: "jaconjcondes@gmail.com",
-      name: "Jake",
-      subject: "Testing Your SMTP Credentials",
-      bodyPLAIN: `Hello ${"Jake"}!\nYour SMTP Credentials Have Been Validated!`,
-      bodyHTML: `<h1>Hello ${"Jake"}!</h1>Your SMTP Credentials Have Been Validated!`
-    };
-    this.props.sendEmail(emailToSend);
-
+    this.props.retrieveEmails("Inbox");
+    // const emailToSend = {
+    //   toAddress: "jaconjcondes@gmail.com",
+    //   fromAddress: "jaconjcondes@gmail.com",
+    //   name: "Jake",
+    //   subject: "Testing Your SMTP Credentials",
+    //   bodyPLAIN: `Hello ${"Jake"}!\nYour SMTP Credentials Have Been Validated!`,
+    //   bodyHTML: `<h1>Hello ${"Jake"}!</h1>Your SMTP Credentials Have Been Validated!`
+    // };
+    // this.props.sendEmail(emailToSend);
     // await axios
     //   .get("http://127.0.0.1:8000/zzz", {
     //     params: {
