@@ -83,3 +83,10 @@ def testimap():
 @app.route('/smtp')
 def testsmtp():
     return {'smtp': 'test'}
+
+
+@app.route('/zzz', cors=True)
+def testsmtp():
+    params = app.current_request.query_params
+    print(params["ID"])
+    return {'zzz': 'working'}

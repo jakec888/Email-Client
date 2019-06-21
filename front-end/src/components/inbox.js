@@ -14,8 +14,25 @@ import Paper from "@material-ui/core/Paper";
 import selectEmailActions from "../redux/actions/selectEmail.action";
 
 import moment from "moment";
+import axios from "axios";
 
 export class Inbox extends Component {
+  sample = async () => {
+    console.log("Working!");
+    await axios
+      .get("http://127.0.0.1:8000/zzz", {
+        params: {
+          ID: 12345
+        }
+      })
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => {
+        console.log(`Error\n${err}`);
+      });
+  };
+
   email = ({ id, subject, name, body, date }) => {
     const emailDate = new Date(date);
 
@@ -100,6 +117,7 @@ export class Inbox extends Component {
   render() {
     return (
       <Paper style={{ width: "85%", margin: "auto" }}>
+        <button onClick={this.sample}>Hello</button>
         <List>
           {this.props.inbox
             ? this.props.inbox.map(email => this.email(email))
