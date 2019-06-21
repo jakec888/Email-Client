@@ -45,39 +45,75 @@ const composeEmailActions = {
   },
   sendMessage: () => {
     return (dispatch, getState) => {
-      console.log(`SEND EMAIL`);
+      const profile = getState().ProfileConfig;
       const email = getState().ComposeEmail;
+      console.log(profile);
       console.log(email);
-
       axios
         .post("http://127.0.0.1:8000/send-email", {
-          toAddress: email.to
-          // fromAddress: email.,
-          // name: email.,
-          // subject: email.subject,
-          // bodyPLAIN: email.,
-          // bodyHTML: email.,
+          email: profile.EMAIL,
+          password: profile.PASSWORD,
+          smtp_server: profile.SMTP_SERVER,
+          smtp_port: profile.SMTP_PORT,
+          fromAddress: profile.EMAIL,
+          name: profile.NAME,
+          toAddress: email.toAddress,
+          subject: email.subject,
+          bodyPLAIN: email.bodyPLAIN,
+          bodyHTML: email.bodyHTML
         })
         .then(result => {
+          console.log(result);
           dispatch({
-            type: composeEmailActions.SEND_MESSAGE,
-            payload: {
-              to: "",
-              subject: "",
-              message: ""
-            }
+            type: composeEmailActions.SEND_EMAIL,
+            payload: result.data
           });
         })
         .catch(err => {
           console.log("Error");
           console.log(err);
-          alert(err);
           dispatch({
-            type: composeEmailActions.SEND_MESSAGE
+            type: composeEmailActions.SEND_EMAIL,
+            payload: err
           });
         });
     };
   }
+  // sendMessage: () => {
+  //   return (dispatch, getState) => {
+  //     console.log(`SEND EMAIL`);
+  //     const email = getState().ComposeEmail;
+  //     console.log(email);
+
+  //     axios
+  //       .post("http://127.0.0.1:8000/send-email", {
+  //         toAddress: email.to
+  //         // fromAddress: email.,
+  //         // name: email.,
+  //         // subject: email.subject,
+  //         // bodyPLAIN: email.,
+  //         // bodyHTML: email.,
+  //       })
+  //       .then(result => {
+  //         dispatch({
+  //           type: composeEmailActions.SEND_MESSAGE,
+  //           payload: {
+  //             to: "",
+  //             subject: "",
+  //             message: ""
+  //           }
+  //         });
+  //       })
+  //       .catch(err => {
+  //         console.log("Error");
+  //         console.log(err);
+  //         alert(err);
+  //         dispatch({
+  //           type: composeEmailActions.SEND_MESSAGE
+  //         });
+  //       });
+  //   };
+  // }
 };
 
 export default composeEmailActions;

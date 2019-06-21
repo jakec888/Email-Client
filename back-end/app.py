@@ -104,6 +104,11 @@ def send_email():
     try:
         data = app.current_request.json_body
 
+        email = data["email"]
+        password = data["password"]
+        imap_server = data["imap_server"]
+        imap_port = data["imap_port"]
+
         toAddress = data["toAddress"]
         fromAddress = data["fromAddress"]
         name = data["name"]
