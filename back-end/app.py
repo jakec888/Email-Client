@@ -1,9 +1,11 @@
 from chalice import Chalice, Response
+from sender import Mail, Message
 from imbox import Imbox
 from datetime import datetime
 import config
 import json
 import uuid
+import time
 
 
 app = Chalice(app_name='back-end')
@@ -80,9 +82,52 @@ def testimap():
                         headers={'Content-Type': 'text/plain'})
 
 
-@app.route('/smtp')
+@app.route('/smtp', methods=['POST'], cors=True)
 def testsmtp():
-    return {'smtp': 'test'}
+    try:
+        data = app.current_request.json_body
+
+        toAddress = data["toAddress"]
+
+        print(toAddress)
+
+        mail = Mail(
+            host=config.SMTP_SERVER,
+            port=config.SMTP_PORT,
+            username=config.EMAIL,
+            password=config.PASSWORD,
+            use_ssl=True
+        )
+
+        msg = Message()
+
+        msg.subject = f"Testing Your SMTP Credentials"
+        msg.fromaddr = (config.NAME, config.EMAIL)
+        msg.to = toAddress
+        msg.body = f"Hello {config.NAME}!\nYour SMTP Credentials Have Been Validated!"
+        msg.html = f"<h1>Hello {config.NAME}!</h1>Your SMTP Credentials Have Been Validated!"
+        # msg.cc = "cc@example.com"
+        # msg.bcc = ["bcc01@example.com", "bcc02@example.com"]
+        # msg.reply_to = "cc@example.com"
+        msg.date = int(round(time.time()))
+        msg.charset = "utf-8"
+        msg.extra_headers = {}
+        msg.mail_options = []
+        msg.rcpt_options = []
+
+        print(msg)
+        print(type(msg))
+
+        mail.send(msg)
+
+        return Response(body={'sent': True},
+                        status_code=200,
+                        headers={'Content-Type': 'text/json'})
+
+    except Exception as error:
+        return Response(body={'sent': False},
+                        status_code=500,
+                        headers={'Content-Type': 'text/json'})
 
 
 @app.route('/zzz', cors=True)

@@ -18,12 +18,21 @@ import axios from "axios";
 
 export class Inbox extends Component {
   sample = async () => {
-    console.log("Working!");
+    // await axios
+    //   .get("http://127.0.0.1:8000/zzz", {
+    //     params: {
+    //       ID: 12345
+    //     }
+    //   })
+    //   .then(result => {
+    //     console.log(result);
+    //   })
+    //   .catch(err => {
+    //     console.log(`Error\n${err}`);
+    //   });
     await axios
-      .get("http://127.0.0.1:8000/zzz", {
-        params: {
-          ID: 12345
-        }
+      .post("http://127.0.0.1:8000/smtp", {
+        toAddress: "jaconjcondes@gmail.com"
       })
       .then(result => {
         console.log(result);
