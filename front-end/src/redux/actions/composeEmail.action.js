@@ -65,7 +65,11 @@ const composeEmailActions = {
           console.log(result);
           dispatch({
             type: composeEmailActions.SEND_MESSAGE,
-            payload: result.data
+            payload: {
+              to: "",
+              subject: "",
+              message: ""
+            }
           });
         })
         .catch(err => {
@@ -73,46 +77,15 @@ const composeEmailActions = {
           console.log(err);
           dispatch({
             type: composeEmailActions.SEND_MESSAGE,
-            payload: err
+            payload: {
+              to: "",
+              subject: "",
+              message: ""
+            }
           });
         });
     };
   }
-  // sendMessage: () => {
-  //   return (dispatch, getState) => {
-  //     console.log(`SEND EMAIL`);
-  //     const email = getState().ComposeEmail;
-  //     console.log(email);
-
-  //     axios
-  //       .post("http://127.0.0.1:8000/send-email", {
-  //         toAddress: email.to
-  //         // fromAddress: email.,
-  //         // name: email.,
-  //         // subject: email.subject,
-  //         // bodyPLAIN: email.,
-  //         // bodyHTML: email.,
-  //       })
-  //       .then(result => {
-  //         dispatch({
-  //           type: composeEmailActions.SEND_MESSAGE,
-  //           payload: {
-  //             to: "",
-  //             subject: "",
-  //             message: ""
-  //           }
-  //         });
-  //       })
-  //       .catch(err => {
-  //         console.log("Error");
-  //         console.log(err);
-  //         alert(err);
-  //         dispatch({
-  //           type: composeEmailActions.SEND_MESSAGE
-  //         });
-  //       });
-  //   };
-  // }
 };
 
 export default composeEmailActions;

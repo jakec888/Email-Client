@@ -120,8 +120,6 @@ def send_email():
         bodyHTML = data["bodyHTML"]
         bodyPLAIN = html2text(bodyHTML)
 
-        print(toAddress)
-
         mail = Mail(
             host=smtp_server,
             port=smtp_port,
@@ -146,21 +144,17 @@ def send_email():
         msg.mail_options = []
         msg.rcpt_options = []
 
-        print(msg)
-        print(type(msg))
+        # print(msg)
+        # print(type(msg))
 
         mail.send(msg)
 
-        return Response(body={'sent': True},
-                        status_code=200,
-                        headers={'Content-Type': 'text/json'})
+        return Response(body={'sent': True}, status_code=200, headers={'Content-Type': 'text/json'})
 
     except Exception as error:
         print("Error")
         print(error)
-        return Response(body=error,
-                        status_code=500,
-                        headers={'Content-Type': 'text/plain'})
+        return Response(body={'error': str(error)}, status_code=500, headers={'Content-Type': 'text/json'})
 
 
 # @app.route('/smtp', methods=['POST'], cors=True)
