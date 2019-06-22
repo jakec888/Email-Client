@@ -15,8 +15,8 @@ import composeEmailActions from "../redux/actions/composeEmail.action";
 // import { convertToRaw } from "draft-js";
 // import draftToHtml from "draftjs-to-html";
 
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+// import { Editor } from "react-draft-wysiwyg";
+// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const CssTextField = withStyles({
   root: {
@@ -56,13 +56,12 @@ export class ComposeEmail extends Component {
     this.props.updateSubject(event.target.value);
   };
 
-  onChangeMessage = event => {
-    this.props.updateMessage(event);
-  };
-
   // onChangeMessage = event => {
-  //   console.log(draftToHtml(convertToRaw(event.getCurrentContent())));
+  //   this.props.updateMessage(event);
   // };
+  onChangeMessage = event => {
+    this.props.updateMessage(event.target.value);
+  };
 
   onSendEmail = event => {
     event.preventDefault();
@@ -105,7 +104,7 @@ export class ComposeEmail extends Component {
           />
           <CssTextField
             label="Subject"
-            placeholder="Hi There!"
+            placeholder="Subject Here!"
             variant="outlined"
             id="custom-css-outlined-input"
             style={{ margin: "8px 0 8px 0" }}
@@ -114,9 +113,9 @@ export class ComposeEmail extends Component {
             name="subject"
             fullWidth
           />
-          {/* <CssTextField
+          <CssTextField
             label="Message"
-            placeholder="Hello "
+            placeholder="Message Here!"
             variant="outlined"
             id="custom-css-outlined-input"
             style={{ margin: "8px 0 8px 0" }}
@@ -125,14 +124,15 @@ export class ComposeEmail extends Component {
             value={this.props.currentMessage}
             name="message"
             multiline
-          /> */}
-          <Editor
+          />
+          {/* <Editor
+            wrapperClassName="wrapper-class"
+            editorClassName="editor-class"
+            onEditorStateChange={this.onChangeMessage}
             editorState={this.props.currentMessage}
             // editorState={this.state.editorState}
-            wrapperClassName="demo-wrapper"
-            editorClassName="demo-editor"
-            onEditorStateChange={this.onChangeMessage}
-          />
+            toolbarOnFocus
+          /> */}
           <div
             style={{
               display: "flex",
@@ -173,7 +173,8 @@ export class ComposeEmail extends Component {
 const mapStateToProps = state => ({
   currentTo: state.ComposeEmail.to,
   currentSubject: state.ComposeEmail.subject,
-  currentMessage: state.ComposeEmail.message
+  currentMessage: state.ComposeEmail.message,
+  emailError: state.ComposeEmail.error
 });
 
 const mapDispatchToProps = {

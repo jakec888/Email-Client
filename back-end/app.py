@@ -2,7 +2,8 @@ from chalice import Chalice, Response
 from sender import Mail, Message
 from imbox import Imbox
 from datetime import datetime
-from html2text import html2text
+# from html2text import html2text
+from textile import textile
 import config
 import json
 import uuid
@@ -116,9 +117,10 @@ def send_email():
         fromAddress = data["fromAddress"]
         name = data["name"]
         subject = data["subject"]
-        # bodyPLAIN = data["bodyPLAIN"]
-        bodyHTML = data["bodyHTML"]
-        bodyPLAIN = html2text(bodyHTML)
+        bodyPLAIN = data["bodyPLAIN"]
+        bodyHTML = textile(bodyPLAIN)
+        # bodyHTML = data["bodyHTML"]
+        # bodyPLAIN = html2text(bodyHTML)
 
         mail = Mail(
             host=smtp_server,

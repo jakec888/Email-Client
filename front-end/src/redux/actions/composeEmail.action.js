@@ -1,6 +1,6 @@
 import axios from "axios";
-import { convertToRaw } from "draft-js";
-import draftToHtml from "draftjs-to-html";
+// import { convertToRaw } from "draft-js";
+// import draftToHtml from "draftjs-to-html";
 
 const composeEmailActions = {
   COMPOSE_TO: "COMPOSE_TO",
@@ -49,6 +49,7 @@ const composeEmailActions = {
     return (dispatch, getState) => {
       const profile = getState().ProfileConfig;
       const email = getState().ComposeEmail;
+
       axios
         .post("http://127.0.0.1:8000/send-email", {
           email: profile.EMAIL,
@@ -59,7 +60,8 @@ const composeEmailActions = {
           name: profile.NAME,
           toAddress: email.to,
           subject: email.subject,
-          bodyHTML: draftToHtml(convertToRaw(email.message.getCurrentContent()))
+          bodyPLAIN: email.message
+          // bodyHTML: draftToHtml(convertToRaw(email.message.getCurrentContent()))
         })
         .then(result => {
           console.log(result);
@@ -68,14 +70,15 @@ const composeEmailActions = {
             payload: {
               to: "",
               subject: "",
-              message: ""
+              message: "",
+              error: ""
             }
           });
+          alert("Email Successfully Sent");
         })
         .catch(err => {
           console.log("Error");
           console.log(err);
-          alert(err);
           dispatch({
             type: composeEmailActions.SEND_MESSAGE,
             payload: {
@@ -84,6 +87,7 @@ const composeEmailActions = {
               message: email.message
             }
           });
+          alert("Email Was Not Send");
         });
     };
   }

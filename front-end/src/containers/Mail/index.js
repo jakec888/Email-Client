@@ -1,8 +1,5 @@
 import React from "react";
 
-import EditorConvertToHTML from "../../components/example";
-
-// import Home from "../../components/home";
 import Inbox from "../../components/inbox";
 import Sent from "../../components/sent";
 import AllMail from "../../components/all";
@@ -271,7 +268,6 @@ export default function PersistentDrawerLeft(props) {
             <Route path="/all-mail" exact component={AllMail} />
             <Route path="/trash" exact component={Trash} />
             <Route path="/compose" exact component={ComposeEmail} />
-            <Route path="/sample" exact component={EditorConvertToHTML} />
           </Switch>
         </main>
       </div>
