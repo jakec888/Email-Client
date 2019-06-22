@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import { convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 
@@ -49,38 +49,33 @@ const composeEmailActions = {
     return (dispatch, getState) => {
       const profile = getState().ProfileConfig;
       const email = getState().ComposeEmail;
-      console.log(profile);
-      console.log(email);
-
-      console.log(draftToHtml(convertToRaw(email.message.getCurrentContent())));
-      // axios
-      //   .post("http://127.0.0.1:8000/send-email", {
-      //     email: profile.EMAIL,
-      //     password: profile.PASSWORD,
-      //     smtp_server: profile.SMTP_SERVER,
-      //     smtp_port: profile.SMTP_PORT,
-      //     fromAddress: profile.EMAIL,
-      //     name: profile.NAME,
-      //     toAddress: email.toAddress,
-      //     subject: email.subject,
-      //     bodyPLAIN: email.bodyPLAIN,
-      //     bodyHTML: email.bodyHTML
-      //   })
-      //   .then(result => {
-      //     console.log(result);
-      //     dispatch({
-      //       type: composeEmailActions.SEND_EMAIL,
-      //       payload: result.data
-      //     });
-      //   })
-      //   .catch(err => {
-      //     console.log("Error");
-      //     console.log(err);
-      //     dispatch({
-      //       type: composeEmailActions.SEND_EMAIL,
-      //       payload: err
-      //     });
-      //   });
+      axios
+        .post("http://127.0.0.1:8000/send-email", {
+          email: profile.EMAIL,
+          password: profile.PASSWORD,
+          smtp_server: profile.SMTP_SERVER,
+          smtp_port: profile.SMTP_PORT,
+          fromAddress: profile.EMAIL,
+          name: profile.NAME,
+          toAddress: email.to,
+          subject: email.subject,
+          bodyHTML: draftToHtml(convertToRaw(email.message.getCurrentContent()))
+        })
+        .then(result => {
+          console.log(result);
+          dispatch({
+            type: composeEmailActions.SEND_MESSAGE,
+            payload: result.data
+          });
+        })
+        .catch(err => {
+          console.log("Error");
+          console.log(err);
+          dispatch({
+            type: composeEmailActions.SEND_MESSAGE,
+            payload: err
+          });
+        });
     };
   }
   // sendMessage: () => {

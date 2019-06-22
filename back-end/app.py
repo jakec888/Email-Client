@@ -2,6 +2,7 @@ from chalice import Chalice, Response
 from sender import Mail, Message
 from imbox import Imbox
 from datetime import datetime
+from html2text import html2text
 import config
 import json
 import uuid
@@ -104,25 +105,28 @@ def send_email():
     try:
         data = app.current_request.json_body
 
+        print(data)
+
         email = data["email"]
         password = data["password"]
-        imap_server = data["imap_server"]
-        imap_port = data["imap_port"]
+        smtp_server = data["smtp_server"]
+        smtp_port = data["smtp_port"]
 
         toAddress = data["toAddress"]
         fromAddress = data["fromAddress"]
         name = data["name"]
         subject = data["subject"]
-        bodyPLAIN = data["bodyPLAIN"]
+        # bodyPLAIN = data["bodyPLAIN"]
         bodyHTML = data["bodyHTML"]
+        bodyPLAIN = html2text(bodyHTML)
 
         print(toAddress)
 
         mail = Mail(
-            host=config.SMTP_SERVER,
-            port=config.SMTP_PORT,
-            username=config.EMAIL,
-            password=config.PASSWORD,
+            host=smtp_server,
+            port=smtp_port,
+            username=email,
+            password=password,
             use_ssl=True
         )
 
@@ -152,66 +156,61 @@ def send_email():
                         headers={'Content-Type': 'text/json'})
 
     except Exception as error:
-        return Response(body={'sent': False},
+        print("Error")
+        print(error)
+        return Response(body=error,
                         status_code=500,
-                        headers={'Content-Type': 'text/json'})
+                        headers={'Content-Type': 'text/plain'})
 
 
-@app.route('/smtp', methods=['POST'], cors=True)
-def testsmtp():
-    try:
-        data = app.current_request.json_body
+# @app.route('/smtp', methods=['POST'], cors=True)
+# def testsmtp():
+#     try:
+#         data = app.current_request.json_body
 
-        toAddress = data["toAddress"]
-        fromAddress = data["fromAddress"]
-        name = data["name"]
-        subject = data["subject"]
-        bodyPLAIN = data["bodyPLAIN"]
-        bodyHTML = data["bodyHTML"]
+#         toAddress = data["toAddress"]
+#         fromAddress = data["fromAddress"]
+#         name = data["name"]
+#         subject = data["subject"]
+#         bodyPLAIN = data["bodyPLAIN"]
+#         bodyHTML = data["bodyHTML"]
 
-        print(toAddress)
+#         print(toAddress)
 
-        mail = Mail(
-            host=config.SMTP_SERVER,
-            port=config.SMTP_PORT,
-            username=config.EMAIL,
-            password=config.PASSWORD,
-            use_ssl=True
-        )
+#         mail = Mail(
+#             host=config.SMTP_SERVER,
+#             port=config.SMTP_PORT,
+#             username=config.EMAIL,
+#             password=config.PASSWORD,
+#             use_ssl=True
+#         )
 
-        msg = Message()
+#         msg = Message()
 
-        msg.subject = subject
-        msg.fromaddr = (name, fromAddress)
-        msg.to = toAddress
-        msg.body = bodyPLAIN
-        msg.html = bodyHTML
-        # msg.cc = "cc@example.com"
-        # msg.bcc = ["bcc01@example.com", "bcc02@example.com"]
-        # msg.reply_to = "cc@example.com"
-        msg.date = int(round(time.time()))
-        msg.charset = "utf-8"
-        msg.extra_headers = {}
-        msg.mail_options = []
-        msg.rcpt_options = []
+#         msg.subject = subject
+#         msg.fromaddr = (name, fromAddress)
+#         msg.to = toAddress
+#         msg.body = bodyPLAIN
+#         msg.html = bodyHTML
+#         # msg.cc = "cc@example.com"
+#         # msg.bcc = ["bcc01@example.com", "bcc02@example.com"]
+#         # msg.reply_to = "cc@example.com"
+#         msg.date = int(round(time.time()))
+#         msg.charset = "utf-8"
+#         msg.extra_headers = {}
+#         msg.mail_options = []
+#         msg.rcpt_options = []
 
-        print(msg)
-        print(type(msg))
+#         print(msg)
+#         print(type(msg))
 
-        mail.send(msg)
+#         mail.send(msg)
 
-        return Response(body={'sent': True},
-                        status_code=200,
-                        headers={'Content-Type': 'text/json'})
+#         return Response(body={'sent': True},
+#                         status_code=200,
+#                         headers={'Content-Type': 'text/json'})
 
-    except Exception as error:
-        return Response(body={'sent': False},
-                        status_code=500,
-                        headers={'Content-Type': 'text/json'})
-
-
-@app.route('/zzz', cors=True)
-def testsmtp():
-    params = app.current_request.query_params
-    print(params["ID"])
-    return {'zzz': 'working'}
+#     except Exception as error:
+#         return Response(body={'sent': False},
+#                         status_code=500,
+#                         headers={'Content-Type': 'text/json'})
