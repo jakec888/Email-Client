@@ -75,12 +75,13 @@ const composeEmailActions = {
         .catch(err => {
           console.log("Error");
           console.log(err);
+          alert(err);
           dispatch({
             type: composeEmailActions.SEND_MESSAGE,
             payload: {
-              to: "",
-              subject: "",
-              message: ""
+              to: email.to,
+              subject: email.subject,
+              message: email.message
             }
           });
         });
