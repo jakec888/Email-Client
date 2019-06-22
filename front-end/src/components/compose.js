@@ -12,42 +12,29 @@ import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
 
 import composeEmailActions from "../redux/actions/composeEmail.action";
 
-// import { convertToRaw } from "draft-js";
-// import draftToHtml from "draftjs-to-html";
-
-// import { Editor } from "react-draft-wysiwyg";
-// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-
 const CssTextField = withStyles({
   root: {
     "& label.Mui-focused": {
-      color: "green"
+      color: "#3f51b5"
     },
     "& .MuiInput-underline:after": {
-      borderBottomColor: "green"
+      borderBottomColor: "#3f51b5"
     },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-        borderColor: "#3f51b5"
+        borderColor: "#95a2e6"
       },
       "&:hover fieldset": {
         borderColor: "#fff"
       },
       "&.Mui-focused fieldset": {
-        borderColor: "green"
+        borderColor: "#95a2e6"
       }
     }
   }
 })(TextField);
 
 export class ComposeEmail extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editorState: ""
-    };
-  }
-
   onChangeToAddress = event => {
     this.props.updateToAddress(event.target.value);
   };
@@ -56,9 +43,6 @@ export class ComposeEmail extends Component {
     this.props.updateSubject(event.target.value);
   };
 
-  // onChangeMessage = event => {
-  //   this.props.updateMessage(event);
-  // };
   onChangeMessage = event => {
     this.props.updateMessage(event.target.value);
   };
@@ -78,9 +62,6 @@ export class ComposeEmail extends Component {
           height: "auto",
           margin: "auto",
           padding: "15px"
-          // display: "flex",
-          // flexDirection: "column",
-          // justifyContent: "space-between"
         }}
       >
         <form
@@ -125,14 +106,6 @@ export class ComposeEmail extends Component {
             name="message"
             multiline
           />
-          {/* <Editor
-            wrapperClassName="wrapper-class"
-            editorClassName="editor-class"
-            onEditorStateChange={this.onChangeMessage}
-            editorState={this.props.currentMessage}
-            // editorState={this.state.editorState}
-            toolbarOnFocus
-          /> */}
           <div
             style={{
               display: "flex",

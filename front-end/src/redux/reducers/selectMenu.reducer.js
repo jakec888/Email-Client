@@ -1,7 +1,6 @@
 import selectMenuActions from "../actions/selectMenu.action";
 
 const initialState = {
-  // menu: "Home"
   menu: "Inbox"
 };
 

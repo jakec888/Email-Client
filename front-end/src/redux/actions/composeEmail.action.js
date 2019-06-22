@@ -1,6 +1,4 @@
 import axios from "axios";
-// import { convertToRaw } from "draft-js";
-// import draftToHtml from "draftjs-to-html";
 
 const composeEmailActions = {
   COMPOSE_TO: "COMPOSE_TO",
@@ -61,7 +59,6 @@ const composeEmailActions = {
           toAddress: email.to,
           subject: email.subject,
           bodyPLAIN: email.message
-          // bodyHTML: draftToHtml(convertToRaw(email.message.getCurrentContent()))
         })
         .then(result => {
           console.log(result);
