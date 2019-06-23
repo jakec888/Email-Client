@@ -3,6 +3,15 @@ import axios from "axios";
 const retrieveEmailActions = {
   GET_EMAILS: "GET_EMAILS",
   SEND_EMAIL: "SEND_EMAIL",
+  LOADING_EMAIL: "LOADING_EMAIL",
+  loadingEmail: status => {
+    return dispatch => {
+      dispatch({
+        type: retrieveEmailActions.LOADING_EMAIL,
+        payload: status
+      });
+    };
+  },
   retrieveEmails: folder => {
     return (dispatch, getState) => {
       const ProfileConfig = getState().ProfileConfig;

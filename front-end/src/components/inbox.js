@@ -10,6 +10,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import selectEmailActions from "../redux/actions/selectEmail.action";
 import retrieveEmailActions from "../redux/actions/retrieveEmail.actions";
@@ -17,11 +18,13 @@ import retrieveEmailActions from "../redux/actions/retrieveEmail.actions";
 import moment from "moment";
 
 export class Inbox extends Component {
-  componentDidMount() {
+  componentDidMount = async () => {
     console.log("checking inbox...");
-    this.props.retrieveEmails("Inbox");
+    await this.props.loadingEmail(true);
+    await this.props.retrieveEmails("Inbox");
+    await this.props.loadingEmail(false);
     console.log("successfully retrieved emails");
-  }
+  };
 
   // sample = () => {
   //   this.props.retrieveEmails("Inbox");
@@ -111,25 +114,42 @@ export class Inbox extends Component {
   render() {
     return (
       <Paper style={{ width: "85%", margin: "auto" }}>
-        {/* <button onClick={this.sample}>Hello</button> */}
-        <List>
-          {this.props.inboxEmails
-            ? this.props.inboxEmails.map(email => this.email(email))
-            : "No Emails"}
-        </List>
+        {this.props.loading === true ? (
+          <Fragment>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <CircularProgress size={150} disableShrink />
+            </div>
+            <Typography variant="h5" align="center" gutterBottom>
+              Loading...
+            </Typography>
+          </Fragment>
+        ) : (
+          <List>
+            {this.props.inboxEmails
+              ? this.props.inboxEmails.map(email => this.email(email))
+              : "No Emails"}
+          </List>
+        )}
       </Paper>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  inboxEmails: state.RetrieveEmails.emails
+  inboxEmails: state.RetrieveEmails.emails,
+  loading: state.RetrieveEmails.loading
 });
 
 const mapDispatchToProps = {
   selectEmail: selectEmailActions.selectEmail,
   retrieveEmails: retrieveEmailActions.retrieveEmails,
-  sendEmail: retrieveEmailActions.sendEmailTest
+  loadingEmail: retrieveEmailActions.loadingEmail
 };
 
 export default connect(
