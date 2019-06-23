@@ -4,7 +4,8 @@ const initialState = {
   id: null,
   name: "",
   email: "",
-  body: "",
+  body_html: "",
+  body_plain: "",
   subject: "",
   date: ""
 };

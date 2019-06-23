@@ -2,7 +2,7 @@ const selectEmailActions = {
   SELECT_EMAIL: "SELECT_EMAIL",
   selectEmail: emailId => {
     return (dispatch, getState) => {
-      const selectedEmail = getState().ExampleData.sampleData.filter(
+      const selectedEmail = getState().RetrieveEmails.emails.filter(
         email => email.id === emailId
       )[0];
       dispatch({

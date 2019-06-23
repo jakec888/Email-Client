@@ -2,7 +2,6 @@ from chalice import Chalice, Response
 from sender import Mail, Message
 from imbox import Imbox
 from datetime import datetime
-# from html2text import html2text
 from textile import textile
 import config
 import json
@@ -12,11 +11,6 @@ import time
 
 app = Chalice(app_name='back-end')
 app.debug = True
-
-
-@app.route('/')
-def index():
-    return {'hello': 'jake'}
 
 
 @app.route('/get-emails', cors=True)
@@ -72,7 +66,7 @@ def get_emails():
                             email["date"] = parser.parse(str(message.date)).strftime(
                                 '%Y-%m-%dT%H:%M:%S.%f')[:-3] + "Z"
                         except:
-                            datetime.now().strftime(
+                            email["date"] = datetime.now().strftime(
                                 '%Y-%m-%dT%H:%M:%S.%f')[:-3] + "Z"
 
                     # # bucket
@@ -119,8 +113,6 @@ def send_email():
         subject = data["subject"]
         bodyPLAIN = data["bodyPLAIN"]
         bodyHTML = textile(bodyPLAIN)
-        # bodyHTML = data["bodyHTML"]
-        # bodyPLAIN = html2text(bodyHTML)
 
         mail = Mail(
             host=smtp_server,
@@ -157,56 +149,3 @@ def send_email():
         print("Error")
         print(error)
         return Response(body={'error': str(error)}, status_code=500, headers={'Content-Type': 'text/json'})
-
-
-# @app.route('/smtp', methods=['POST'], cors=True)
-# def testsmtp():
-#     try:
-#         data = app.current_request.json_body
-
-#         toAddress = data["toAddress"]
-#         fromAddress = data["fromAddress"]
-#         name = data["name"]
-#         subject = data["subject"]
-#         bodyPLAIN = data["bodyPLAIN"]
-#         bodyHTML = data["bodyHTML"]
-
-#         print(toAddress)
-
-#         mail = Mail(
-#             host=config.SMTP_SERVER,
-#             port=config.SMTP_PORT,
-#             username=config.EMAIL,
-#             password=config.PASSWORD,
-#             use_ssl=True
-#         )
-
-#         msg = Message()
-
-#         msg.subject = subject
-#         msg.fromaddr = (name, fromAddress)
-#         msg.to = toAddress
-#         msg.body = bodyPLAIN
-#         msg.html = bodyHTML
-#         # msg.cc = "cc@example.com"
-#         # msg.bcc = ["bcc01@example.com", "bcc02@example.com"]
-#         # msg.reply_to = "cc@example.com"
-#         msg.date = int(round(time.time()))
-#         msg.charset = "utf-8"
-#         msg.extra_headers = {}
-#         msg.mail_options = []
-#         msg.rcpt_options = []
-
-#         print(msg)
-#         print(type(msg))
-
-#         mail.send(msg)
-
-#         return Response(body={'sent': True},
-#                         status_code=200,
-#                         headers={'Content-Type': 'text/json'})
-
-#     except Exception as error:
-#         return Response(body={'sent': False},
-#                         status_code=500,
-#                         headers={'Content-Type': 'text/json'})

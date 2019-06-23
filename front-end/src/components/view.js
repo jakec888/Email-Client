@@ -46,7 +46,7 @@ export class View extends Component {
 
     return (
       <Paper style={{ width: "85%", margin: "auto", padding: "15px" }}>
-        <Typography variant="h3" gutterBottom>
+        <Typography variant="h4" align="center" gutterBottom>
           {this.props.selectedEmail.subject}
         </Typography>
         <Divider variant="middle" />
@@ -94,7 +94,16 @@ export class View extends Component {
             }}
           />
         </ListItem>
-        <ListItemText primary={this.props.selectedEmail.body} />
+        {/* <ListItemText primary={this.props.selectedEmail.body_plain} /> */}
+        {this.props.selectedEmail.body_html ? (
+          <ListItemText>
+            <div
+              dangerouslySetInnerHTML={{ __html: this.props.selectedEmail.body_html }}
+            />
+          </ListItemText>
+        ) : (
+          <ListItemText primary={this.props.selectedEmail.body_plain} />
+        )}
       </Paper>
     );
   }

@@ -15,46 +15,19 @@ import selectEmailActions from "../redux/actions/selectEmail.action";
 import retrieveEmailActions from "../redux/actions/retrieveEmail.actions";
 
 import moment from "moment";
-// import axios from "axios";
 
 export class Inbox extends Component {
-  // sample = async () => {
-  sample = () => {
+  componentDidMount() {
+    console.log("checking inbox...");
     this.props.retrieveEmails("Inbox");
-    // const emailToSend = {
-    //   toAddress: "jaconjcondes@gmail.com",
-    //   fromAddress: "jaconjcondes@gmail.com",
-    //   name: "Jake",
-    //   subject: "Testing Your SMTP Credentials",
-    //   bodyPLAIN: `Hello ${"Jake"}!\nYour SMTP Credentials Have Been Validated!`,
-    //   bodyHTML: `<h1>Hello ${"Jake"}!</h1>Your SMTP Credentials Have Been Validated!`
-    // };
-    // this.props.sendEmail(emailToSend);
-    // await axios
-    //   .get("http://127.0.0.1:8000/zzz", {
-    //     params: {
-    //       ID: 12345
-    //     }
-    //   })
-    //   .then(result => {
-    //     console.log(result);
-    //   })
-    //   .catch(err => {
-    //     console.log(`Error\n${err}`);
-    //   });
-    // await axios
-    //   .post("http://127.0.0.1:8000/smtp", {
-    //     toAddress: "jaconjcondes@gmail.com"
-    //   })
-    //   .then(result => {
-    //     console.log(result);
-    //   })
-    //   .catch(err => {
-    //     console.log(`Error\n${err}`);
-    //   });
-  };
+    console.log("successfully retrieved emails");
+  }
 
-  email = ({ id, subject, name, body, date }) => {
+  // sample = () => {
+  //   this.props.retrieveEmails("Inbox");
+  // };
+
+  email = ({ id, subject, name, body_plain, body_html, date }) => {
     const emailDate = new Date(date);
 
     // moment().format('ll');   // Jun 17, 2019
@@ -116,7 +89,7 @@ export class Inbox extends Component {
                   {name}
                 </Typography>
                 <Typography component="span" variant="body2" color="textPrimary">
-                  {" — " + body.substring(0, 100) + "..."}
+                  {body_plain ? " — " + body_plain.substring(0, 50) + "..." : false}
                 </Typography>
               </Fragment>
             }
@@ -138,11 +111,11 @@ export class Inbox extends Component {
   render() {
     return (
       <Paper style={{ width: "85%", margin: "auto" }}>
-        <button onClick={this.sample}>Hello</button>
+        {/* <button onClick={this.sample}>Hello</button> */}
         <List>
-          {this.props.inbox
-            ? this.props.inbox.map(email => this.email(email))
-            : "No Email"}
+          {this.props.inboxEmails
+            ? this.props.inboxEmails.map(email => this.email(email))
+            : "No Emails"}
         </List>
       </Paper>
     );
@@ -150,8 +123,7 @@ export class Inbox extends Component {
 }
 
 const mapStateToProps = state => ({
-  inbox: state.ExampleData.sampleData,
-  inboxEmails: state.RetrieveEmails.inboxEmails
+  inboxEmails: state.RetrieveEmails.emails
 });
 
 const mapDispatchToProps = {
