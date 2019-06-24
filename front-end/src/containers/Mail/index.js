@@ -264,9 +264,16 @@ export default function PersistentDrawerLeft(props) {
             <Route path="/" exact component={Inbox} />
             {/* <Route path="/inbox" exact component={Inbox} /> */}
             <Route path="/inbox/:id" component={View} />
+
             <Route path="/sent" exact component={Sent} />
+            <Route path="/sent/:id" component={View} />
+
             <Route path="/all-mail" exact component={AllMail} />
+            <Route path="/all-mail/:id" component={View} />
+
             <Route path="/trash" exact component={Trash} />
+            <Route path="/trash/:id" component={View} />
+
             <Route path="/compose" exact component={ComposeEmail} />
           </Switch>
         </main>

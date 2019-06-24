@@ -121,7 +121,7 @@ export class AllMail extends Component {
               <CircularProgress size={150} disableShrink />
             </div>
             <Typography variant="h5" align="center" gutterBottom>
-              Retrieving AllMail...
+              Retrieving All Mail...
             </Typography>
           </Fragment>
         ) : (
