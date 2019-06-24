@@ -21,7 +21,7 @@ export class AllMail extends Component {
   componentDidMount = async () => {
     console.log("checking all mail...");
     await this.props.loadingEmail(true);
-    await this.props.retrieveEmails("AllMail");
+    await this.props.retrieveEmails("All Mail");
     await this.props.loadingEmail(false);
     console.log("successfully all mail emails");
   };
@@ -126,8 +126,8 @@ export class AllMail extends Component {
           </Fragment>
         ) : (
           <List>
-            {this.props.inboxEmails
-              ? this.props.inboxEmails.map(email => this.email(email))
+            {this.props.allEmails
+              ? this.props.allEmails.map(email => this.email(email))
               : "No AllMail Emails"}
           </List>
         )}
@@ -137,7 +137,7 @@ export class AllMail extends Component {
 }
 
 const mapStateToProps = state => ({
-  inboxEmails: state.RetrieveEmails.emails,
+  allEmails: state.RetrieveEmails.emails,
   loading: state.RetrieveEmails.loading
 });
 

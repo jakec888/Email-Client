@@ -126,8 +126,8 @@ export class Sent extends Component {
           </Fragment>
         ) : (
           <List>
-            {this.props.inboxEmails
-              ? this.props.inboxEmails.map(email => this.email(email))
+            {this.props.sentEmails
+              ? this.props.sentEmails.map(email => this.email(email))
               : "No Sent Emails"}
           </List>
         )}
@@ -137,7 +137,7 @@ export class Sent extends Component {
 }
 
 const mapStateToProps = state => ({
-  inboxEmails: state.RetrieveEmails.emails,
+  sentEmails: state.RetrieveEmails.emails,
   loading: state.RetrieveEmails.loading
 });
 

@@ -126,8 +126,8 @@ export class Trash extends Component {
           </Fragment>
         ) : (
           <List>
-            {this.props.inboxEmails
-              ? this.props.inboxEmails.map(email => this.email(email))
+            {this.props.trashEmails
+              ? this.props.trashEmails.map(email => this.email(email))
               : "No Trash Emails"}
           </List>
         )}
@@ -137,7 +137,7 @@ export class Trash extends Component {
 }
 
 const mapStateToProps = state => ({
-  inboxEmails: state.RetrieveEmails.emails,
+  trashEmails: state.RetrieveEmails.emails,
   loading: state.RetrieveEmails.loading
 });
 

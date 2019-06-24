@@ -35,7 +35,7 @@ def get_emails():
             all_inbox_messages = imbox.messages(folder=folder)
             if all_inbox_messages:
                 emails = []
-                for uid, message in all_inbox_messages:
+                for uid, message in all_inbox_messages[0:10]:
                     email = {}
 
                     email["id"] = str(uuid.uuid4())
