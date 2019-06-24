@@ -23,23 +23,20 @@ export class Inbox extends Component {
     await this.props.loadingEmail(true);
     await this.props.retrieveEmails("Inbox");
     await this.props.loadingEmail(false);
-    console.log("successfully retrieved emails");
+    console.log("successfully inbox emails");
   };
 
-  // sample = () => {
-  //   this.props.retrieveEmails("Inbox");
-  // };
+  onSelectEmail = emailId => {
+    this.props.selectEmail(emailId);
+  };
 
-  email = ({ id, subject, name, body_plain, body_html, date }) => {
+  email = ({ id, subject, name, body_plain, date }) => {
     const emailDate = new Date(date);
 
-    // moment().format('ll');   // Jun 17, 2019
     const calendar = moment(emailDate).format("ll");
 
-    // moment(z).format('LT');  // 8:38 PM
     const time = moment(emailDate).format("LT");
 
-    // moment().startOf('hour').fromNow(); // 36 minutes ago
     const when = moment(emailDate)
       .startOf("hour")
       .fromNow();
@@ -56,12 +53,14 @@ export class Inbox extends Component {
       color: "#fff",
       letterSpacing: "1px"
     };
+
     const signature = {
       splitLet: name
         .match(/\b(\w)/g)
         .join("")
         .split("", 2)
     };
+
     return (
       <Link
         key={id}
@@ -107,10 +106,6 @@ export class Inbox extends Component {
     );
   };
 
-  onSelectEmail = emailId => {
-    this.props.selectEmail(emailId);
-  };
-
   render() {
     return (
       <Paper style={{ width: "85%", margin: "auto" }}>
@@ -126,14 +121,14 @@ export class Inbox extends Component {
               <CircularProgress size={150} disableShrink />
             </div>
             <Typography variant="h5" align="center" gutterBottom>
-              Loading...
+              Retrieving Inbox...
             </Typography>
           </Fragment>
         ) : (
           <List>
             {this.props.inboxEmails
               ? this.props.inboxEmails.map(email => this.email(email))
-              : "No Emails"}
+              : "No Inbox Emails"}
           </List>
         )}
       </Paper>

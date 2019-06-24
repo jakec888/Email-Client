@@ -94,7 +94,6 @@ export class View extends Component {
             }}
           />
         </ListItem>
-        {/* <ListItemText primary={this.props.selectedEmail.body_plain} /> */}
         {this.props.selectedEmail.body_html ? (
           <ListItemText>
             <div

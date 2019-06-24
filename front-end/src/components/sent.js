@@ -10,22 +10,33 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import selectEmailActions from "../redux/actions/selectEmail.action";
+import retrieveEmailActions from "../redux/actions/retrieveEmail.actions";
 
 import moment from "moment";
 
 export class Sent extends Component {
-  email = ({ id, subject, name, body, date }) => {
+  componentDidMount = async () => {
+    console.log("checking sent...");
+    await this.props.loadingEmail(true);
+    await this.props.retrieveEmails("Sent");
+    await this.props.loadingEmail(false);
+    console.log("successfully sent emails");
+  };
+
+  onSelectEmail = emailId => {
+    this.props.selectEmail(emailId);
+  };
+
+  email = ({ id, subject, name, body_plain, date }) => {
     const emailDate = new Date(date);
 
-    // moment().format('ll');   // Jun 17, 2019
     const calendar = moment(emailDate).format("ll");
 
-    // moment(z).format('LT');  // 8:38 PM
     const time = moment(emailDate).format("LT");
 
-    // moment().startOf('hour').fromNow(); // 36 minutes ago
     const when = moment(emailDate)
       .startOf("hour")
       .fromNow();
@@ -42,16 +53,18 @@ export class Sent extends Component {
       color: "#fff",
       letterSpacing: "1px"
     };
+
     const signature = {
       splitLet: name
         .match(/\b(\w)/g)
         .join("")
         .split("", 2)
     };
+
     return (
       <Link
         key={id}
-        to={`/sent/${id}`}
+        to={`/inbox/${id}`}
         style={{ textDecoration: "none", color: "#000" }}
         onClick={() => this.onSelectEmail(id)}
       >
@@ -78,7 +91,7 @@ export class Sent extends Component {
                   {name}
                 </Typography>
                 <Typography component="span" variant="body2" color="textPrimary">
-                  {" — " + body.substring(0, 100) + "..."}
+                  {body_plain ? " — " + body_plain.substring(0, 50) + "..." : false}
                 </Typography>
               </Fragment>
             }
@@ -93,29 +106,45 @@ export class Sent extends Component {
     );
   };
 
-  onSelectEmail = emailId => {
-    this.props.selectEmail(emailId);
-  };
-
   render() {
     return (
       <Paper style={{ width: "85%", margin: "auto" }}>
-        <List>
-          {this.props.inbox
-            ? this.props.inbox.map(email => this.email(email))
-            : "No Email"}
-        </List>
+        {this.props.loading === true ? (
+          <Fragment>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <CircularProgress size={150} disableShrink />
+            </div>
+            <Typography variant="h5" align="center" gutterBottom>
+              Retrieving Sent...
+            </Typography>
+          </Fragment>
+        ) : (
+          <List>
+            {this.props.inboxEmails
+              ? this.props.inboxEmails.map(email => this.email(email))
+              : "No Sent Emails"}
+          </List>
+        )}
       </Paper>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  inbox: state.ExampleData.sampleData
+  inboxEmails: state.RetrieveEmails.emails,
+  loading: state.RetrieveEmails.loading
 });
 
 const mapDispatchToProps = {
-  selectEmail: selectEmailActions.selectEmail
+  selectEmail: selectEmailActions.selectEmail,
+  retrieveEmails: retrieveEmailActions.retrieveEmails,
+  loadingEmail: retrieveEmailActions.loadingEmail
 };
 
 export default connect(
