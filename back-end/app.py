@@ -25,17 +25,20 @@ def get_emails():
         imap_server = params["imap_server"]
         imap_port = params["imap_port"]
 
-        print(folder)
-        print(email)
-        print(password)
-        print(imap_server)
-        print(imap_port)
+        # print(folder)
+        # print(email)
+        # print(password)
+        # print(imap_server)
+        # print(imap_port)
 
         with Imbox(hostname=imap_server, port=imap_port, username=email, password=password, ssl=True) as imbox:
             all_inbox_messages = imbox.messages(folder=folder)
             if all_inbox_messages:
                 emails = []
                 for uid, message in all_inbox_messages[0:10]:
+
+                    print(uid)
+
                     email = {}
 
                     email["id"] = str(uuid.uuid4())
@@ -88,7 +91,7 @@ def get_emails():
                                 status_code=204,
                                 headers={'Content-Type': 'text/plain'})
     except Exception as error:
-        print("Error")
+        print("Get Emails Error:")
         print(error)
         return Response(body=str(error),
                         status_code=500,
@@ -100,7 +103,7 @@ def send_email():
     try:
         data = app.current_request.json_body
 
-        print(data)
+        # print(data)
 
         email = data["email"]
         password = data["password"]
@@ -146,6 +149,6 @@ def send_email():
         return Response(body={'sent': True}, status_code=200, headers={'Content-Type': 'text/json'})
 
     except Exception as error:
-        print("Error")
+        print("Send Emails Error")
         print(error)
         return Response(body={'error': str(error)}, status_code=500, headers={'Content-Type': 'text/json'})
