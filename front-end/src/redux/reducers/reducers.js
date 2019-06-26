@@ -3,7 +3,7 @@ import emailReducer from "./selectEmail.reducer";
 import menuReducer from "./selectMenu.reducer";
 import composeEmailReducer from "./composeEmail.reducer";
 import retrieveEmailReducer from "./retrieveEmails.reducer";
-import emailConfigReducer from "./emailConfig.reducers";
+import userReducer from "./user.reducers";
 
 export default {
   ExampleData: sampleReducer,
@@ -11,5 +11,5 @@ export default {
   SelectedMenu: menuReducer,
   ComposeEmail: composeEmailReducer,
   RetrieveEmails: retrieveEmailReducer,
-  ProfileConfig: emailConfigReducer
+  Profile: userReducer
 };
