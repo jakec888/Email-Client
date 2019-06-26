@@ -1,5 +1,6 @@
 import React from "react";
 
+import User from "../../components/user";
 import Inbox from "../../components/inbox";
 import Sent from "../../components/sent";
 import AllMail from "../../components/all";
@@ -261,8 +262,8 @@ export default function PersistentDrawerLeft(props) {
           <div className={classes.drawerHeader} />
           <Switch>
             {/* <Route path="/" exact component={Home} /> */}
-            <Route path="/" exact component={Inbox} />
-            {/* <Route path="/inbox" exact component={Inbox} /> */}
+            <Route path="/" exact component={User} />
+            <Route path="/inbox" exact component={Inbox} />
             <Route path="/inbox/:id" component={View} />
 
             <Route path="/sent" exact component={Sent} />
