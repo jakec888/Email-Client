@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+// import { Redirect } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -34,28 +35,79 @@ const CssTextField = withStyles({
 })(TextField);
 
 export class User extends Component {
-  onSubmitUserData = () => {};
+  // componentDidMount() {
+  //   console.log("start");
+  //   console.log(this.props.authenticated);
+  //   // this.props.authenticated
+  //   //   ? this.props.history.push("/inbox")
+  //   //   : console.log("not authenticated");
+
+  //   // this.props.authenticated && this.props.history.push("/");
+
+  //   // this.props.authenticated && <Redirect to="/" />;
+  //   // if (this.props.authenticated) {
+  //   //   console.log("redirecting");
+  //   //   return <Redirect to="/" />;
+  //   // }
+  // }
+
+  onSubmitUserData = event => {
+    event.preventDefault();
+    console.log("authenticating user");
+    console.log(this.props.authenticated);
+    this.props.authenticateUser();
+    console.log("user authenticationg finished");
+    console.log(this.props.authenticated);
+
+    // (await this.props.authenticated)
+    //   ? this.props.history.push("/")
+    //   : console.log("not authenticated");
+
+    // this.props.authenticated && this.props.history.push("/");
+
+    // if (this.props.authenticated) {
+    //   console.log("redirecting");
+    //   return <Redirect to="/" />;
+    // }
+
+    // if (this.props.authenticated) {
+    //   console.log("redirecting");
+    //   return <Redirect to="/" />;
+    // }
+
+    // console.log("pushing history");
+    // this.props.history.push("/");
+    // console.log("pushed history");
+  };
+
   onChangeName = event => {
     this.props.updateName(event.target.value);
   };
+
   onChangeEmail = event => {
     this.props.updateEmail(event.target.value);
   };
+
   onChangePassword = event => {
     this.props.updatePassword(event.target.value);
   };
+
   onChangeIMAPServer = event => {
     this.props.updateIMAPServer(event.target.value);
   };
+
   onChangeIMAPPort = event => {
     this.props.updateIMAPPort(event.target.value);
   };
+
   onChangeSMTPServer = event => {
     this.props.updateSMTPServer(event.target.value);
   };
+
   onChangeSMTPPort = event => {
     this.props.updateSMTPPort(event.target.value);
   };
+
   render() {
     return (
       <Paper
@@ -79,7 +131,6 @@ export class User extends Component {
             label="Name"
             placeholder="John Doe"
             variant="outlined"
-            id="custom-css-outlined-input"
             style={{ margin: "8px 0 8px 0" }}
             onChange={this.onChangeName}
             value={this.props.currentName}
@@ -91,7 +142,6 @@ export class User extends Component {
             type="email"
             placeholder="john_doe@gmail.com"
             variant="outlined"
-            id="custom-css-outlined-input"
             style={{ margin: "8px 0 8px 0" }}
             onChange={this.onChangeEmail}
             value={this.props.currentEmail}
@@ -103,7 +153,6 @@ export class User extends Component {
             type="password"
             placeholder="Password Here!"
             variant="outlined"
-            id="custom-css-outlined-input"
             style={{ margin: "8px 0 8px 0" }}
             onChange={this.onChangePassword}
             value={this.props.currentPassword}
@@ -114,7 +163,6 @@ export class User extends Component {
             label="IMAP Server"
             placeholder="imap.gmail.com"
             variant="outlined"
-            id="custom-css-outlined-input"
             style={{ margin: "8px 0 8px 0" }}
             onChange={this.onChangeIMAPServer}
             value={this.props.currentIMAPServer}
@@ -125,7 +173,6 @@ export class User extends Component {
             label="IMAP Port"
             placeholder="993"
             variant="outlined"
-            id="custom-css-outlined-input"
             style={{ margin: "8px 0 8px 0" }}
             onChange={this.onChangeIMAPPort}
             value={this.props.currentIMAPPort}
@@ -136,7 +183,6 @@ export class User extends Component {
             label="SMTP Server"
             placeholder="smtp.gmail.com"
             variant="outlined"
-            id="custom-css-outlined-input"
             style={{ margin: "8px 0 8px 0" }}
             onChange={this.onChangeSMTPServer}
             value={this.props.currentSMTPServer}
@@ -147,7 +193,6 @@ export class User extends Component {
             label="SMTP Port"
             placeholder="465"
             variant="outlined"
-            id="custom-css-outlined-input"
             style={{ margin: "8px 0 8px 0" }}
             onChange={this.onChangeSMTPPort}
             value={this.props.currentSMTPPort}
@@ -189,7 +234,8 @@ const mapStateToProps = state => ({
   imap_server: state.Profile.imap_server,
   imap_port: state.Profile.imap_port,
   smtp_server: state.Profile.smtp_server,
-  smtp_port: state.Profile.smtp_port
+  smtp_port: state.Profile.smtp_port,
+  authenticated: state.Profile.authenticated
 });
 
 const mapDispatchToProps = {
@@ -199,7 +245,8 @@ const mapDispatchToProps = {
   updateIMAPServer: userActions.updateIMAPServer,
   updateIMAPPort: userActions.updateIMAPPort,
   updateSMTPServer: userActions.updateSMTPServer,
-  updateSMTPPort: userActions.updateSMTPPort
+  updateSMTPPort: userActions.updateSMTPPort,
+  authenticateUser: userActions.authenticateUser
 };
 
 export default connect(

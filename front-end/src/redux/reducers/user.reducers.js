@@ -2,6 +2,7 @@ import userActions from "../actions/user.actions";
 // import ProfileConfig from "../../EmailConfig";
 
 const initialState = {
+  authenticated: false
   // name: ProfileConfig.NAME,
   // email: ProfileConfig.EMAIL,
   // password: ProfileConfig.PASSWORD,
@@ -9,6 +10,7 @@ const initialState = {
   // imap_port: ProfileConfig.IMAP_PORT,
   // smtp_server: ProfileConfig.SMTP_SERVER,
   // smtp_port: ProfileConfig.SMTP_PORT
+  // authenticated: true
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -27,6 +29,12 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, smtp_server: payload.smtp_server };
     case userActions.UPDATE_SMTP_PORT:
       return { ...state, smtp_port: payload.smtp_port };
+    case userActions.AUTHENTICATE:
+      console.log("authenticated");
+      return { ...state, authenticated: payload.authenticate };
+    case userActions.UNAUTHENTICATE:
+      console.log("NOT authenticated");
+      return { ...state, authenticated: payload.authenticate };
     default:
       return state;
   }

@@ -18,6 +18,8 @@ def get_emails():
     try:
         params = app.current_request.query_params
 
+        print(params)
+
         folder = params["RequestedFolder"]
 
         email = params["email"]

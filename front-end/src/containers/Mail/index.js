@@ -9,8 +9,13 @@ import View from "../../components/view";
 
 import ComposeEmail from "../../components/compose";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles, useTheme, createStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -36,6 +41,15 @@ import AddIcon from "@material-ui/icons/Add";
 // import HomeIcon from "@material-ui/icons/Home";
 
 const drawerWidth = 240;
+
+const RestrictedRoute = ({ component: Component, authenticated, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      authenticated ? <Component {...props} /> : <Redirect to={"/profile"} />
+    }
+  />
+);
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -135,11 +149,6 @@ export default function PersistentDrawerLeft(props) {
             >
               <MenuIcon />
             </IconButton>
-            {/* <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
-              <Typography variant="h6" noWrap>
-                {props.currentMenu}
-              </Typography>
-            </Link> */}
             <Typography variant="h6" noWrap>
               {props.currentMenu}
             </Typography>
@@ -161,26 +170,6 @@ export default function PersistentDrawerLeft(props) {
           </div>
           <Divider />
           <List>
-            {/* <Link
-              to="/"
-              style={{ textDecoration: "none" }}
-              onClick={() => props.changeMenu("Home")}
-            >
-              <ListItem button key={"Home"}>
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary={"Home"} />
-              </ListItem>
-            </Link>
-
-            <Divider /> */}
-
-            {/* <Link
-              to="/inbox"
-              style={{ textDecoration: "none" }}
-              onClick={() => props.changeMenu("Inbox")}
-            > */}
             <Link
               to="/"
               style={{ textDecoration: "none" }}
@@ -261,21 +250,62 @@ export default function PersistentDrawerLeft(props) {
         >
           <div className={classes.drawerHeader} />
           <Switch>
-            {/* <Route path="/" exact component={Home} /> */}
-            <Route path="/" exact component={User} />
-            <Route path="/inbox" exact component={Inbox} />
-            <Route path="/inbox/:id" component={View} />
-
-            <Route path="/sent" exact component={Sent} />
-            <Route path="/sent/:id" component={View} />
-
-            <Route path="/all-mail" exact component={AllMail} />
-            <Route path="/all-mail/:id" component={View} />
-
-            <Route path="/trash" exact component={Trash} />
-            <Route path="/trash/:id" component={View} />
-
-            <Route path="/compose" exact component={ComposeEmail} />
+            <RestrictedRoute
+              exact
+              path="/"
+              authenticated={props.authenticated}
+              component={Inbox}
+            />
+            <Route
+              path="/profile"
+              exact
+              component={User}
+              // authenticated={props.authenticated}
+            />
+            <RestrictedRoute
+              path="/inbox/:id"
+              authenticated={props.authenticated}
+              component={View}
+            />
+            <RestrictedRoute
+              exact
+              path="/sent"
+              authenticated={props.authenticated}
+              component={Sent}
+            />
+            <RestrictedRoute
+              path="/sent/:id"
+              authenticated={props.authenticated}
+              component={View}
+            />
+            <RestrictedRoute
+              exact
+              path="/all-mail"
+              authenticated={props.authenticated}
+              component={AllMail}
+            />
+            <RestrictedRoute
+              path="/all-mail/:id"
+              authenticated={props.authenticated}
+              component={View}
+            />
+            <RestrictedRoute
+              exact
+              path="/trash"
+              authenticated={props.authenticated}
+              component={Trash}
+            />
+            <RestrictedRoute
+              path="/trash/:id"
+              authenticated={props.authenticated}
+              component={View}
+            />
+            <RestrictedRoute
+              exact
+              path="/compose"
+              authenticated={props.authenticated}
+              component={ComposeEmail}
+            />
           </Switch>
         </main>
       </div>

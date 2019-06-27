@@ -76,7 +76,6 @@ export class ComposeEmail extends Component {
             label="To"
             placeholder="example@gmail.com"
             variant="outlined"
-            id="custom-css-outlined-input"
             style={{ margin: "8px 0 8px 0" }}
             onChange={this.onChangeToAddress}
             value={this.props.currentTo}
@@ -87,7 +86,6 @@ export class ComposeEmail extends Component {
             label="Subject"
             placeholder="Subject Here!"
             variant="outlined"
-            id="custom-css-outlined-input"
             style={{ margin: "8px 0 8px 0" }}
             onChange={this.onChangeSubject}
             value={this.props.currentSubject}
@@ -98,7 +96,6 @@ export class ComposeEmail extends Component {
             label="Message"
             placeholder="Message Here!"
             variant="outlined"
-            id="custom-css-outlined-input"
             style={{ margin: "8px 0 8px 0" }}
             rows="13"
             onChange={this.onChangeMessage}

@@ -14,15 +14,18 @@ const retrieveEmailActions = {
   },
   retrieveEmails: folder => {
     return (dispatch, getState) => {
-      const Profile = getState().Profile;
+      console.log("Getting Emails");
+      const profile = getState().Profile;
+      console.log(folder);
+      console.log(profile);
       return axios
         .get("http://127.0.0.1:8000/get-emails", {
           params: {
             RequestedFolder: folder,
-            email: Profile.email,
-            password: Profile.password,
-            imap_server: Profile.imap_server,
-            imap_port: Profile.imap_port
+            email: profile.email,
+            password: profile.password,
+            imap_server: profile.imap_server,
+            imap_port: profile.imap_port
           }
         })
         .then(result => {

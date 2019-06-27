@@ -18,7 +18,8 @@ export class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  currentMenu: state.SelectedMenu.menu
+  currentMenu: state.SelectedMenu.menu,
+  authenticated: state.Profile.authenticated
 });
 
 const mapDispatchToProps = {
