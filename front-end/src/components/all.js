@@ -18,7 +18,17 @@ import retrieveEmailActions from "../redux/actions/retrieveEmail.actions";
 import moment from "moment";
 
 export class AllMail extends Component {
-  componentDidMount = async () => {
+  componentDidMount = () => {
+    if (this.props.authenticated) {
+      console.log("valid credentials");
+      this.onRetrieveAll();
+    } else {
+      console.log("not valid credentials");
+      this.props.history.push("/profile");
+    }
+  };
+
+  onRetrieveAll = async () => {
     console.log("checking all mail...");
     await this.props.loadingEmail(true);
     await this.props.retrieveEmails("All Mail");
@@ -137,6 +147,7 @@ export class AllMail extends Component {
 }
 
 const mapStateToProps = state => ({
+  authenticated: state.Profile.authenticated,
   allEmails: state.RetrieveEmails.emails,
   loading: state.RetrieveEmails.loading
 });

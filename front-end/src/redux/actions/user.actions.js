@@ -68,34 +68,6 @@ const userActions = {
   authenticateUser: () => {
     return (dispatch, getState) => {
       const profile = getState().Profile;
-      console.log(profile);
-
-      // profile.name &&
-      // profile.email &&
-      // profile.password &&
-      // profile.imap_server &&
-      // profile.imap_port &&
-      // profile.smtp_server &&
-      // profile.smtp_port
-      //   ? console.log("working")
-      //   : console.log("note working");
-
-      // profile.name &&
-      // profile.email &&
-      // profile.password &&
-      // profile.imap_server &&
-      // profile.imap_port &&
-      // profile.smtp_server &&
-      // profile.smtp_port
-      //   ? dispatch({
-      //       type: userActions.AUTHENTICATE,
-      //       payload: { authenticate: true }
-      //     })
-      //   : dispatch({
-      //       type: userActions.UNAUTHENTICATE,
-      //       payload: { authenticate: false }
-      //     });
-
       if (
         profile.name &&
         profile.email &&

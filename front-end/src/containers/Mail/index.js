@@ -1,6 +1,5 @@
 import React from "react";
 
-import Working from "../../components/working";
 import User from "../../components/user";
 import Inbox from "../../components/inbox";
 import Sent from "../../components/sent";
@@ -10,13 +9,7 @@ import View from "../../components/view";
 
 import ComposeEmail from "../../components/compose";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles, useTheme, createStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -43,20 +36,11 @@ import AddIcon from "@material-ui/icons/Add";
 
 const drawerWidth = 240;
 
-const RestrictedRoute = ({ component: Component, authenticated, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      authenticated ? <Component {...props} /> : <Redirect to={"/profile"} />
-    }
-  />
-);
-
-// const RestrictedRoute = ({ component: Component, ...rest }) => (
+// const RestrictedRoute = ({ component: Component, authenticated, ...rest }) => (
 //   <Route
 //     {...rest}
 //     render={props =>
-//       props.authenticated ? <Component {...props} /> : <Redirect to={"/profile"} />
+//       authenticated ? <Component {...props} /> : <Redirect to={"/profile"} />
 //     }
 //   />
 // );
@@ -260,68 +244,21 @@ export default function PersistentDrawerLeft(props) {
         >
           <div className={classes.drawerHeader} />
           <Switch>
-            <Route
-              exact
-              path="/working"
-              // authenticated={props.authenticated}
-              component={Working}
-            />
-            <RestrictedRoute
-              exact
-              path="/"
-              authenticated={props.authenticated}
-              component={Inbox}
-            />
+            <Route exact path="/" component={Inbox} />
             <Route
               path="/profile"
               exact
               component={User}
-              // authenticated={props.authenticated}
-            />
-            <RestrictedRoute
-              path="/inbox/:id"
               authenticated={props.authenticated}
-              component={View}
             />
-            <RestrictedRoute
-              exact
-              path="/sent"
-              authenticated={props.authenticated}
-              component={Sent}
-            />
-            <RestrictedRoute
-              path="/sent/:id"
-              authenticated={props.authenticated}
-              component={View}
-            />
-            <RestrictedRoute
-              exact
-              path="/all-mail"
-              authenticated={props.authenticated}
-              component={AllMail}
-            />
-            <RestrictedRoute
-              path="/all-mail/:id"
-              authenticated={props.authenticated}
-              component={View}
-            />
-            <RestrictedRoute
-              exact
-              path="/trash"
-              authenticated={props.authenticated}
-              component={Trash}
-            />
-            <RestrictedRoute
-              path="/trash/:id"
-              authenticated={props.authenticated}
-              component={View}
-            />
-            <RestrictedRoute
-              exact
-              path="/compose"
-              authenticated={props.authenticated}
-              component={ComposeEmail}
-            />
+            <Route path="/inbox/:id" component={View} />
+            <Route exact path="/sent" component={Sent} />
+            <Route path="/sent/:id" component={View} />
+            <Route exact path="/all-mail" component={AllMail} />
+            <Route path="/all-mail/:id" component={View} />
+            <Route exact path="/trash" component={Trash} />
+            <Route path="/trash/:id" component={View} />
+            <Route exact path="/compose" component={ComposeEmail} />
           </Switch>
         </main>
       </div>

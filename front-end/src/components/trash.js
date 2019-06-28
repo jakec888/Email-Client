@@ -19,6 +19,16 @@ import moment from "moment";
 
 export class Trash extends Component {
   componentDidMount = async () => {
+    if (this.props.authenticated) {
+      console.log("valid credentials");
+      this.onRetrieveTrash();
+    } else {
+      console.log("not valid credentials");
+      this.props.history.push("/profile");
+    }
+  };
+
+  onRetrieveTrash = async () => {
     console.log("checking trash...");
     await this.props.loadingEmail(true);
     await this.props.retrieveEmails("Trash");
@@ -137,6 +147,7 @@ export class Trash extends Component {
 }
 
 const mapStateToProps = state => ({
+  authenticated: state.Profile.authenticated,
   trashEmails: state.RetrieveEmails.emails,
   loading: state.RetrieveEmails.loading
 });

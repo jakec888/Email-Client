@@ -19,6 +19,16 @@ import moment from "moment";
 
 export class Sent extends Component {
   componentDidMount = async () => {
+    if (this.props.authenticated) {
+      console.log("valid credentials");
+      this.onRetrieveSent();
+    } else {
+      console.log("not valid credentials");
+      this.props.history.push("/profile");
+    }
+  };
+
+  onRetrieveSent = async () => {
     console.log("checking sent...");
     await this.props.loadingEmail(true);
     await this.props.retrieveEmails("Sent");
@@ -137,6 +147,7 @@ export class Sent extends Component {
 }
 
 const mapStateToProps = state => ({
+  authenticated: state.Profile.authenticated,
   sentEmails: state.RetrieveEmails.emails,
   loading: state.RetrieveEmails.loading
 });

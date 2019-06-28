@@ -18,7 +18,18 @@ import retrieveEmailActions from "../redux/actions/retrieveEmail.actions";
 import moment from "moment";
 
 export class Inbox extends Component {
-  componentDidMount = async () => {
+  componentDidMount = () => {
+    console.log("Inbox");
+    if (this.props.authenticated) {
+      console.log("valid credentials");
+      this.onRetrieveInbox();
+    } else {
+      console.log("not valid credentials");
+      this.props.history.push("/profile");
+    }
+  };
+
+  onRetrieveInbox = async () => {
     console.log("checking inbox...");
     await this.props.loadingEmail(true);
     await this.props.retrieveEmails("Inbox");
@@ -137,6 +148,7 @@ export class Inbox extends Component {
 }
 
 const mapStateToProps = state => ({
+  authenticated: state.Profile.authenticated,
   inboxEmails: state.RetrieveEmails.emails,
   loading: state.RetrieveEmails.loading
 });
