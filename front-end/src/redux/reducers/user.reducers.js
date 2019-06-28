@@ -30,7 +30,7 @@ export default (state = initialState, { type, payload }) => {
     case userActions.UPDATE_SMTP_PORT:
       return { ...state, smtp_port: payload.smtp_port };
     case userActions.AUTHENTICATE:
-      console.log("authenticated");
+      console.log("IS authenticated");
       return { ...state, authenticated: payload.authenticate };
     case userActions.UNAUTHENTICATE:
       console.log("NOT authenticated");

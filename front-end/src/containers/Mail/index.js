@@ -1,5 +1,6 @@
 import React from "react";
 
+import Working from "../../components/working";
 import User from "../../components/user";
 import Inbox from "../../components/inbox";
 import Sent from "../../components/sent";
@@ -50,6 +51,15 @@ const RestrictedRoute = ({ component: Component, authenticated, ...rest }) => (
     }
   />
 );
+
+// const RestrictedRoute = ({ component: Component, ...rest }) => (
+//   <Route
+//     {...rest}
+//     render={props =>
+//       props.authenticated ? <Component {...props} /> : <Redirect to={"/profile"} />
+//     }
+//   />
+// );
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -250,6 +260,12 @@ export default function PersistentDrawerLeft(props) {
         >
           <div className={classes.drawerHeader} />
           <Switch>
+            <Route
+              exact
+              path="/working"
+              // authenticated={props.authenticated}
+              component={Working}
+            />
             <RestrictedRoute
               exact
               path="/"

@@ -36,14 +36,13 @@ const CssTextField = withStyles({
 
 export class User extends Component {
   // componentDidMount() {
-  //   console.log("start");
-  //   console.log(this.props.authenticated);
+  //   this.onCheckAuth();
+  //   // console.log("start");
+  //   // console.log(this.props.authenticated);
   //   // this.props.authenticated
   //   //   ? this.props.history.push("/inbox")
   //   //   : console.log("not authenticated");
-
   //   // this.props.authenticated && this.props.history.push("/");
-
   //   // this.props.authenticated && <Redirect to="/" />;
   //   // if (this.props.authenticated) {
   //   //   console.log("redirecting");
@@ -51,14 +50,23 @@ export class User extends Component {
   //   // }
   // }
 
-  onSubmitUserData = event => {
-    event.preventDefault();
-    console.log("authenticating user");
-    console.log(this.props.authenticated);
-    this.props.authenticateUser();
-    console.log("user authenticationg finished");
-    console.log(this.props.authenticated);
+  onCheckAuth = () => {
+    console.log("checking");
+    this.props.authenticated
+      ? this.props.history.push("/working")
+      : console.log("not authenticated");
+  };
 
+  onSubmitUserData = async event => {
+    event.preventDefault();
+    // console.log("authenticating user");
+    // console.log(this.props.authenticated);
+    await this.props.authenticateUser();
+    this.onCheckAuth();
+    // console.log("user authenticationg finished");
+    // console.log(this.props.authenticated);
+
+    // await this.onCheckAuth();
     // (await this.props.authenticated)
     //   ? this.props.history.push("/")
     //   : console.log("not authenticated");
@@ -78,6 +86,7 @@ export class User extends Component {
     // console.log("pushing history");
     // this.props.history.push("/");
     // console.log("pushed history");
+    // await this.props.history.push("/profile");
   };
 
   onChangeName = event => {
