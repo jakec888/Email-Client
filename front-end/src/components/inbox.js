@@ -19,22 +19,17 @@ import moment from "moment";
 
 export class Inbox extends Component {
   componentDidMount = () => {
-    console.log("Inbox");
-    if (this.props.authenticated) {
-      console.log("valid credentials");
+    if (this.props.validCredentials) {
       this.onRetrieveInbox();
     } else {
-      console.log("not valid credentials");
-      this.props.history.push("/profile");
+      this.props.history.push("/");
     }
   };
 
   onRetrieveInbox = async () => {
-    console.log("checking inbox...");
     await this.props.loadingEmail(true);
     await this.props.retrieveEmails("Inbox");
     await this.props.loadingEmail(false);
-    console.log("successfully inbox emails");
   };
 
   onSelectEmail = emailId => {
@@ -148,7 +143,7 @@ export class Inbox extends Component {
 }
 
 const mapStateToProps = state => ({
-  authenticated: state.Profile.authenticated,
+  validCredentials: state.Profile.validCredentials,
   inboxEmails: state.RetrieveEmails.emails,
   loading: state.RetrieveEmails.loading
 });

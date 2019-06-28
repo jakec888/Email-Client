@@ -36,14 +36,7 @@ const CssTextField = withStyles({
 
 export class ComposeEmail extends Component {
   componentDidMount = () => {
-    // if (this.props.authenticated) {
-    //   console.log("valid credentials");
-    //   this.onRetrieveInbox();
-    // } else {
-    //   console.log("not valid credentials");
-    //   this.props.history.push("/profile");
-    // }
-    this.props.authenticated !== true && this.props.history.push("/profile");
+    this.props.validCredentials !== true && this.props.history.push("/");
   };
 
   onChangeToAddress = event => {
@@ -60,7 +53,6 @@ export class ComposeEmail extends Component {
 
   onSendEmail = event => {
     event.preventDefault();
-    console.log("onSendEmail Clicked");
     this.props.onSendMessage();
   };
 
@@ -152,7 +144,7 @@ export class ComposeEmail extends Component {
 }
 
 const mapStateToProps = state => ({
-  authenticated: state.Profile.authenticated,
+  validCredentials: state.Profile.validCredentials,
   currentTo: state.ComposeEmail.to,
   currentSubject: state.ComposeEmail.subject,
   currentMessage: state.ComposeEmail.message,

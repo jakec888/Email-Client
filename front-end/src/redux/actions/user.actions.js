@@ -79,12 +79,12 @@ const userActions = {
       ) {
         dispatch({
           type: userActions.AUTHENTICATE,
-          payload: { authenticate: true }
+          payload: { validCredentials: true }
         });
       } else {
         dispatch({
           type: userActions.UNAUTHENTICATE,
-          payload: { authenticate: false }
+          payload: { validCredentials: false }
         });
       }
     };

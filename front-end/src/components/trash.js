@@ -19,21 +19,17 @@ import moment from "moment";
 
 export class Trash extends Component {
   componentDidMount = async () => {
-    if (this.props.authenticated) {
-      console.log("valid credentials");
+    if (this.props.validCredentials) {
       this.onRetrieveTrash();
     } else {
-      console.log("not valid credentials");
-      this.props.history.push("/profile");
+      this.props.history.push("/");
     }
   };
 
   onRetrieveTrash = async () => {
-    console.log("checking trash...");
     await this.props.loadingEmail(true);
     await this.props.retrieveEmails("Trash");
     await this.props.loadingEmail(false);
-    console.log("successfully trash emails");
   };
 
   onSelectEmail = emailId => {
@@ -147,7 +143,7 @@ export class Trash extends Component {
 }
 
 const mapStateToProps = state => ({
-  authenticated: state.Profile.authenticated,
+  validCredentials: state.Profile.validCredentials,
   trashEmails: state.RetrieveEmails.emails,
   loading: state.RetrieveEmails.loading
 });

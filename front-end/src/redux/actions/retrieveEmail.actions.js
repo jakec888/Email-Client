@@ -14,10 +14,7 @@ const retrieveEmailActions = {
   },
   retrieveEmails: folder => {
     return (dispatch, getState) => {
-      console.log("Getting Emails");
       const profile = getState().Profile;
-      console.log(folder);
-      console.log(profile);
       return axios
         .get("http://127.0.0.1:8000/get-emails", {
           params: {
@@ -43,7 +40,6 @@ const retrieveEmailActions = {
     };
   },
   sendEmailTest: email => {
-    console.log(email);
     return (dispatch, getState) => {
       const Profile = getState().Profile;
       axios
@@ -60,15 +56,12 @@ const retrieveEmailActions = {
           bodyHTML: email.bodyHTML
         })
         .then(result => {
-          console.log(result);
           dispatch({
             type: retrieveEmailActions.SEND_EMAIL,
             payload: result.data
           });
         })
         .catch(err => {
-          console.log("Error");
-          console.log(err);
           dispatch({
             type: retrieveEmailActions.SEND_EMAIL,
             payload: err

@@ -37,7 +37,7 @@ export class User extends Component {
   onSubmitUserData = event => {
     event.preventDefault();
     this.props.authenticateUser();
-    this.props.history.push("/");
+    this.props.history.push("/inbox");
   };
 
   onChangeName = event => {
@@ -195,7 +195,7 @@ const mapStateToProps = state => ({
   imap_port: state.Profile.imap_port,
   smtp_server: state.Profile.smtp_server,
   smtp_port: state.Profile.smtp_port,
-  authenticated: state.Profile.authenticated
+  validCredentials: state.Profile.validCredentials
 });
 
 const mapDispatchToProps = {

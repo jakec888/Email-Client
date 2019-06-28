@@ -61,7 +61,6 @@ const composeEmailActions = {
           bodyPLAIN: email.message
         })
         .then(result => {
-          console.log(result);
           dispatch({
             type: composeEmailActions.SEND_MESSAGE,
             payload: {
@@ -74,8 +73,6 @@ const composeEmailActions = {
           alert("Email Successfully Sent");
         })
         .catch(err => {
-          console.log("Error");
-          console.log(err);
           dispatch({
             type: composeEmailActions.SEND_MESSAGE,
             payload: {

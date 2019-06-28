@@ -19,21 +19,17 @@ import moment from "moment";
 
 export class AllMail extends Component {
   componentDidMount = () => {
-    if (this.props.authenticated) {
-      console.log("valid credentials");
+    if (this.props.validCredentials) {
       this.onRetrieveAll();
     } else {
-      console.log("not valid credentials");
-      this.props.history.push("/profile");
+      this.props.history.push("/");
     }
   };
 
   onRetrieveAll = async () => {
-    console.log("checking all mail...");
     await this.props.loadingEmail(true);
     await this.props.retrieveEmails("All Mail");
     await this.props.loadingEmail(false);
-    console.log("successfully all mail emails");
   };
 
   onSelectEmail = emailId => {
@@ -147,7 +143,7 @@ export class AllMail extends Component {
 }
 
 const mapStateToProps = state => ({
-  authenticated: state.Profile.authenticated,
+  validCredentials: state.Profile.validCredentials,
   allEmails: state.RetrieveEmails.emails,
   loading: state.RetrieveEmails.loading
 });

@@ -14,14 +14,7 @@ import moment from "moment";
 
 export class View extends Component {
   componentDidMount = () => {
-    // if (this.props.authenticate) {
-    //   console.log("valid credentials");
-    //   this.onRetrieveInbox();
-    // } else {
-    //   console.log("not valid credentials");
-    //   this.props.history.push("/profile");
-    // }
-    this.props.authenticate !== true && this.props.history.push("/profile");
+    this.props.validCredentials !== true && this.props.history.push("/");
   };
 
   render() {
@@ -120,6 +113,7 @@ export class View extends Component {
 }
 
 const mapStateToProps = state => ({
+  validCredentials: state.Profile.validCredentials,
   selectedEmail: state.SelectedEmail
 });
 

@@ -36,11 +36,11 @@ import AddIcon from "@material-ui/icons/Add";
 
 const drawerWidth = 240;
 
-// const RestrictedRoute = ({ component: Component, authenticated, ...rest }) => (
+// const RestrictedRoute = ({ component: Component, validCredentials, ...rest }) => (
 //   <Route
 //     {...rest}
 //     render={props =>
-//       authenticated ? <Component {...props} /> : <Redirect to={"/profile"} />
+//       validCredentials ? <Component {...props} /> : <Redirect to={"/"} />
 //     }
 //   />
 // );
@@ -108,8 +108,6 @@ const useStyles = makeStyles(theme =>
 );
 
 export default function PersistentDrawerLeft(props) {
-  // console.log(props);
-
   const classes = useStyles();
   const theme = useTheme();
 
@@ -165,7 +163,7 @@ export default function PersistentDrawerLeft(props) {
           <Divider />
           <List>
             <Link
-              to="/"
+              to="/inbox"
               style={{ textDecoration: "none" }}
               onClick={() => props.changeMenu("Inbox")}
             >
@@ -244,13 +242,13 @@ export default function PersistentDrawerLeft(props) {
         >
           <div className={classes.drawerHeader} />
           <Switch>
-            <Route exact path="/" component={Inbox} />
             <Route
-              path="/profile"
+              path="/"
               exact
               component={User}
-              authenticated={props.authenticated}
+              validCredentials={props.validCredentials}
             />
+            <Route exact path="/inbox" component={Inbox} />
             <Route path="/inbox/:id" component={View} />
             <Route exact path="/sent" component={Sent} />
             <Route path="/sent/:id" component={View} />
