@@ -20,6 +20,7 @@ import moment from "moment";
 export class Inbox extends Component {
   componentDidMount = () => {
     if (this.props.validCredentials) {
+      document.title = "Inbox Emails";
       this.onRetrieveInbox();
     } else {
       this.props.history.push("/");

@@ -37,6 +37,7 @@ const CssTextField = withStyles({
 export class ComposeEmail extends Component {
   componentDidMount = () => {
     this.props.validCredentials !== true && this.props.history.push("/");
+    document.title = "Compose Email";
   };
 
   onChangeToAddress = event => {

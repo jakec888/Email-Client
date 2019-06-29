@@ -21,6 +21,7 @@ export class Trash extends Component {
   componentDidMount = async () => {
     if (this.props.validCredentials) {
       this.onRetrieveTrash();
+      document.title = "Trash Emails";
     } else {
       this.props.history.push("/");
     }

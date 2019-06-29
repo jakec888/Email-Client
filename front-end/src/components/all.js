@@ -21,6 +21,7 @@ export class AllMail extends Component {
   componentDidMount = () => {
     if (this.props.validCredentials) {
       this.onRetrieveAll();
+      document.title = "All Emails";
     } else {
       this.props.history.push("/");
     }

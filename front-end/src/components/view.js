@@ -15,6 +15,7 @@ import moment from "moment";
 export class View extends Component {
   componentDidMount = () => {
     this.props.validCredentials !== true && this.props.history.push("/");
+    document.title = this.props.selectedEmail.subject;
   };
 
   render() {

@@ -33,7 +33,11 @@ const CssTextField = withStyles({
   }
 })(TextField);
 
-export class User extends Component {
+export class Credentials extends Component {
+  componentDidMount() {
+    document.title = "Credentials";
+  }
+
   onSubmitUserData = event => {
     event.preventDefault();
     this.props.authenticateUser();
@@ -212,4 +216,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(User);
+)(Credentials);

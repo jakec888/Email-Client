@@ -20,6 +20,7 @@ import moment from "moment";
 export class Sent extends Component {
   componentDidMount = async () => {
     if (this.props.validCredentials) {
+      document.title = "Sent Emails";
       this.onRetrieveSent();
     } else {
       this.props.history.push("/");

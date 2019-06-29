@@ -1,16 +1,7 @@
 import userActions from "../actions/user.actions";
-// import ProfileConfig from "../../EmailConfig";
 
 const initialState = {
   validCredentials: false
-  // name: ProfileConfig.NAME,
-  // email: ProfileConfig.EMAIL,
-  // password: ProfileConfig.PASSWORD,
-  // imap_server: ProfileConfig.IMAP_SERVER,
-  // imap_port: ProfileConfig.IMAP_PORT,
-  // smtp_server: ProfileConfig.SMTP_SERVER,
-  // smtp_port: ProfileConfig.SMTP_PORT
-  // validCredentials: true
 };
 
 export default (state = initialState, { type, payload }) => {

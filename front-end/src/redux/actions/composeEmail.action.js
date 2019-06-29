@@ -45,9 +45,8 @@ const composeEmailActions = {
   },
   sendMessage: () => {
     return (dispatch, getState) => {
-      const profile = getState().ProfileConfig;
+      const profile = getState().Profile;
       const email = getState().ComposeEmail;
-
       axios
         .post("http://127.0.0.1:8000/send-email", {
           email: profile.EMAIL,

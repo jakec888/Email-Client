@@ -1,6 +1,6 @@
 import React from "react";
 
-import User from "../../components/user";
+import Credentials from "../../components/credentials";
 import Inbox from "../../components/inbox";
 import Sent from "../../components/sent";
 import AllMail from "../../components/all";
@@ -245,7 +245,7 @@ export default function PersistentDrawerLeft(props) {
             <Route
               path="/"
               exact
-              component={User}
+              component={Credentials}
               validCredentials={props.validCredentials}
             />
             <Route exact path="/inbox" component={Inbox} />
