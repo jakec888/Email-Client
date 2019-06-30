@@ -23,9 +23,16 @@ cors_config = CORSConfig(
 
 @app.route('/', methods=['GET'], cors=cors_config)
 def working():
-    return Response(body={'working': True},
-                    status_code=200,
-                    headers={'Content-Type': 'text/json'})
+    try:
+        return Response(body={'working': True},
+                        status_code=200,
+                        headers={'Content-Type': 'text/json'})
+    except Exception as error:
+        print("Get Emails Error:")
+        print(error)
+        return Response(body={'error': str(error)},
+                        status_code=500,
+                        headers={'Content-Type': 'text/plain'})
 
 
 @app.route('/get-emails', methods=['GET'], cors=cors_config)
@@ -54,7 +61,7 @@ def get_emails():
                 emails = []
                 for uid, message in all_inbox_messages[0:10]:
 
-                    print(uid)
+                    # print(uid)
 
                     email = {}
 
