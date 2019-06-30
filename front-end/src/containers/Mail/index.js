@@ -32,7 +32,6 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SendIcon from "@material-ui/icons/Send";
 import AddIcon from "@material-ui/icons/Add";
-// import HomeIcon from "@material-ui/icons/Home";
 
 const drawerWidth = 240;
 

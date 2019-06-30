@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import API from "../../api/email";
 
 const composeEmailActions = {
   COMPOSE_TO: "COMPOSE_TO",
@@ -47,18 +48,17 @@ const composeEmailActions = {
     return (dispatch, getState) => {
       const profile = getState().Profile;
       const email = getState().ComposeEmail;
-      axios
-        .post("http://127.0.0.1:8000/send-email", {
-          email: profile.EMAIL,
-          password: profile.PASSWORD,
-          smtp_server: profile.SMTP_SERVER,
-          smtp_port: profile.SMTP_PORT,
-          fromAddress: profile.EMAIL,
-          name: profile.NAME,
-          toAddress: email.to,
-          subject: email.subject,
-          bodyPLAIN: email.message
-        })
+      API.post("/send-email", {
+        email: profile.EMAIL,
+        password: profile.PASSWORD,
+        smtp_server: profile.SMTP_SERVER,
+        smtp_port: profile.SMTP_PORT,
+        fromAddress: profile.EMAIL,
+        name: profile.NAME,
+        toAddress: email.to,
+        subject: email.subject,
+        bodyPLAIN: email.message
+      })
         .then(result => {
           dispatch({
             type: composeEmailActions.SEND_MESSAGE,

@@ -1,4 +1,4 @@
-from chalice import Chalice, Response
+from chalice import Chalice, Response, CORSConfig
 from sender import Mail, Message
 from imbox import Imbox
 from datetime import datetime
@@ -10,22 +10,37 @@ import time
 
 
 app = Chalice(app_name='back-end')
-app.debug = True
+app.debug = False
+
+cors_config = CORSConfig(
+    allow_origin='https://d2j53vwkoe69bq.cloudfront.net',
+    allow_headers=[],
+    max_age=600,
+    expose_headers=[],
+    allow_credentials=False
+)
 
 
-@app.route('/get-emails', cors=True)
+@app.route('/', methods=['GET'], cors=cors_config)
+def working():
+    return Response(body={'working': True},
+                    status_code=200,
+                    headers={'Content-Type': 'text/json'})
+
+
+@app.route('/get-emails', methods=['GET'], cors=cors_config)
 def get_emails():
     try:
-        params = app.current_request.query_params
+        given_params = app.current_request.query_params
 
-        print(params)
+        print(given_params)
 
-        folder = params["RequestedFolder"]
+        folder = given_params["RequestedFolder"]
 
-        email = params["email"]
-        password = params["password"]
-        imap_server = params["imap_server"]
-        imap_port = params["imap_port"]
+        email = given_params["email"]
+        password = given_params["password"]
+        imap_server = given_params["imap_server"]
+        imap_port = given_params["imap_port"]
 
         # print(folder)
         # print(email)
@@ -89,18 +104,18 @@ def get_emails():
                                 status_code=200,
                                 headers={'Content-Type': 'text/json'})
             else:
-                return Response(body='No Emails!',
+                return Response(body={'emails': "No Emails!"},
                                 status_code=204,
                                 headers={'Content-Type': 'text/plain'})
     except Exception as error:
         print("Get Emails Error:")
         print(error)
-        return Response(body=str(error),
+        return Response(body={'error': str(error)},
                         status_code=500,
                         headers={'Content-Type': 'text/plain'})
 
 
-@app.route('/send-email', methods=['POST'], cors=True)
+@app.route('/send-email', methods=['POST'], cors=cors_config)
 def send_email():
     try:
         data = app.current_request.json_body

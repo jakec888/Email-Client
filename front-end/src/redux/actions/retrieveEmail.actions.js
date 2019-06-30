@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import API from "../../api/email";
 
 const retrieveEmailActions = {
   GET_EMAILS: "GET_EMAILS",
@@ -15,16 +16,15 @@ const retrieveEmailActions = {
   retrieveEmails: folder => {
     return (dispatch, getState) => {
       const profile = getState().Profile;
-      return axios
-        .get("http://127.0.0.1:8000/get-emails", {
-          params: {
-            RequestedFolder: folder,
-            email: profile.email,
-            password: profile.password,
-            imap_server: profile.imap_server,
-            imap_port: profile.imap_port
-          }
-        })
+      return API.get("/get-emails", {
+        params: {
+          RequestedFolder: folder,
+          email: profile.email,
+          password: profile.password,
+          imap_server: profile.imap_server,
+          imap_port: profile.imap_port
+        }
+      })
         .then(result => {
           dispatch({
             type: retrieveEmailActions.GET_EMAILS,
@@ -42,19 +42,18 @@ const retrieveEmailActions = {
   sendEmailTest: email => {
     return (dispatch, getState) => {
       const Profile = getState().Profile;
-      axios
-        .post("http://127.0.0.1:8000/smtp", {
-          email: Profile.email,
-          password: Profile.password,
-          smtp_server: Profile.smtp_server,
-          smtp_port: Profile.smtp_port,
-          fromAddress: Profile.email,
-          name: Profile.NAME,
-          toAddress: email.toAddress,
-          subject: email.subject,
-          bodyPLAIN: email.bodyPLAIN,
-          bodyHTML: email.bodyHTML
-        })
+      API.post("/smtp", {
+        email: Profile.email,
+        password: Profile.password,
+        smtp_server: Profile.smtp_server,
+        smtp_port: Profile.smtp_port,
+        fromAddress: Profile.email,
+        name: Profile.NAME,
+        toAddress: email.toAddress,
+        subject: email.subject,
+        bodyPLAIN: email.bodyPLAIN,
+        bodyHTML: email.bodyHTML
+      })
         .then(result => {
           dispatch({
             type: retrieveEmailActions.SEND_EMAIL,
