@@ -7,6 +7,7 @@ DateTime==4.3
 docutils==0.14
 enum-compat==0.0.2
 html5lib==1.0.1
+imbox==0.9.6
 jmespath==0.9.4
 pycodestyle==2.5.0
 python-dateutil==2.8.0
