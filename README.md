@@ -8,6 +8,12 @@ Ephemeral online email client that will securely check your emails anywhere with
 
 Static website with serverless backend.
 
+![](credentials.gif)
+
+![](folder-and-view-email.gif)
+
+![](compose-email.gif)
+
 ### Front End Stack
 
 - [Node JS v10.16.0](v10.16.0)

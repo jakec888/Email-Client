@@ -49,12 +49,12 @@ const composeEmailActions = {
       const profile = getState().Profile;
       const email = getState().ComposeEmail;
       API.post("/send-email", {
-        email: profile.EMAIL,
-        password: profile.PASSWORD,
-        smtp_server: profile.SMTP_SERVER,
-        smtp_port: profile.SMTP_PORT,
-        fromAddress: profile.EMAIL,
-        name: profile.NAME,
+        email: profile.email,
+        password: profile.password,
+        smtp_server: profile.smtp_server,
+        smtp_port: profile.smtp_port,
+        fromAddress: profile.email,
+        name: profile.name,
         toAddress: email.to,
         subject: email.subject,
         bodyPLAIN: email.message

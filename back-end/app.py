@@ -74,7 +74,7 @@ def get_emails():
             all_inbox_messages = imbox.messages(folder=folder)
             if all_inbox_messages:
                 emails = []
-                for uid, message in all_inbox_messages[0:10]:
+                for uid, message in all_inbox_messages[::-1][0:10]:
 
                     print(uid)
 
@@ -188,6 +188,6 @@ def send_email():
         return Response(body={'sent': True}, status_code=200, headers=custom_headers)
 
     except Exception as error:
-        # print("Send Emails Error")
-        # print(error)
+        print("Send Emails Error")
+        print(error)
         return Response(body={'AppError': str(error)}, status_code=500, headers=custom_headers)
