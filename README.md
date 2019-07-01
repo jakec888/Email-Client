@@ -4,6 +4,8 @@
 
 This is a simple locally hosted email client
 
+![](sample.gif)
+  
 ### Front End
 
 - [Node JS v10.16.0](v10.16.0)
