@@ -2,17 +2,26 @@
 
 ## About
 
-[Email Client](https://d358ioepy2yz0y.cloudfront.net)
+Visit: [Ephemeral Web Mail Client](https://d358ioepy2yz0y.cloudfront.net)
 
 Ephemeral online email client that will securely check your emails anywhere without holding you information.
 
 Static website with serverless backend.
 
-![](credentials.gif)
+<center><h3>Add Your Email Credentials</h3></center>
+<p align="center">
+<img src="credentials.gif" />
+</p>
 
-![](folder-and-view-email.gif)
+<center><h3>Retrieve Emails From Your Inbox and Other Folders</h3></center>
+<p align="center">
+<img src="folder-and-view-email.gif" />
+</p>
 
-![](compose-email.gif)
+<center><h3>Compose And Send Emails</h3></center>
+<p align="center">
+<img src="compose-email.gif" />
+</p>
 
 ### Front End Stack
 
