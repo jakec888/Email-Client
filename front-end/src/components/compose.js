@@ -1,34 +1,34 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from '@material-ui/core/styles';
 
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 
-import Button from "@material-ui/core/Button";
-import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
-import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
+import Button from '@material-ui/core/Button';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
 
-import composeEmailActions from "../redux/actions/composeEmail.action";
+import composeEmailActions from '../redux/actions/composeEmail.action';
 
 const CssTextField = withStyles({
   root: {
-    "& label.Mui-focused": {
-      color: "#3f51b5"
+    '& label.Mui-focused': {
+      color: '#3f51b5'
     },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "#3f51b5"
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#3f51b5'
     },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#95a2e6"
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#95a2e6'
       },
-      "&:hover fieldset": {
-        borderColor: "#4b5cb8"
+      '&:hover fieldset': {
+        borderColor: '#4b5cb8'
       },
-      "&.Mui-focused fieldset": {
-        borderColor: "#95a2e6"
+      '&.Mui-focused fieldset': {
+        borderColor: '#95a2e6'
       }
     }
   }
@@ -36,23 +36,23 @@ const CssTextField = withStyles({
 
 export class ComposeEmail extends Component {
   componentDidMount = () => {
-    this.props.validCredentials !== true && this.props.history.push("/");
-    document.title = "Compose Email";
+    this.props.validCredentials !== true && this.props.history.push('/');
+    document.title = 'Compose Email';
   };
 
-  onChangeToAddress = event => {
+  onChangeToAddress = (event) => {
     this.props.updateToAddress(event.target.value);
   };
 
-  onChangeSubject = event => {
+  onChangeSubject = (event) => {
     this.props.updateSubject(event.target.value);
   };
 
-  onChangeMessage = event => {
+  onChangeMessage = (event) => {
     this.props.updateMessage(event.target.value);
   };
 
-  onSendEmail = event => {
+  onSendEmail = (event) => {
     event.preventDefault();
     this.props.onSendMessage();
   };
@@ -61,26 +61,26 @@ export class ComposeEmail extends Component {
     return (
       <Paper
         style={{
-          width: "85%",
-          minHeight: "300px",
-          height: "auto",
-          margin: "auto",
-          padding: "15px"
+          width: '85%',
+          minHeight: '300px',
+          height: 'auto',
+          margin: 'auto',
+          padding: '15px'
         }}
       >
         <form
           onSubmit={this.onSendEmail}
           style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between"
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between'
           }}
         >
           <CssTextField
             label="To"
             placeholder="example@gmail.com"
             variant="outlined"
-            style={{ margin: "8px 0 8px 0" }}
+            style={{ margin: '8px 0 8px 0' }}
             onChange={this.onChangeToAddress}
             value={this.props.currentTo}
             name="to"
@@ -90,7 +90,7 @@ export class ComposeEmail extends Component {
             label="Subject"
             placeholder="Subject Here!"
             variant="outlined"
-            style={{ margin: "8px 0 8px 0" }}
+            style={{ margin: '8px 0 8px 0' }}
             onChange={this.onChangeSubject}
             value={this.props.currentSubject}
             name="subject"
@@ -100,7 +100,7 @@ export class ComposeEmail extends Component {
             label="Message"
             placeholder="Message Here!"
             variant="outlined"
-            style={{ margin: "8px 0 8px 0" }}
+            style={{ margin: '8px 0 8px 0' }}
             rows="13"
             onChange={this.onChangeMessage}
             value={this.props.currentMessage}
@@ -109,9 +109,9 @@ export class ComposeEmail extends Component {
           />
           <div
             style={{
-              display: "flex",
-              flexDirection: "row-reverse",
-              justifyContent: "flex-start"
+              display: 'flex',
+              flexDirection: 'row-reverse',
+              justifyContent: 'flex-start'
             }}
           >
             <Button
@@ -120,22 +120,22 @@ export class ComposeEmail extends Component {
               variant="outlined"
               color="primary"
               style={{
-                margin: "0px 5px",
-                color: "#3f51b5",
-                borderColor: "#3f51b5"
+                margin: '0px 5px',
+                color: '#3f51b5',
+                borderColor: '#3f51b5'
               }}
             >
               Send
-              <SendOutlinedIcon style={{ margin: "0px 3px" }} />
+              <SendOutlinedIcon style={{ margin: '0px 3px' }} />
             </Button>
             <Button
               variant="outlined"
               color="secondary"
-              style={{ margin: "0px 5px", color: "red", borderColor: "red" }}
+              style={{ margin: '0px 5px', color: 'red', borderColor: 'red' }}
               onClick={this.props.onTrashMessage}
             >
               Delete
-              <DeleteOutlinedIcon style={{ margin: "0px 3px" }} />
+              <DeleteOutlinedIcon style={{ margin: '0px 3px' }} />
             </Button>
           </div>
         </form>
@@ -144,7 +144,7 @@ export class ComposeEmail extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   validCredentials: state.Profile.validCredentials,
   currentTo: state.ComposeEmail.to,
   currentSubject: state.ComposeEmail.subject,

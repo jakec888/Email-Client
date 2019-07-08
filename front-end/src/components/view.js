@@ -1,67 +1,67 @@
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 
-import Paper from "@material-ui/core/Paper";
-import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
+import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
 
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
 
-import moment from "moment";
+import moment from 'moment';
 
 export class View extends Component {
   componentDidMount = () => {
-    this.props.validCredentials !== true && this.props.history.push("/");
+    this.props.validCredentials !== true && this.props.history.push('/');
     document.title = this.props.selectedEmail.subject;
   };
 
   render() {
     const date = new Date(this.props.selectedEmail.date);
 
-    const calendar = moment(date).format("ll");
+    const calendar = moment(date).format('ll');
 
-    const time = moment(date).format("LT");
+    const time = moment(date).format('LT');
 
     const when = moment(date)
-      .startOf("hour")
+      .startOf('hour')
       .fromNow();
 
     const avatarStyle = {
-      width: "100%",
-      height: "100%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: "#3f51b5",
-      fontSize: "16px",
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#3f51b5',
+      fontSize: '16px',
       fontWeight: 300,
-      color: "#fff",
-      letterSpacing: "1px"
+      color: '#fff',
+      letterSpacing: '1px'
     };
 
     const signature = {
       splitLet: this.props.selectedEmail.name
         .match(/\b(\w)/g)
-        .join("")
-        .split("", 2)
+        .join('')
+        .split('', 2)
     };
 
     return (
-      <Paper style={{ width: "85%", margin: "auto", padding: "15px" }}>
+      <Paper style={{ width: '85%', margin: 'auto', padding: '15px' }}>
         <Typography variant="h4" align="center" gutterBottom>
           {this.props.selectedEmail.subject}
         </Typography>
         <Divider variant="middle" />
         <ListItem
           style={{
-            display: "flex",
-            fleDirection: "row",
-            height: "100%",
-            justifyContent: "center",
-            aligItems: "center"
+            display: 'flex',
+            fleDirection: 'row',
+            height: '100%',
+            justifyContent: 'center',
+            aligItems: 'center'
           }}
         >
           <ListItemAvatar>
@@ -94,8 +94,8 @@ export class View extends Component {
               </Fragment>
             }
             style={{
-              display: "flex",
-              flexDirection: "row-reverse"
+              display: 'flex',
+              flexDirection: 'row-reverse'
             }}
           />
         </ListItem>
@@ -113,7 +113,7 @@ export class View extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   validCredentials: state.Profile.validCredentials,
   selectedEmail: state.SelectedEmail
 });

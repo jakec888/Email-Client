@@ -1,7 +1,7 @@
-import selectMenuActions from "../actions/selectMenu.action";
+import selectMenuActions from '../actions/selectMenu.action';
 
 const initialState = {
-  menu: "Inbox"
+  menu: 'Inbox'
 };
 
 export default (state = initialState, { type, payload }) => {

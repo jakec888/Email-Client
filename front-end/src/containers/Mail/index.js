@@ -1,37 +1,37 @@
-import React from "react";
+import React from 'react';
 
-import Credentials from "../../components/credentials";
-import Inbox from "../../components/inbox";
-import Sent from "../../components/sent";
-import AllMail from "../../components/all";
-import Trash from "../../components/trash";
-import View from "../../components/view";
+import Credentials from '../../components/credentials';
+import Inbox from '../../components/inbox';
+import Sent from '../../components/sent';
+import AllMail from '../../components/all';
+import Trash from '../../components/trash';
+import View from '../../components/view';
 
-import ComposeEmail from "../../components/compose";
+import ComposeEmail from '../../components/compose';
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import clsx from "clsx";
-import { makeStyles, useTheme, createStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import clsx from 'clsx';
+import { makeStyles, useTheme, createStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
-import MailIcon from "@material-ui/icons/Mail";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DeleteIcon from "@material-ui/icons/Delete";
-import SendIcon from "@material-ui/icons/Send";
-import AddIcon from "@material-ui/icons/Add";
+import MailIcon from '@material-ui/icons/Mail';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SendIcon from '@material-ui/icons/Send';
+import AddIcon from '@material-ui/icons/Add';
 
 const drawerWidth = 240;
 
@@ -44,17 +44,17 @@ const drawerWidth = 240;
 //   />
 // );
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     menuPadding: {
-      paddingTop: "15px",
-      paddingBottom: "15px"
+      paddingTop: '15px',
+      paddingBottom: '15px'
     },
     root: {
-      display: "flex"
+      display: 'flex'
     },
     appBar: {
-      transition: theme.transitions.create(["margin", "width"], {
+      transition: theme.transitions.create(['margin', 'width'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
       })
@@ -62,7 +62,7 @@ const useStyles = makeStyles(theme =>
     appBarShift: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
-      transition: theme.transitions.create(["margin", "width"], {
+      transition: theme.transitions.create(['margin', 'width'], {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen
       })
@@ -71,7 +71,7 @@ const useStyles = makeStyles(theme =>
       marginRight: theme.spacing(2)
     },
     hide: {
-      display: "none"
+      display: 'none'
     },
     drawer: {
       width: drawerWidth,
@@ -81,23 +81,23 @@ const useStyles = makeStyles(theme =>
       width: drawerWidth
     },
     drawerHeader: {
-      display: "flex",
-      alignItems: "center",
-      padding: "0 8px",
+      display: 'flex',
+      alignItems: 'center',
+      padding: '0 8px',
       ...theme.mixins.toolbar,
-      justifyContent: "flex-end"
+      justifyContent: 'flex-end'
     },
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
-      transition: theme.transitions.create("margin", {
+      transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
       }),
       marginLeft: -drawerWidth
     },
     contentShift: {
-      transition: theme.transitions.create("margin", {
+      transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen
       }),
@@ -156,47 +156,47 @@ export default function PersistentDrawerLeft(props) {
         >
           <div className={classes.drawerHeader}>
             <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "ltr" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
           </div>
           <Divider />
           <List>
             <Link
               to="/inbox"
-              style={{ textDecoration: "none" }}
-              onClick={() => props.changeMenu("Inbox")}
+              style={{ textDecoration: 'none' }}
+              onClick={() => props.changeMenu('Inbox')}
             >
-              <ListItem button key={"Inbox"}>
+              <ListItem button key={'Inbox'}>
                 <ListItemIcon>
                   <InboxIcon />
                 </ListItemIcon>
-                <ListItemText primary={"Inbox"} />
+                <ListItemText primary={'Inbox'} />
               </ListItem>
             </Link>
 
             <Link
               to="/sent"
-              style={{ textDecoration: "none" }}
-              onClick={() => props.changeMenu("Sent Emails")}
+              style={{ textDecoration: 'none' }}
+              onClick={() => props.changeMenu('Sent Emails')}
             >
-              <ListItem button key={"Sent"}>
+              <ListItem button key={'Sent'}>
                 <ListItemIcon>
                   <SendIcon />
                 </ListItemIcon>
-                <ListItemText primary={"Sent"} />
+                <ListItemText primary={'Sent'} />
               </ListItem>
             </Link>
 
             <Link
               to="/all-mail"
-              style={{ textDecoration: "none" }}
-              onClick={() => props.changeMenu("All Emails")}
+              style={{ textDecoration: 'none' }}
+              onClick={() => props.changeMenu('All Emails')}
             >
-              <ListItem button key={"AllMail"}>
+              <ListItem button key={'AllMail'}>
                 <ListItemIcon>
                   <MailIcon />
                 </ListItemIcon>
-                <ListItemText primary={"All Mail"} />
+                <ListItemText primary={'All Mail'} />
               </ListItem>
             </Link>
 
@@ -204,15 +204,15 @@ export default function PersistentDrawerLeft(props) {
 
             <Link
               to="/compose"
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: 'none' }}
               className={classes.menuPadding}
-              onClick={() => props.changeMenu("Compose A New Email")}
+              onClick={() => props.changeMenu('Compose A New Email')}
             >
-              <ListItem button key={"ComposeEmail"}>
+              <ListItem button key={'ComposeEmail'}>
                 <ListItemIcon>
                   <AddIcon />
                 </ListItemIcon>
-                <ListItemText primary={"Compose Email"} />
+                <ListItemText primary={'Compose Email'} />
               </ListItem>
             </Link>
 
@@ -220,15 +220,15 @@ export default function PersistentDrawerLeft(props) {
 
             <Link
               to="/trash"
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: 'none' }}
               className={classes.menuPadding}
-              onClick={() => props.changeMenu("Trash")}
+              onClick={() => props.changeMenu('Trash')}
             >
-              <ListItem button key={"Trash"}>
+              <ListItem button key={'Trash'}>
                 <ListItemIcon>
                   <DeleteIcon />
                 </ListItemIcon>
-                <ListItemText primary={"Trash"} />
+                <ListItemText primary={'Trash'} />
               </ListItem>
             </Link>
           </List>

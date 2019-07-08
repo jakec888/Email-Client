@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import Mail from "./containers/mail";
+import Mail from './containers/Mail';
 
-import selectMenuActions from "./redux/actions/selectMenu.action";
+import selectMenuActions from './redux/actions/selectMenu.action';
 
-import "./App.css";
+import './App.css';
 
 export class App extends Component {
   render() {
@@ -17,7 +17,7 @@ export class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentMenu: state.SelectedMenu.menu,
   validCredentials: state.Profile.validCredentials
 });

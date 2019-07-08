@@ -1,22 +1,22 @@
 // import axios from "axios";
-import API from "../../api/email";
+import API from '../../api/email';
 
 const retrieveEmailActions = {
-  GET_EMAILS: "GET_EMAILS",
-  SEND_EMAIL: "SEND_EMAIL",
-  LOADING_EMAIL: "LOADING_EMAIL",
-  loadingEmail: status => {
-    return dispatch => {
+  GET_EMAILS: 'GET_EMAILS',
+  SEND_EMAIL: 'SEND_EMAIL',
+  LOADING_EMAIL: 'LOADING_EMAIL',
+  loadingEmail: (status) => {
+    return (dispatch) => {
       dispatch({
         type: retrieveEmailActions.LOADING_EMAIL,
         payload: status
       });
     };
   },
-  retrieveEmails: folder => {
+  retrieveEmails: (folder) => {
     return (dispatch, getState) => {
       const profile = getState().Profile;
-      return API.get("/get-emails", {
+      return API.get('/get-emails', {
         params: {
           RequestedFolder: folder,
           email: profile.email,
@@ -25,13 +25,13 @@ const retrieveEmailActions = {
           imap_port: profile.imap_port
         }
       })
-        .then(result => {
+        .then((result) => {
           dispatch({
             type: retrieveEmailActions.GET_EMAILS,
             payload: result.data.emails
           });
         })
-        .catch(err => {
+        .catch((err) => {
           dispatch({
             type: retrieveEmailActions.GET_EMAILS,
             payload: `Error: ${err}`
@@ -39,10 +39,10 @@ const retrieveEmailActions = {
         });
     };
   },
-  sendEmailTest: email => {
+  sendEmailTest: (email) => {
     return (dispatch, getState) => {
       const Profile = getState().Profile;
-      API.post("/smtp", {
+      API.post('/smtp', {
         email: Profile.email,
         password: Profile.password,
         smtp_server: Profile.smtp_server,
@@ -54,13 +54,13 @@ const retrieveEmailActions = {
         bodyPLAIN: email.bodyPLAIN,
         bodyHTML: email.bodyHTML
       })
-        .then(result => {
+        .then((result) => {
           dispatch({
             type: retrieveEmailActions.SEND_EMAIL,
             payload: result.data
           });
         })
-        .catch(err => {
+        .catch((err) => {
           dispatch({
             type: retrieveEmailActions.SEND_EMAIL,
             payload: err

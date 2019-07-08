@@ -1,4 +1,4 @@
-import userActions from "../actions/user.actions";
+import userActions from '../actions/user.actions';
 
 const initialState = {
   validCredentials: false

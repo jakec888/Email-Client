@@ -1,7 +1,7 @@
-import axios from "axios";
-import Config from "../Config";
+import axios from 'axios';
+import Config from '../Config';
 
 export default axios.create({
-  baseURL: Config.email.prod,
-  responseType: "json"
+  baseURL: Config.email.dev,
+  responseType: 'json'
 });

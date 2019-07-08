@@ -1,13 +1,13 @@
-import selectEmailActions from "../actions/selectEmail.action";
+import selectEmailActions from '../actions/selectEmail.action';
 
 const initialState = {
   id: null,
-  name: "",
-  email: "",
-  body_html: "",
-  body_plain: "",
-  subject: "",
-  date: ""
+  name: '',
+  email: '',
+  body_html: '',
+  body_plain: '',
+  subject: '',
+  date: ''
 };
 
 export default (state = initialState, { type, payload }) => {

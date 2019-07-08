@@ -1,4 +1,4 @@
-import retrieveEmailActions from "../actions/retrieveEmail.actions";
+import retrieveEmailActions from '../actions/retrieveEmail.actions';
 
 const initialState = {
   emails: [],

@@ -1,9 +1,9 @@
-import composeEmailActions from "../actions/composeEmail.action";
+import composeEmailActions from '../actions/composeEmail.action';
 
 const initialState = {
-  to: "",
-  subject: "",
-  message: ""
+  to: '',
+  subject: '',
+  message: ''
 };
 
 export default (state = initialState, { type, payload }) => {

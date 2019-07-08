@@ -1,31 +1,31 @@
 // import axios from "axios";
-import API from "../../api/email";
+import API from '../../api/email';
 
 const composeEmailActions = {
-  COMPOSE_TO: "COMPOSE_TO",
-  COMPOSE_SUBJECT: "COMPOSE_SUBJECT",
-  COMPOSE_MESSAGE: "COMPOSE_MESSAGE",
-  TRASH_MESSAGE: "TRASH_MESSAGE",
-  SEND_MESSAGE: "SEND_MESSAGE",
-  ERROR_SEND_MESSAGE: "ERROR_SEND_MESSAGE",
-  updateTo: toAddress => {
-    return dispatch => {
+  COMPOSE_TO: 'COMPOSE_TO',
+  COMPOSE_SUBJECT: 'COMPOSE_SUBJECT',
+  COMPOSE_MESSAGE: 'COMPOSE_MESSAGE',
+  TRASH_MESSAGE: 'TRASH_MESSAGE',
+  SEND_MESSAGE: 'SEND_MESSAGE',
+  ERROR_SEND_MESSAGE: 'ERROR_SEND_MESSAGE',
+  updateTo: (toAddress) => {
+    return (dispatch) => {
       dispatch({
         type: composeEmailActions.COMPOSE_TO,
         payload: { to: toAddress }
       });
     };
   },
-  updateSubject: subject => {
-    return dispatch => {
+  updateSubject: (subject) => {
+    return (dispatch) => {
       dispatch({
         type: composeEmailActions.COMPOSE_SUBJECT,
         payload: { subject }
       });
     };
   },
-  updateMessage: message => {
-    return dispatch => {
+  updateMessage: (message) => {
+    return (dispatch) => {
       dispatch({
         type: composeEmailActions.COMPOSE_MESSAGE,
         payload: { message }
@@ -33,13 +33,13 @@ const composeEmailActions = {
     };
   },
   trashMessage: () => {
-    return dispatch => {
+    return (dispatch) => {
       dispatch({
         type: composeEmailActions.TRASH_MESSAGE,
         payload: {
-          to: "",
-          subject: "",
-          message: ""
+          to: '',
+          subject: '',
+          message: ''
         }
       });
     };
@@ -48,7 +48,7 @@ const composeEmailActions = {
     return (dispatch, getState) => {
       const profile = getState().Profile;
       const email = getState().ComposeEmail;
-      API.post("/send-email", {
+      API.post('/send-email', {
         email: profile.email,
         password: profile.password,
         smtp_server: profile.smtp_server,
@@ -59,19 +59,19 @@ const composeEmailActions = {
         subject: email.subject,
         bodyPLAIN: email.message
       })
-        .then(result => {
+        .then((result) => {
           dispatch({
             type: composeEmailActions.SEND_MESSAGE,
             payload: {
-              to: "",
-              subject: "",
-              message: "",
-              error: ""
+              to: '',
+              subject: '',
+              message: '',
+              error: ''
             }
           });
-          alert("Email Successfully Sent");
+          alert('Email Successfully Sent');
         })
-        .catch(err => {
+        .catch((err) => {
           dispatch({
             type: composeEmailActions.SEND_MESSAGE,
             payload: {
@@ -80,7 +80,7 @@ const composeEmailActions = {
               message: email.message
             }
           });
-          alert("Email Was Not Send");
+          alert('Email Was Not Send');
         });
     };
   }
