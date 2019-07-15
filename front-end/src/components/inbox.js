@@ -86,7 +86,7 @@ export class Inbox extends Component {
           }}
         >
           <ListItemAvatar>
-            <Avatar alt="Remy Sharp">
+            <Avatar alt="Avatar">
               <span style={avatarStyle}>{signature.splitLet}</span>
             </Avatar>
           </ListItemAvatar>

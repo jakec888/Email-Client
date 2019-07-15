@@ -33,3 +33,5 @@ EmailConfig.js
 venv
 config.py
 test.py
+
+package-lock.json
