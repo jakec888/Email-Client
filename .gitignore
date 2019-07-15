@@ -34,4 +34,7 @@ venv
 config.py
 test.py
 
+node_modules
+
 package-lock.json
+yarn.lock
