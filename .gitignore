@@ -51,5 +51,4 @@ node_modules
 .chalice/deployments/
 .chalice/venv/
 
-# package-lock.json
-# yarn.lock
+__pycache__
