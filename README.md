@@ -44,10 +44,14 @@ Static website with serverless backend.
 - I believe the imbox library uses .uid() to build its query
 - [UID Source Code](https://github.com/python/cpython/blob/3.7/Lib/imaplib.py#L862)
 
-### Thing To Improve
+# Imbox
 
-- Add Pagination
-- In Reply Email
+### Things To Improve
+
+- Add a limit to imbox.message()
+  -- here is where emails are downloaded to memory (highly memory intensive)
+- Add a ascending/descending order
+- Add pagination; retrieve emails
 
 ### Internet Message Access Protocol
 
