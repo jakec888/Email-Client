@@ -64,19 +64,27 @@ def get_emails():
         imap_server = given_params["imap_server"]
         imap_port = given_params["imap_port"]
 
-        print(folder)
-        print(email)
-        print(password)
-        print(imap_server)
-        print(imap_port)
+        # print(folder)
+        # print(email)
+        # print(password)
+        # print(imap_server)
+        # print(imap_port)
 
         with Imbox(hostname=imap_server, port=imap_port, username=email, password=password, ssl=True) as imbox:
-            all_inbox_messages = imbox.messages(folder=folder)
-            if all_inbox_messages:
-                emails = []
-                for uid, message in all_inbox_messages[::-1][0:10]:
+            all_inbox_messages = imbox.messages(folder=folder)[::-1][0:10]
 
-                    print(uid)
+            if all_inbox_messages:
+                # if all_inbox_messages[::-1][0:10]:
+
+                randnum = 0
+
+                emails = []
+                # for uid, message in all_inbox_messages[::-1][0:10]:
+                for uid, message in all_inbox_messages:
+
+                    # print(uid)
+
+                    randnum = randnum + 1
 
                     email = {}
 
@@ -122,6 +130,8 @@ def get_emails():
 
                     emails.append(email)
 
+                print(randnum)
+
                 return Response(body={'emails': emails, "number_of_emails": len(emails)},
                                 status_code=200,
                                 headers=custom_headers)
@@ -142,7 +152,7 @@ def send_email():
     try:
         data = app.current_request.json_body
 
-        print(data)
+        # print(data)
 
         email = data["email"]
         password = data["password"]
@@ -180,14 +190,14 @@ def send_email():
         msg.mail_options = []
         msg.rcpt_options = []
 
-        print(msg)
-        print(type(msg))
+        # print(msg)
+        # print(type(msg))
 
         mail.send(msg)
 
         return Response(body={'sent': True}, status_code=200, headers=custom_headers)
 
     except Exception as error:
-        print("Send Emails Error")
-        print(error)
+        # print("Send Emails Error")
+        # print(error)
         return Response(body={'AppError': str(error)}, status_code=500, headers=custom_headers)
