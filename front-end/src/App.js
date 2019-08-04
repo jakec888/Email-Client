@@ -11,7 +11,7 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <Mail currentMenu={this.props.currentMenu} changeMenu={this.props.changeMenu} />
+        <Mail />
       </div>
     );
   }

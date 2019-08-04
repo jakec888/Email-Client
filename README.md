@@ -3,6 +3,7 @@
 ### Things Done (kstrbxlvqfwgxuhj)
 
 deleted config and hard coded url
+added a layout
 
 ## About
 
