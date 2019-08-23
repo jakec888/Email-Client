@@ -1,3 +1,15 @@
+/* 
+  All Emails List View
+
+  !!! limit 25 emails !!!
+
+  the api return a list of 25 emails from the labeled 'All Emails' folder.
+
+  limit is 25 due to the imbox library which uses .uid() to build its query; the uid protocal does not allow for limits or ordering.
+
+  imbox library must be update.
+*/
+
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';

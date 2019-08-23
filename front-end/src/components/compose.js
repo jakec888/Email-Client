@@ -1,3 +1,9 @@
+/* 
+  Compose Email View
+
+  send emails from the application to any valid email.
+*/
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 

@@ -1,3 +1,11 @@
+/* 
+  Layout
+
+  use of Matrial UI
+
+  current standards and practice use react hooks
+*/
+
 import React from 'react';
 
 import { BrowserRouter as Router, Link } from 'react-router-dom';

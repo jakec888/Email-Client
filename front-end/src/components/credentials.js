@@ -1,3 +1,9 @@
+/* 
+  Credentials View
+
+  this has the same standards and practices that would mirror authentication flows
+*/
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 

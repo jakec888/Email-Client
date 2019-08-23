@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Credentials from './components/credentials';
-import Inbox from './components/inbox';
-import Sent from './components/sent';
-import AllMail from './components/all';
-import Trash from './components/trash';
-import View from './components/view';
-import ComposeEmail from './components/compose';
+import Credentials from './components/Credentials';
+import Inbox from './components/Inbox';
+import Sent from './components/Sent';
+import AllMail from './components/All';
+import Trash from './components/Trash';
+import View from './components/View';
+import ComposeEmail from './components/Compose';
 
 class MyRouter extends Component {
   render() {
