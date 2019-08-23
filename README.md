@@ -1,10 +1,5 @@
 # Email Client
 
-### Things Done (kstrbxlvqfwgxuhj)
-
-deleted config and hard coded url
-added a layout
-
 ## About
 
 Visit: [Ephemeral Web Mail Client](https://d358ioepy2yz0y.cloudfront.net)
