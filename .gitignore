@@ -54,3 +54,5 @@ node_modules
 __pycache__
 
 app.pyc
+
+package-lock.json
