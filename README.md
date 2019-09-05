@@ -1,5 +1,10 @@
 # Email Client
 
+### In Progress:
+
+- testing using jest and enzyme
+- redux-saga (generators)
+
 ## About
 
 Visit: [Ephemeral Web Mail Client](https://d358ioepy2yz0y.cloudfront.net)
