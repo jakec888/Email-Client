@@ -1,9 +1,13 @@
 # Email Client
 
+### Most Recent Project:
+
+[Bityle Clone](https://github.com/jakec888/bitly-clone) which uses the tecnologies here but with redux saga to make asynchronous requests.
+
 ### In Progress:
 
+- redux-saga/generators
 - testing using jest and enzyme
-- redux-saga (generators)
 
 ## About
 
