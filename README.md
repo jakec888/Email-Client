@@ -2,7 +2,8 @@
 
 ### Most Recent Project:
 
-[Bityle Clone](https://github.com/jakec888/bitly-clone) which uses the tecnologies here but with redux saga to make asynchronous requests.
+[Bityle Clone](https://github.com/jakec888/bitly-clone) which uses the tecnologies here but with redux saga and to make asynchronous generator-linke requests.
+ß
 
 ### In Progress:
 
