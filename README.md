@@ -6,7 +6,7 @@
 
 ### In Progress:
 
-- redux-saga/generators
+- redux-saga/generators (recently finished at most recent project [Bityle Clone](https://github.com/jakec888/bitly-clone))
 - testing using jest and enzyme
 
 ## About
