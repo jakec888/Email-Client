@@ -1,4 +1,4 @@
-/* 
+/*
   Layout
 
   use of Matrial UI
@@ -6,33 +6,33 @@
   current standards and practice use react hooks
 */
 
-import React from 'react';
+import React from 'react'
 
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-import clsx from 'clsx';
-import { makeStyles, useTheme, createStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import { BrowserRouter as Router, Link } from 'react-router-dom'
+import clsx from 'clsx'
+import { makeStyles, useTheme, createStyles } from '@material-ui/core/styles'
+import Drawer from '@material-ui/core/Drawer'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 
-import MailIcon from '@material-ui/icons/Mail';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DeleteIcon from '@material-ui/icons/Delete';
-import SendIcon from '@material-ui/icons/Send';
-import AddIcon from '@material-ui/icons/Add';
+import MailIcon from '@material-ui/icons/Mail'
+import InboxIcon from '@material-ui/icons/MoveToInbox'
+import DeleteIcon from '@material-ui/icons/Delete'
+import SendIcon from '@material-ui/icons/Send'
+import AddIcon from '@material-ui/icons/Add'
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -94,20 +94,20 @@ const useStyles = makeStyles((theme) =>
       marginLeft: 0
     }
   })
-);
+)
 
-export default function PersistentDrawerLeft(props) {
-  const classes = useStyles();
-  const theme = useTheme();
+export default function PersistentDrawerLeft (props) {
+  const classes = useStyles()
+  const theme = useTheme()
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
 
-  function handleDrawerOpen() {
-    setOpen(true);
+  function handleDrawerOpen () {
+    setOpen(true)
   }
 
-  function handleDrawerClose() {
-    setOpen(false);
+  function handleDrawerClose () {
+    setOpen(false)
   }
 
   return (
@@ -234,5 +234,5 @@ export default function PersistentDrawerLeft(props) {
         </main>
       </div>
     </Router>
-  );
+  )
 }

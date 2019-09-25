@@ -1,4 +1,4 @@
-/* 
+/*
   View Email
 
   shows the selected email
@@ -13,36 +13,36 @@
   avatar should be the first letter of the first name and last name. example => Jake Condes = JC
 */
 
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
+import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
 
-import Paper from '@material-ui/core/Paper';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper'
+import Divider from '@material-ui/core/Divider'
+import Typography from '@material-ui/core/Typography'
 
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import Avatar from '@material-ui/core/Avatar'
 
-import moment from 'moment';
+import moment from 'moment'
 
 export class View extends Component {
   componentDidMount = () => {
-    this.props.validCredentials !== true && this.props.history.push('/');
-    document.title = this.props.selectedEmail.subject;
+    this.props.validCredentials !== true && this.props.history.push('/')
+    document.title = this.props.selectedEmail.subject
   };
 
-  render() {
-    const date = new Date(this.props.selectedEmail.date);
+  render () {
+    const date = new Date(this.props.selectedEmail.date)
 
-    const calendar = moment(date).format('ll');
+    const calendar = moment(date).format('ll')
 
-    const time = moment(date).format('LT');
+    const time = moment(date).format('LT')
 
     const when = moment(date)
       .startOf('hour')
-      .fromNow();
+      .fromNow()
 
     const avatarStyle = {
       width: '100%',
@@ -55,14 +55,14 @@ export class View extends Component {
       fontWeight: 300,
       color: '#fff',
       letterSpacing: '1px'
-    };
+    }
 
     const signature = {
       splitLet: this.props.selectedEmail.name
         .match(/\b(\w)/g)
         .join('')
         .split('', 2)
-    };
+    }
 
     return (
       <Paper style={{ width: '85%', margin: 'auto', padding: '15px' }}>
@@ -124,18 +124,18 @@ export class View extends Component {
           <ListItemText primary={this.props.selectedEmail.body_plain} />
         )}
       </Paper>
-    );
+    )
   }
 }
 
 const mapStateToProps = (state) => ({
   validCredentials: state.Profile.validCredentials,
   selectedEmail: state.SelectedEmail
-});
+})
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(View);
+)(View)

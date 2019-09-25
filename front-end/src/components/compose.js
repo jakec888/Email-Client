@@ -1,22 +1,23 @@
-/* 
+/*
   Compose Email View
 
   send emails from the application to any valid email.
 */
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper'
+import TextField from '@material-ui/core/TextField'
 
-import Button from '@material-ui/core/Button';
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
-import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
+import Button from '@material-ui/core/Button'
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'
+import SendOutlinedIcon from '@material-ui/icons/SendOutlined'
 
-import composeEmailActions from '../redux/actions/composeEmail.action';
+// import composeEmailActions from '../redux/actions/composeEmail.action'
+import { updateTo, updateSubject, updateMessage, trashMessage, sendMessage } from '../redux/actions/composeEmail.action'
 
 const CssTextField = withStyles({
   root: {
@@ -38,32 +39,32 @@ const CssTextField = withStyles({
       }
     }
   }
-})(TextField);
+})(TextField)
 
 export class ComposeEmail extends Component {
   componentDidMount = () => {
-    this.props.validCredentials !== true && this.props.history.push('/');
-    document.title = 'Compose Email';
+    this.props.validCredentials !== true && this.props.history.push('/')
+    document.title = 'Compose Email'
   };
 
   onChangeToAddress = (event) => {
-    this.props.updateToAddress(event.target.value);
+    this.props.updateToAddress(event.target.value)
   };
 
   onChangeSubject = (event) => {
-    this.props.updateSubject(event.target.value);
+    this.props.updateSubject(event.target.value)
   };
 
   onChangeMessage = (event) => {
-    this.props.updateMessage(event.target.value);
+    this.props.updateMessage(event.target.value)
   };
 
   onSendEmail = (event) => {
-    event.preventDefault();
-    this.props.onSendMessage();
+    event.preventDefault()
+    this.props.onSendMessage()
   };
 
-  render() {
+  render () {
     return (
       <Paper
         style={{
@@ -146,7 +147,7 @@ export class ComposeEmail extends Component {
           </div>
         </form>
       </Paper>
-    );
+    )
   }
 }
 
@@ -156,17 +157,25 @@ const mapStateToProps = (state) => ({
   currentSubject: state.ComposeEmail.subject,
   currentMessage: state.ComposeEmail.message,
   emailError: state.ComposeEmail.error
-});
+})
+
+// const mapDispatchToProps = {
+//   updateToAddress: composeEmailActions.updateTo,
+//   updateSubject: composeEmailActions.updateSubject,
+//   updateMessage: composeEmailActions.updateMessage,
+//   onTrashMessage: composeEmailActions.trashMessage,
+//   onSendMessage: composeEmailActions.sendMessage
+// }
 
 const mapDispatchToProps = {
-  updateToAddress: composeEmailActions.updateTo,
-  updateSubject: composeEmailActions.updateSubject,
-  updateMessage: composeEmailActions.updateMessage,
-  onTrashMessage: composeEmailActions.trashMessage,
-  onSendMessage: composeEmailActions.sendMessage
-};
+  updateToAddress: updateTo,
+  updateSubject: updateSubject,
+  updateMessage: updateMessage,
+  onTrashMessage: trashMessage,
+  onSendMessage: sendMessage
+}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ComposeEmail);
+)(ComposeEmail)

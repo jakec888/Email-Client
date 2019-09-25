@@ -1,4 +1,6 @@
-import selectEmailActions from '../actions/selectEmail.action';
+// import selectEmailActions from '../actions/selectEmail.action'
+
+import { SELECT_EMAIL } from '../actions/selectEmail.action'
 
 const initialState = {
   id: null,
@@ -8,13 +10,13 @@ const initialState = {
   body_plain: '',
   subject: '',
   date: ''
-};
+}
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case selectEmailActions.SELECT_EMAIL:
-      return payload;
+    case SELECT_EMAIL:
+      return payload
     default:
-      return state;
+      return state
   }
-};
+}

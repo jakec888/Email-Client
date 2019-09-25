@@ -1,4 +1,4 @@
-/* 
+/*
   Sent Emails List View
 
   !!! limit 25 emails !!!
@@ -10,55 +10,58 @@
   imbox library must be update.
 */
 
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import Divider from '@material-ui/core/Divider'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import Avatar from '@material-ui/core/Avatar'
+import Typography from '@material-ui/core/Typography'
+import Paper from '@material-ui/core/Paper'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
-import selectEmailActions from '../redux/actions/selectEmail.action';
-import retrieveEmailActions from '../redux/actions/retrieveEmail.actions';
+// import selectEmailActions from '../redux/actions/selectEmail.action'
+// import retrieveEmailActions from '../redux/actions/retrieveEmail.actions'
 
-import moment from 'moment';
+import { selectEmail } from '../redux/actions/selectEmail.action'
+import { retrieveEmails, loadingEmail } from '../redux/actions/retrieveEmail.actions'
+
+import moment from 'moment'
 
 export class Sent extends Component {
   componentDidMount = async () => {
     if (this.props.validCredentials) {
-      document.title = 'Sent Emails';
-      this.onRetrieveSent();
+      document.title = 'Sent Emails'
+      this.onRetrieveSent()
     } else {
-      this.props.history.push('/');
+      this.props.history.push('/')
     }
   };
 
   onRetrieveSent = async () => {
-    await this.props.loadingEmail(true);
-    await this.props.retrieveEmails('Sent');
-    await this.props.loadingEmail(false);
+    await this.props.loadingEmail(true)
+    await this.props.retrieveEmails('Sent')
+    await this.props.loadingEmail(false)
   };
 
   onSelectEmail = (emailId) => {
-    this.props.selectEmail(emailId);
+    this.props.selectEmail(emailId)
   };
 
   email = ({ id, subject, name, body_plain, date }) => {
-    const emailDate = new Date(date);
+    const emailDate = new Date(date)
 
-    const calendar = moment(emailDate).format('ll');
+    const calendar = moment(emailDate).format('ll')
 
-    const time = moment(emailDate).format('LT');
+    const time = moment(emailDate).format('LT')
 
     const when = moment(emailDate)
       .startOf('hour')
-      .fromNow();
+      .fromNow()
 
     const avatarStyle = {
       width: '100%',
@@ -71,14 +74,14 @@ export class Sent extends Component {
       fontWeight: 300,
       color: '#fff',
       letterSpacing: '1px'
-    };
+    }
 
     const signature = {
       splitLet: name
         .match(/\b(\w)/g)
         .join('')
         .split('', 2)
-    };
+    }
 
     return (
       <Link
@@ -122,10 +125,10 @@ export class Sent extends Component {
         </ListItem>
         <Divider variant="middle" />
       </Link>
-    );
+    )
   };
 
-  render() {
+  render () {
     return (
       <Paper style={{ width: '85%', margin: 'auto' }}>
         {this.props.loading === true ? (
@@ -151,7 +154,7 @@ export class Sent extends Component {
           </List>
         )}
       </Paper>
-    );
+    )
   }
 }
 
@@ -159,15 +162,21 @@ const mapStateToProps = (state) => ({
   validCredentials: state.Profile.validCredentials,
   sentEmails: state.RetrieveEmails.emails,
   loading: state.RetrieveEmails.loading
-});
+})
+
+// const mapDispatchToProps = {
+//   selectEmail: selectEmailActions.selectEmail,
+//   retrieveEmails: retrieveEmailActions.retrieveEmails,
+//   loadingEmail: retrieveEmailActions.loadingEmail
+// }
 
 const mapDispatchToProps = {
-  selectEmail: selectEmailActions.selectEmail,
-  retrieveEmails: retrieveEmailActions.retrieveEmails,
-  loadingEmail: retrieveEmailActions.loadingEmail
-};
+  selectEmail: selectEmail,
+  retrieveEmails: retrieveEmails,
+  loadingEmail: loadingEmail
+}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Sent);
+)(Sent)

@@ -1,21 +1,22 @@
-/* 
+/*
   Credentials View
 
   this has the same standards and practices that would mirror authentication flows
 */
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper'
+import TextField from '@material-ui/core/TextField'
 
-import Button from '@material-ui/core/Button';
-import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
+import Button from '@material-ui/core/Button'
+import SendOutlinedIcon from '@material-ui/icons/SendOutlined'
 
-import userActions from '../redux/actions/user.actions';
+// import userActions from '../redux/actions/user.actions'
+import { updateName, updateEmail, updatePassword, updateIMAPServer, updateIMAPPort, updateSMTPServer, updateSMTPPort, authenticateUser } from '../redux/actions/user.actions'
 
 const CssTextField = withStyles({
   root: {
@@ -37,48 +38,48 @@ const CssTextField = withStyles({
       }
     }
   }
-})(TextField);
+})(TextField)
 
 export class Credentials extends Component {
-  componentDidMount() {
-    document.title = 'Credentials';
+  componentDidMount () {
+    document.title = 'Credentials'
   }
 
   onSubmitUserData = (event) => {
-    event.preventDefault();
-    this.props.authenticateUser();
-    this.props.history.push('/inbox');
+    event.preventDefault()
+    this.props.authenticateUser()
+    this.props.history.push('/inbox')
   };
 
   onChangeName = (event) => {
-    this.props.updateName(event.target.value);
+    this.props.updateName(event.target.value)
   };
 
   onChangeEmail = (event) => {
-    this.props.updateEmail(event.target.value);
+    this.props.updateEmail(event.target.value)
   };
 
   onChangePassword = (event) => {
-    this.props.updatePassword(event.target.value);
+    this.props.updatePassword(event.target.value)
   };
 
   onChangeIMAPServer = (event) => {
-    this.props.updateIMAPServer(event.target.value);
+    this.props.updateIMAPServer(event.target.value)
   };
 
   onChangeIMAPPort = (event) => {
-    this.props.updateIMAPPort(event.target.value);
+    this.props.updateIMAPPort(event.target.value)
   };
 
   onChangeSMTPServer = (event) => {
-    this.props.updateSMTPServer(event.target.value);
+    this.props.updateSMTPServer(event.target.value)
   };
 
   onChangeSMTPPort = (event) => {
-    this.props.updateSMTPPort(event.target.value);
+    this.props.updateSMTPPort(event.target.value)
   };
 
-  render() {
+  render () {
     return (
       <Paper
         style={{
@@ -193,7 +194,7 @@ export class Credentials extends Component {
           </div>
         </form>
       </Paper>
-    );
+    )
   }
 }
 
@@ -206,20 +207,31 @@ const mapStateToProps = (state) => ({
   smtp_server: state.Profile.smtp_server,
   smtp_port: state.Profile.smtp_port,
   validCredentials: state.Profile.validCredentials
-});
+})
+
+// const mapDispatchToProps = {
+//   updateName: userActions.updateName,
+//   updateEmail: userActions.updateEmail,
+//   updatePassword: userActions.updatePassword,
+//   updateIMAPServer: userActions.updateIMAPServer,
+//   updateIMAPPort: userActions.updateIMAPPort,
+//   updateSMTPServer: userActions.updateSMTPServer,
+//   updateSMTPPort: userActions.updateSMTPPort,
+//   authenticateUser: userActions.authenticateUser
+// }
 
 const mapDispatchToProps = {
-  updateName: userActions.updateName,
-  updateEmail: userActions.updateEmail,
-  updatePassword: userActions.updatePassword,
-  updateIMAPServer: userActions.updateIMAPServer,
-  updateIMAPPort: userActions.updateIMAPPort,
-  updateSMTPServer: userActions.updateSMTPServer,
-  updateSMTPPort: userActions.updateSMTPPort,
-  authenticateUser: userActions.authenticateUser
-};
+  updateName: updateName,
+  updateEmail: updateEmail,
+  updatePassword: updatePassword,
+  updateIMAPServer: updateIMAPServer,
+  updateIMAPPort: updateIMAPPort,
+  updateSMTPServer: updateSMTPServer,
+  updateSMTPPort: updateSMTPPort,
+  authenticateUser: authenticateUser
+}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Credentials);
+)(Credentials)

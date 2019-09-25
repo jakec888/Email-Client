@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import Credentials from './components/Credentials';
-import Inbox from './components/Inbox';
-import Sent from './components/Sent';
-import AllMail from './components/All';
-import Trash from './components/Trash';
-import View from './components/View';
-import ComposeEmail from './components/Compose';
+import Credentials from './components/Credentials'
+import Inbox from './components/Inbox'
+import Sent from './components/Sent'
+import AllMail from './components/All'
+import Trash from './components/Trash'
+import View from './components/View'
+import ComposeEmail from './components/Compose'
 
 class MyRouter extends Component {
-  render() {
+  render () {
     return (
       <Router>
         <Switch>
@@ -34,17 +34,17 @@ class MyRouter extends Component {
           <Route exact path="/compose" component={ComposeEmail} />
         </Switch>
       </Router>
-    );
+    )
   }
 }
 
 const mapStateToProps = (state) => ({
   validCredentials: state.Profile.validCredentials
-});
+})
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MyRouter);
+)(MyRouter)
