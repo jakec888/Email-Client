@@ -24,8 +24,6 @@ import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-// import selectEmailActions from '../redux/actions/selectEmail.action'
-// import retrieveEmailActions from '../redux/actions/retrieveEmail.actions'
 import { selectEmail } from '../redux/actions/selectEmail.action'
 import { retrieveEmails, loadingEmail } from '../redux/actions/retrieveEmail.actions'
 
@@ -162,12 +160,6 @@ const mapStateToProps = (state) => ({
   trashEmails: state.RetrieveEmails.emails,
   loading: state.RetrieveEmails.loading
 })
-
-// const mapDispatchToProps = {
-//   selectEmail: selectEmailActions.selectEmail,
-//   retrieveEmails: retrieveEmailActions.retrieveEmails,
-//   loadingEmail: retrieveEmailActions.loadingEmail
-// }
 
 const mapDispatchToProps = {
   selectEmail: selectEmail,

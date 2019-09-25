@@ -16,7 +16,6 @@ import Button from '@material-ui/core/Button'
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'
 import SendOutlinedIcon from '@material-ui/icons/SendOutlined'
 
-// import composeEmailActions from '../redux/actions/composeEmail.action'
 import { updateTo, updateSubject, updateMessage, trashMessage, sendMessage } from '../redux/actions/composeEmail.action'
 
 const CssTextField = withStyles({
@@ -158,14 +157,6 @@ const mapStateToProps = (state) => ({
   currentMessage: state.ComposeEmail.message,
   emailError: state.ComposeEmail.error
 })
-
-// const mapDispatchToProps = {
-//   updateToAddress: composeEmailActions.updateTo,
-//   updateSubject: composeEmailActions.updateSubject,
-//   updateMessage: composeEmailActions.updateMessage,
-//   onTrashMessage: composeEmailActions.trashMessage,
-//   onSendMessage: composeEmailActions.sendMessage
-// }
 
 const mapDispatchToProps = {
   updateToAddress: updateTo,

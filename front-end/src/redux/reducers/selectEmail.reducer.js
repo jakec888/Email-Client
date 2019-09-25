@@ -1,5 +1,3 @@
-// import selectEmailActions from '../actions/selectEmail.action'
-
 import { SELECT_EMAIL } from '../actions/selectEmail.action'
 
 const initialState = {

@@ -1,4 +1,3 @@
-// import userActions from '../actions/user.actions'
 import { UPDATE_NAME, UPDATE_EMAIL, UPDATE_PASSWORD, UPDATE_IMAP_SERVER, UPDATE_IMAP_PORT, UPDATE_SMTP_SERVER, UPDATE_SMTP_PORT, AUTHENTICATE, UNAUTHENTICATE } from '../actions/user.actions'
 
 const initialState = {

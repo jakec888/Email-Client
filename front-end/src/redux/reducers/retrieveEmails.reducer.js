@@ -1,4 +1,3 @@
-// import retrieveEmailActions from '../actions/retrieveEmail.actions'
 import { GET_EMAILS, SEND_EMAIL, LOADING_EMAIL } from '../actions/retrieveEmail.actions'
 
 const initialState = {

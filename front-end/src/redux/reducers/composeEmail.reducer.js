@@ -1,5 +1,3 @@
-// import composeEmailActions from '../actions/composeEmail.action';
-
 import {
   COMPOSE_TO, COMPOSE_SUBJECT, COMPOSE_MESSAGE, TRASH_MESSAGE, SEND_MESSAGE, ERROR_SEND_MESSAGE
 } from '../actions/composeEmail.action'

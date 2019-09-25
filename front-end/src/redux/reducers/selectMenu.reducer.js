@@ -1,4 +1,3 @@
-// import selectMenuActions from '../actions/selectMenu.action'
 import { SELECT_MENU } from '../actions/selectMenu.action'
 
 const initialState = {

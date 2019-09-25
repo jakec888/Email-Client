@@ -15,7 +15,6 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import SendOutlinedIcon from '@material-ui/icons/SendOutlined'
 
-// import userActions from '../redux/actions/user.actions'
 import { updateName, updateEmail, updatePassword, updateIMAPServer, updateIMAPPort, updateSMTPServer, updateSMTPPort, authenticateUser } from '../redux/actions/user.actions'
 
 const CssTextField = withStyles({
@@ -208,17 +207,6 @@ const mapStateToProps = (state) => ({
   smtp_port: state.Profile.smtp_port,
   validCredentials: state.Profile.validCredentials
 })
-
-// const mapDispatchToProps = {
-//   updateName: userActions.updateName,
-//   updateEmail: userActions.updateEmail,
-//   updatePassword: userActions.updatePassword,
-//   updateIMAPServer: userActions.updateIMAPServer,
-//   updateIMAPPort: userActions.updateIMAPPort,
-//   updateSMTPServer: userActions.updateSMTPServer,
-//   updateSMTPPort: userActions.updateSMTPPort,
-//   authenticateUser: userActions.authenticateUser
-// }
 
 const mapDispatchToProps = {
   updateName: updateName,
