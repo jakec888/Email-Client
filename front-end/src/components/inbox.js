@@ -39,10 +39,9 @@ export class Inbox extends Component {
     }
   };
 
-  onRetrieveInbox = async () => {
-    await this.props.loadingEmail(true)
-    await this.props.retrieveEmails('Inbox')
-    await this.props.loadingEmail(false)
+  onRetrieveInbox = () => {
+    this.props.loadingEmail(true)
+    this.props.retrieveEmails('Inbox')
   };
 
   onSelectEmail = (emailId) => {

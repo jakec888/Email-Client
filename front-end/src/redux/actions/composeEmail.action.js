@@ -1,4 +1,4 @@
-import API from '../../api/email'
+import API from '../../api'
 
 export const COMPOSE_TO = 'COMPOSE_TO'
 export const COMPOSE_SUBJECT = 'COMPOSE_SUBJECT'
