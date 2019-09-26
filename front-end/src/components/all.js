@@ -39,10 +39,10 @@ export class AllMail extends Component {
     }
   };
 
-  onRetrieveAll = async () => {
-    await this.props.loadingEmail(true)
-    await this.props.retrieveEmails('All Mail')
-    await this.props.loadingEmail(false)
+  onRetrieveAll = () => {
+    this.props.loadingEmail(true)
+    this.props.retrieveEmails('All Mail')
+    this.props.loadingEmail(false)
   };
 
   onSelectEmail = (emailId) => {

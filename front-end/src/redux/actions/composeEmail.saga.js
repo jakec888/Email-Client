@@ -14,19 +14,17 @@ const onLinkRequest = payload => {
     subject,
     bodyPLAIN
   } = payload
-  return API.get('/send-email', {
-      params: {
-        email,
-        password,
-        smtp_server,
-        smtp_port,
-        fromAddress,
-        name,
-        toAddress,
-        subject,
-        bodyPLAIN
-      }
-    })
+  return API.post('/send-email', {
+    email,
+    password,
+    smtp_server,
+    smtp_port,
+    fromAddress,
+    name,
+    toAddress,
+    subject,
+    bodyPLAIN
+  })
 }
 
 export function * sendMessageAsync ({ payload }) {

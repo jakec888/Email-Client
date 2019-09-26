@@ -39,10 +39,10 @@ export class Sent extends Component {
     }
   };
 
-  onRetrieveSent = async () => {
-    await this.props.loadingEmail(true)
-    await this.props.retrieveEmails('Sent')
-    await this.props.loadingEmail(false)
+  onRetrieveSent = () => {
+    this.props.loadingEmail(true)
+    this.props.retrieveEmails('Sent')
+    this.props.loadingEmail(false)
   };
 
   onSelectEmail = (emailId) => {
