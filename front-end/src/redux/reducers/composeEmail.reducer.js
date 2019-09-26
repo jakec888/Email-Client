@@ -1,5 +1,5 @@
 import {
-  COMPOSE_TO, COMPOSE_SUBJECT, COMPOSE_MESSAGE, TRASH_MESSAGE, SEND_MESSAGE, ERROR_SEND_MESSAGE
+  COMPOSE_TO, COMPOSE_SUBJECT, COMPOSE_MESSAGE, TRASH_MESSAGE, SEND_MESSAGE, ERROR_SEND_MESSAGE, SEND_MESSAGE_SUCCESS
 } from '../actions/composeEmail.action'
 
 const initialState = {
@@ -24,6 +24,12 @@ export default (state = initialState, { type, payload }) => {
         message: payload.message
       }
     case SEND_MESSAGE:
+      return {
+        to: payload.message,
+        subject: payload.subject,
+        message: payload.message
+      }
+    case SEND_MESSAGE_SUCCESS:
       return {
         to: payload.message,
         subject: payload.subject,

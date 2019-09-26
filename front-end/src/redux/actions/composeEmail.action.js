@@ -1,10 +1,9 @@
-import API from '../../api'
-
 export const COMPOSE_TO = 'COMPOSE_TO'
 export const COMPOSE_SUBJECT = 'COMPOSE_SUBJECT'
 export const COMPOSE_MESSAGE = 'COMPOSE_MESSAGE'
 export const TRASH_MESSAGE = 'TRASH_MESSAGE'
 export const SEND_MESSAGE = 'SEND_MESSAGE'
+export const SEND_MESSAGE_SUCCESS = 'SEND_MESSAGE_SUCCESS'
 export const ERROR_SEND_MESSAGE = 'ERROR_SEND_MESSAGE'
 
 export const updateTo = (toAddress) => (dispatch) => {
@@ -49,38 +48,31 @@ export const trashMessage = () => (dispatch) => {
 export const sendMessage = () => (dispatch, getState) => {
   const profile = getState().Profile
   const email = getState().ComposeEmail
-  API.post('/send-email', {
-    email: profile.email,
-    password: profile.password,
-    smtp_server: profile.smtp_server,
-    smtp_port: profile.smtp_port,
-    fromAddress: profile.email,
-    name: profile.name,
-    toAddress: email.to,
-    subject: email.subject,
-    bodyPLAIN: email.message
+  dispatch({
+    type: SEND_MESSAGE,
+    payload: {
+      email: profile.email,
+      password: profile.password,
+      smtp_server: profile.smtp_server,
+      smtp_port: profile.smtp_port,
+      fromAddress: profile.email,
+      name: profile.name,
+      toAddress: email.to,
+      subject: email.subject,
+      bodyPLAIN: email.message
+    }
   })
-    .then(() => {
-      dispatch({
-        type: SEND_MESSAGE,
-        payload: {
-          to: '',
-          subject: '',
-          message: '',
-          error: ''
-        }
-      })
-      alert('Email Successfully Sent')
-    })
-    .catch(() => {
-      dispatch({
-        type: SEND_MESSAGE,
-        payload: {
-          to: email.to,
-          subject: email.subject,
-          message: email.message
-        }
-      })
-      alert('Email Was Not Send')
-    })
+}
+
+export const sendMessageSuccess = () => (dispatch) => {
+  dispatch({
+    type: SEND_MESSAGE_SUCCESS,
+    payload: {
+      to: '',
+      subject: '',
+      message: '',
+      error: ''
+    }
+  })
+  alert('Email Successfully Sent')
 }

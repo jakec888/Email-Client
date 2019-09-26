@@ -22,17 +22,11 @@ const onLinkRequest = payload => {
   return result
 }
 
-/*
-  Saga Worker
-*/
 export function * getEmailsAsync ({ payload }) {
   const result = yield call(onLinkRequest, payload)
   yield put(retrieveEmailsSuccess(result))
 }
 
-/*
-  Saga Watcher
-*/
 export default function * rootSaga () {
   yield all([takeEvery(GET_EMAILS, getEmailsAsync)])
 }
