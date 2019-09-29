@@ -13,13 +13,6 @@ export const updateTo = (toAddress) => (dispatch) => {
   })
 }
 
-export const actionName = (subject) => (dispatch) => {
-  dispatch({
-    type: COMPOSE_SUBJECT,
-    payload: { subject }
-  })
-}
-
 export const updateSubject = (subject) => (dispatch) => {
   dispatch({
     type: COMPOSE_SUBJECT,
